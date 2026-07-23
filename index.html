@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satyam Raj | Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cyber: '#00ff66',
+                        darkbg: '#0a0f1d',
+                        cardbg: '#111827',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-darkbg text-gray-300 font-sans antialiased selection:bg-cyber selection:text-black">
+
+    <!-- Header / Navbar -->
+    <header class="fixed top-0 w-full bg-darkbg/80 backdrop-blur-md border-b border-gray-800 z-50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold tracking-wider text-white">
+                SATYAM<span class="text-cyber">.RAJ</span>
+            </a>
+            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-cyber transition">About</a>
+                <a href="#skills" class="hover:text-cyber transition">Tech Stack</a>
+                <a href="#projects" class="hover:text-cyber transition">Projects</a>
+                <a href="#contact" class="hover:text-cyber transition">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center justify-center pt-20 px-6">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-block px-3 py-1 mb-4 rounded-full bg-cyber/10 border border-cyber/30 text-cyber text-xs font-mono">
+                &gt; ECE Student & Security Tech Enthusiast
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight mb-6">
+                Hi, I'm <span class="text-cyber">Satyam Raj</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                Electronics & Communication Engineering student passionate about programming, system-level concepts, Linux environments, and security tool development.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#projects" class="px-6 py-3 bg-cyber text-black font-semibold rounded-lg hover:bg-emerald-400 transition shadow-lg shadow-cyber/20">
+                    View Projects
+                </a>
+                <a href="#contact" class="px-6 py-3 border border-gray-700 hover:border-cyber text-white font-semibold rounded-lg transition">
+                    Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-6 bg-cardbg/40 border-y border-gray-800/80">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">
+                <span class="text-cyber">&lt;/&gt;</span> Tech Stack & Tools
+            </h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Programming Languages -->
+                <div class="bg-cardbg p-6 rounded-xl border border-gray-800 hover:border-cyber/50 transition">
+                    <div class="text-cyber text-2xl mb-4"><i class="fa-solid fa-code"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-4">Languages</h3>
+                    <ul class="space-y-2 text-gray-400 font-mono text-sm">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-cyber mr-2 text-xs"></i> C</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-cyber mr-2 text-xs"></i> Python</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-cyber mr-2 text-xs"></i> HTML5</li>
+                    </ul>
+                </div>
+
+                <!-- Operating Systems -->
+                <div class="bg-cardbg p-6 rounded-xl border border-gray-800 hover:border-cyber/50 transition">
+                    <div class="text-cyber text-2xl mb-4"><i class="fa-solid fa-desktop"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-4">Operating Systems</h3>
+                    <ul class="space-y-2 text-gray-400 font-mono text-sm">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-cyber mr-2 text-xs"></i> Linux Environments</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-cyber mr-2 text-xs"></i> Windows</li>
+                    </ul>
+                </div>
+
+                <!-- Tools & Frameworks -->
+                <div class="bg-cardbg p-6 rounded-xl border border-gray-800 hover:border-cyber/50 transition">
+                    <div class="text-cyber text-2xl mb-4"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-4">Tools & Workflows</h3>
+                    <ul class="space-y-2 text-gray-400 font-mono text-sm">
+                        <li class="flex items-center"><i class="fa-solid fa-check text-cyber mr-2 text-xs"></i> Git & GitHub</li>
+                        <li class="flex items-center"><i class="fa-solid fa-check text-cyber mr-2 text-xs"></i> Sentinel-X Tooling</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-6">
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">
+                Featured <span class="text-cyber">Projects</span>
+            </h2>
+
+            <div class="grid grid-cols-1 gap-8">
+                <!-- Sentinel-X Project Card -->
+                <div class="bg-cardbg p-8 rounded-xl border border-gray-800 hover:border-cyber/50 transition flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                    <div class="space-y-3">
+                        <div class="flex items-center space-x-3">
+                            <h3 class="text-2xl font-bold text-white">Sentinel-X</h3>
+                            <span class="px-2 py-1 bg-cyber/10 border border-cyber/30 text-cyber text-xs font-mono rounded">Security Tool</span>
+                        </div>
+                        <p class="text-gray-400 max-w-xl">
+                            An automated security and penetration testing framework designed to streamline intelligence gathering and testing workflows.
+                        </p>
+                        <div class="flex gap-2 text-xs font-mono text-gray-400 pt-2">
+                            <span class="bg-darkbg px-2.5 py-1 rounded border border-gray-800">Python</span>
+                            <span class="bg-darkbg px-2.5 py-1 rounded border border-gray-800">Security</span>
+                            <span class="bg-darkbg px-2.5 py-1 rounded border border-gray-800">Linux</span>
+                        </div>
+                    </div>
+                    <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="px-5 py-2.5 bg-darkbg hover:bg-gray-800 border border-gray-700 text-white rounded-lg font-mono text-sm flex items-center gap-2 transition whitespace-nowrap">
+                        <i class="fa-brands fa-github"></i> Repository
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-6 bg-cardbg/40 border-t border-gray-800">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Let's Connect</h2>
+            <p class="text-gray-400 mb-8">Feel free to reach out for collaborations or project discussions.</p>
+
+            <div class="flex flex-wrap justify-center gap-6 mb-12">
+                <a href="mailto:sk4702684@gmail.com" class="flex items-center gap-3 px-6 py-3 bg-cardbg border border-gray-800 rounded-lg hover:border-cyber text-gray-300 hover:text-white transition">
+                    <i class="fa-solid fa-envelope text-cyber"></i> Email Me
+                </a>
+                <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="flex items-center gap-3 px-6 py-3 bg-cardbg border border-gray-800 rounded-lg hover:border-cyber text-gray-300 hover:text-white transition">
+                    <i class="fa-brands fa-linkedin text-cyber"></i> LinkedIn
+                </a>
+                <a href="https://github.com/sk4702684" target="_blank" class="flex items-center gap-3 px-6 py-3 bg-cardbg border border-gray-800 rounded-lg hover:border-cyber text-gray-300 hover:text-white transition">
+                    <i class="fa-brands fa-github text-cyber"></i> GitHub
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-6 border-t border-gray-800 text-center text-sm text-gray-500 font-mono">
+        © 2026 Satyam Raj. All rights reserved.
+    </footer>
+
+</body>
+</html>
