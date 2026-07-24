@@ -8,12 +8,12 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Poppins & Fira Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- FontAwesome Icons -->
+    <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <!-- Tailwind Configuration -->
@@ -79,7 +79,7 @@
 </head>
 <body class="text-gray-200 font-sans selection:bg-cyber selection:text-black relative overflow-x-hidden min-h-screen">
 
-    <!-- Background Canvas -->
+    <!-- Background Canvas Particles -->
     <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20"></canvas>
 
     <!-- Header / Navbar -->
@@ -94,8 +94,10 @@
 
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <a href="#about" class="hover:text-cyber transition">01. About</a>
-                <a href="#projects" class="hover:text-cyber transition">02. Sentinel-X</a>
-                <a href="#contact" class="hover:text-cyber transition">03. Contact</a>
+                <a href="#ece-specialization" class="hover:text-cyber transition">02. ECE Core</a>
+                <a href="#skills" class="hover:text-cyber transition">03. Stack</a>
+                <a href="#projects" class="hover:text-cyber transition">04. Sentinel-X</a>
+                <a href="#contact" class="hover:text-cyber transition">05. Contact</a>
             </nav>
 
             <div class="hidden md:flex items-center space-x-4">
@@ -108,12 +110,13 @@
 
     <main class="relative z-10">
 
-        <!-- Hero Section -->
+        <!-- Hero Section (PHOTO UPDATED & ALIGNED) -->
         <section id="about" class="min-h-screen flex items-center justify-center pt-28 pb-16 px-6 relative">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <div class="lg:col-span-7 space-y-6">
                     <div class="flex items-center gap-4">
+                        <!-- DIRECT GITHUB AVATAR -->
                         <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover profile-glow">
                         <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-cyber/30 text-cyber text-xs font-medium">
                             <span class="w-2 h-2 rounded-full bg-cyber animate-ping"></span>
@@ -177,21 +180,96 @@
             </div>
         </section>
 
-        <!-- Sentinel-X Project Section -->
+        <!-- ECE CORE SECTION (Enhanced Hover Effects) -->
+        <section id="ece-specialization" class="py-20 px-6 relative">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Academic Learning</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white">ECE Core Foundation</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-cyber/60 hover:shadow-lg hover:shadow-cyber/10 space-y-3">
+                        <div class="text-cyber text-3xl"><i class="fa-solid fa-network-wired"></i></div>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-cyber">Digital Electronics</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Logic gates, Boolean algebra, & sequential circuits.</p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-neonBlue/60 hover:shadow-lg hover:shadow-neonBlue/10 space-y-3">
+                        <div class="text-neonBlue text-3xl"><i class="fa-solid fa-satellite-dish"></i></div>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-neonBlue">Communication Systems</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Signal modulation, bandwidth, & data transmission.</p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-purple-400/60 hover:shadow-lg hover:shadow-purple-400/10 space-y-3">
+                        <div class="text-purple-400 text-3xl"><i class="fa-solid fa-microchip"></i></div>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-purple-400">Microprocessors</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Architecture, instruction sets, & bus systems.</p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-yellow-400/60 hover:shadow-lg hover:shadow-yellow-400/10 space-y-3">
+                        <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-diagram-project"></i></div>
+                        <h3 class="text-lg font-semibold text-white group-hover:text-yellow-400">Network Protocols</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">TCP/IP, OSI layers, socket communication, & packets.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TECH STACK SECTION (Kali Tools Added to OS Card) -->
+        <section id="skills" class="py-20 px-6 relative">
+            <div class="max-w-6xl mx-auto space-y-12">
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Technical Toolkit</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white">Skills & Competencies</h2>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="glass-card p-8 rounded-2xl space-y-4 hover:border-cyber transition">
+                        <div class="text-cyber text-3xl"><i class="fa-solid fa-code"></i></div>
+                        <h3 class="text-xl font-bold text-white">Languages</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">C Language, Python 3, HTML5, CSS3, TailwindCSS</p>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl space-y-4 hover:border-cyber transition">
+                        <div class="text-neonBlue text-3xl"><i class="fa-solid fa-desktop"></i></div>
+                        <h3 class="text-xl font-bold text-white">Operating Systems</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Linux (Kali/Ubuntu), Windows, Bash CLI</p>
+                        <!-- KALI TOOLS LIST ADDED HERE -->
+                        <div class="pt-2 space-y-1.5 border-t border-gray-800">
+                            <p class="text-neonBlue font-semibold text-[11px] tracking-wide uppercase font-mono">Kali Linux Toolset:</p>
+                            <div class="flex flex-wrap gap-x-2 gap-y-1 font-mono text-[10px] text-gray-300">
+                                <span><i class="fa-solid fa-shield-halved text-cyber/80"></i> Nmap</span>
+                                <span><i class="fa-solid fa-fish text-cyber/80"></i> Wireshark</span>
+                                <span><i class="fa-solid fa-virus-slash text-cyber/80"></i> Metasploit</span>
+                                <span><i class="fa-solid fa-user-secret text-cyber/80"></i> Burp Suite</span>
+                                <span><i class="fa-solid fa-key text-cyber/80"></i> JohnTheRipper</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card p-8 rounded-2xl space-y-4 hover:border-cyber transition">
+                        <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <h3 class="text-xl font-bold text-white">Developer Tools</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Git, GitHub, Sentinel-X Tooling, Nmap API, VS Code</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SENTINEL-X DETAILED SECTION (Featured Work) -->
         <section id="projects" class="py-20 px-6 relative bg-darkBg/50">
             <div class="max-w-6xl mx-auto space-y-12">
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-800 pb-6">
-                    <div>
-                        <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Featured Projects</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Key Developer Work</h2>
-                    </div>
+                <div class="border-b border-gray-800 pb-6">
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Featured Work</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Sentinel-X Framework</h2>
                 </div>
 
                 <div class="glass-card rounded-2xl p-8 border border-gray-800 relative space-y-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="space-y-4">
-                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/30 text-cyber text-xs font-mono rounded">Python Security Tool</span>
-                            <h3 class="text-2xl font-bold text-white">Sentinel-X</h3>
+                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/30 text-cyber text-xs font-mono rounded">Python Cybersecurity Tool</span>
+                            <h3 class="text-2xl font-bold text-white">Automated Security Suite</h3>
                             <p class="text-gray-300 text-xs leading-relaxed max-w-md">
                                 Automated security assessment framework built with Python for reconnaissance, network diagnostics, and vulnerability scanning.
                             </p>
@@ -200,12 +278,11 @@
                                 <span class="px-2 py-0.5 rounded-md border border-gray-800">Streamlit</span>
                                 <span class="px-2 py-0.5 rounded-md border border-gray-800">Supabase</span>
                                 <span class="px-2 py-0.5 rounded-md border border-gray-800">Nmap API</span>
-                                <span class="px-2 py-0.5 rounded-md border border-gray-800">Threading</span>
                             </div>
                         </div>
 
                         <div class="glass-card p-4 rounded-xl border border-gray-800 space-y-2 text-xs text-gray-300 font-mono leading-relaxed">
-                            <p class="text-neonBlue">// Features Description</p>
+                            <p class="text-neonBlue">// Features Overview</p>
                             <p>+ Automated Subdomain Discovery</p>
                             <p>+ Port Scanning & Service Identification</p>
                             <p>+ Security Header & Vulnerability Analysis</p>
@@ -213,12 +290,9 @@
                         </div>
                     </div>
 
-                    <div class="pt-6 border-t border-gray-800/80 flex items-center justify-between gap-4">
-                        <p class="text-gray-500 text-xs font-mono flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>In Active Development: Finalizing Reporting Module
-                        </p>
+                    <div class="pt-6 border-t border-gray-800/80 flex items-center justify-between">
                         <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="px-4 py-2 border border-cyber text-cyber text-xs font-semibold rounded-lg hover:bg-cyber hover:text-black transition flex items-center gap-1.5">
-                            <i class="fa-brands fa-github text-sm"></i> View Repository
+                            <i class="fa-brands fa-github text-sm"></i> View Sentinel-X Repository
                         </a>
                     </div>
                 </div>
@@ -229,44 +303,24 @@
         <section id="contact" class="py-20 px-6 relative">
             <div class="max-w-4xl mx-auto text-center space-y-12">
                 <div class="space-y-3">
-                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Let's Build Something</span>
-                    <h2 class="text-4xl font-bold text-white">Get In Touch</h2>
-                    <p class="text-gray-400 max-w-lg mx-auto text-sm leading-relaxed">
-                        Whether you want to discuss ECE core concepts, Python scripting, or just say hello, feel free to reach out!
-                    </p>
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Get In Touch</span>
+                    <h2 class="text-4xl font-bold text-white">Let's Connect</h2>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <a href="mailto:sk4702684@gmail.com" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
+                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-solid fa-envelope"></i></div>
                         <h3 class="text-base font-semibold text-white">Email</h3>
                         <p class="text-xs font-mono text-gray-400 truncate">sk4702684@gmail.com</p>
                     </a>
-
-                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </div>
-                        <h3 class="text-base font-semibold text-white">LinkedIn</h3>
-                        <p class="text-xs font-mono text-gray-400">Satyam Raj</p>
-                    </a>
-
-                    <a href="https://github.com/sk4702684" target="_blank" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto">
-                            <i class="fa-brands fa-github"></i>
-                        </div>
-                        <h3 class="text-base font-semibold text-white">GitHub</h3>
-                        <p class="text-xs font-mono text-gray-400">sk4702684</p>
-                    </a>
+                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3"><div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-brands fa-linkedin"></i></div><h3 class="text-base font-semibold text-white">LinkedIn</h3><p class="text-xs font-mono text-gray-400">Satyam Raj</p></a>
+                    <a href="https://github.com/sk4702684" target="_blank" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3"><div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-brands fa-github"></i></div><h3 class="text-base font-semibold text-white">GitHub</h3><p class="text-xs font-mono text-gray-400">sk4702684</p></a>
                 </div>
             </div>
         </section>
 
     </main>
 
-    <!-- Footer -->
     <footer class="py-8 border-t border-gray-800/80 bg-darkBg text-center font-mono text-xs text-gray-500">
         © 2026 Satyam Raj | Shivalik College of Engineering
     </footer>
@@ -279,10 +333,7 @@
 
         function type() {
             const currentWord = words[wordIdx];
-            targetEl.textContent = isDeleting 
-                ? currentWord.substring(0, charIdx - 1) 
-                : currentWord.substring(0, charIdx + 1);
-            
+            targetEl.textContent = isDeleting ? currentWord.substring(0, charIdx - 1) : currentWord.substring(0, charIdx + 1);
             charIdx += isDeleting ? -1 : 1;
             let speed = isDeleting ? 40 : 100;
 
