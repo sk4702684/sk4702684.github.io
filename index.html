@@ -39,13 +39,11 @@
     </script>
 
     <style>
-        /* Custom Scrollbar */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0b0f19; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
 
-        /* Animated Mesh Gradient Background */
         body {
             background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 40%, #311042 75%, #0b0f19 100%);
             background-size: 400% 400%;
@@ -58,7 +56,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Glassmorphism Effect with Touch Scale Response */
         .glass-card {
             background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(12px);
@@ -73,16 +70,14 @@
             transform: translateY(-4px) scale(1.01);
         }
 
-        /* Terminal Window Styling */
-        .term-header {
-            background: #1e293b;
-            border-radius: 8px 8px 0 0;
+        .profile-glow {
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+            border: 2px solid rgba(56, 189, 248, 0.8);
         }
 
-        /* Modal Animation */
-        .modal-enter {
-            animation: modalFadeIn 0.3s ease forwards;
-        }
+        .term-header { background: #1e293b; border-radius: 8px 8px 0 0; }
+        
+        .modal-enter { animation: modalFadeIn 0.3s ease forwards; }
         @keyframes modalFadeIn {
             from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
@@ -91,10 +86,8 @@
 </head>
 <body class="text-gray-200 font-sans selection:bg-cyber selection:text-black relative overflow-x-hidden min-h-screen">
 
-    <!-- Background Canvas Animation -->
     <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20"></canvas>
 
-    <!-- Navigation Bar -->
     <header class="fixed top-0 w-full z-50 glass-card border-b border-gray-800/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-3 text-xl font-bold text-white tracking-wider group">
@@ -126,20 +119,25 @@
             <a href="#ece-specialization" class="hover:text-cyber transition">02. ECE Core</a>
             <a href="#skills" class="hover:text-cyber transition">03. Tech Stack</a>
             <a href="#projects" class="hover:text-cyber transition">04. Sentinel-X</a>
-            <a href="#terminal-section" class="hover:text-cyber transition">05. Interactive CLI</a>
+            <a href="#terminal-section" class="hover:text-cyber transition">05. CLI</a>
         </div>
     </header>
 
     <main class="relative z-10">
 
         <!-- HERO SECTION -->
-        <section class="min-h-screen flex items-center justify-center pt-28 pb-16 px-6 relative">
+        <section id="about" class="min-h-screen flex items-center justify-center pt-28 pb-16 px-6 relative">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <div class="lg:col-span-7 space-y-6">
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-cyber/30 text-cyber text-xs font-medium">
-                        <span class="w-2 h-2 rounded-full bg-cyber animate-ping"></span>
-                        <span>Shivalik College of Engineering Student</span>
+                    
+                    <!-- PHOTO & COLLEGE BADGE ROW -->
+                    <div class="flex items-center gap-4">
+                        <img src="my-photo.jpg" alt="Satyam Raj" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover profile-glow">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-cyber/30 text-cyber text-xs font-medium">
+                            <span class="w-2 h-2 rounded-full bg-cyber animate-ping"></span>
+                            <span>Shivalik College of Engineering Student</span>
+                        </div>
                     </div>
 
                     <div class="space-y-2">
@@ -147,7 +145,6 @@
                         <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight">
                             Satyam Raj<span class="text-cyber">.</span>
                         </h1>
-                        <!-- Student-friendly updated tagline -->
                         <p class="text-xl sm:text-2xl font-medium text-gray-400 flex items-center gap-2">
                             <span>Exploring code & building things like</span>
                             <span id="typewriter" class="text-neonBlue border-b-2 border-neonBlue font-semibold"></span>
@@ -202,7 +199,7 @@
             </div>
         </section>
 
-        <!-- ECE CORE CARDS SECTION (CLICKABLE) -->
+        <!-- ECE CORE SECTION -->
         <section id="ece-specialization" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
@@ -212,7 +209,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    
                     <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Digital Electronics', 'Covers Boolean logic, gate design, flip-flops, multiplexers, and sequential state machines as part of my engineering coursework.')">
                         <div class="text-cyber text-3xl"><i class="fa-solid fa-[#]"></i></div>
                         <h3 class="text-lg font-semibold text-white">Digital Electronics</h3>
@@ -240,12 +236,11 @@
                         <p class="text-xs text-gray-400 leading-relaxed">TCP/IP, OSI layers, socket communication, & packets.</p>
                         <span class="text-yellow-400 text-xs font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- TECH STACK CARDS (CLICKABLE) -->
+        <!-- TECH STACK SECTION -->
         <section id="skills" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
@@ -255,7 +250,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    
                     <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('C & Python Programming', 'Python is my go-to language for building projects like Sentinel-X and small automation scripts. C helps me understand low-level concepts and memory handling.')">
                         <div class="text-cyber text-3xl"><i class="fa-solid fa-code"></i></div>
                         <h3 class="text-xl font-bold text-white">Languages</h3>
@@ -276,12 +270,11 @@
                         <p class="text-xs text-gray-400 leading-relaxed">Git, GitHub, Sentinel-X Tooling</p>
                         <span class="text-yellow-400 text-xs font-mono block">Click to view experience →</span>
                     </div>
-
                 </div>
             </div>
         </section>
 
-        <!-- FEATURED PROJECT: SENTINEL-X -->
+        <!-- SENTINEL-X PROJECT -->
         <section id="projects" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-800 pb-6">
@@ -308,7 +301,7 @@
             </div>
         </section>
 
-        <!-- INTERACTIVE CLI TERMINAL -->
+        <!-- CLI TERMINAL SECTION -->
         <section id="terminal-section" class="py-20 px-6 relative">
             <div class="max-w-4xl mx-auto space-y-6">
                 <div class="text-center space-y-2">
@@ -368,12 +361,11 @@
 
     </main>
 
-    <!-- FOOTER -->
     <footer class="py-8 border-t border-gray-800/80 bg-darkBg text-center font-mono text-xs text-gray-500">
         © 2026 Satyam Raj | Shivalik College of Engineering
     </footer>
 
-    <!-- DYNAMIC DETAIL MODAL POPUP -->
+    <!-- MODAL -->
     <div id="infoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-6">
         <div class="glass-card max-w-lg w-full rounded-2xl p-6 border border-cyber/50 modal-enter space-y-4 text-left">
             <div class="flex items-center justify-between border-b border-gray-800 pb-3">
@@ -387,9 +379,7 @@
         </div>
     </div>
 
-    <!-- JAVASCRIPT -->
     <script>
-        // Modal Handlers
         function openModal(title, text) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalBody').innerText = text;
@@ -404,12 +394,10 @@
             modal.classList.remove('flex');
         }
 
-        // Mobile Menu Toggle
         document.getElementById('menu-btn').addEventListener('click', () => {
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Typewriter Effect (Student Vibe)
         const words = ["Python Scripts", "Linux Tools", "Sentinel-X", "College Projects"];
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         const targetEl = document.getElementById('typewriter');
@@ -430,7 +418,6 @@
         }
         document.addEventListener('DOMContentLoaded', type);
 
-        // Canvas Particles Background
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
@@ -487,7 +474,6 @@
         }
         animateCanvas();
 
-        // Terminal Commands
         const termInput = document.getElementById('terminal-input');
         const termOutput = document.getElementById('terminal-output');
         const commands = {
