@@ -147,14 +147,15 @@
                         <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight">
                             Satyam Raj<span class="text-cyber">.</span>
                         </h1>
-                        <p class="text-2xl sm:text-3xl font-semibold text-gray-400 flex items-center gap-2">
-                            <span>I build</span>
-                            <span id="typewriter" class="text-neonBlue border-b-2 border-neonBlue"></span>
+                        <!-- Student-friendly updated tagline -->
+                        <p class="text-xl sm:text-2xl font-medium text-gray-400 flex items-center gap-2">
+                            <span>Exploring code & building things like</span>
+                            <span id="typewriter" class="text-neonBlue border-b-2 border-neonBlue font-semibold"></span>
                         </p>
                     </div>
 
                     <p class="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
-                        Engineering student at <span class="text-white font-semibold">Shivalik College of Engineering (Shivalik University)</span> specializing in Electronics & Communication. Passionate about software security, Linux customization, and automated tools like <span class="text-cyber font-medium">Sentinel-X</span>.
+                        An engineering student at <span class="text-white font-semibold">Shivalik College of Engineering (Shivalik University)</span> currently pursuing my B.Tech in Electronics & Communication. Passionate about learning programming, tinkering with Linux systems, and building tools like <span class="text-cyber font-medium">Sentinel-X</span>.
                     </p>
 
                     <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono">
@@ -183,16 +184,16 @@
                                 <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
                                 <span class="w-3 h-3 rounded-full bg-green-500"></span>
                             </div>
-                            <span>profile.json</span>
+                            <span>student_profile.json</span>
                         </div>
 
                         <div class="py-4 font-mono text-xs sm:text-sm space-y-2 text-gray-300 leading-relaxed">
-                            <p><span class="text-purple-400">const</span> <span class="text-yellow-300">developer</span> = {</p>
+                            <p><span class="text-purple-400">const</span> <span class="text-yellow-300">student</span> = {</p>
                             <p class="pl-4"><span class="text-blue-400">name</span>: <span class="text-cyber">"Satyam Raj"</span>,</p>
-                            <p class="pl-4"><span class="text-blue-400">college</span>: <span class="text-cyber">"Shivalik College of Engineering"</span>,</p>
-                            <p class="pl-4"><span class="text-blue-400">degree</span>: <span class="text-cyber">"B.Tech in ECE"</span>,</p>
-                            <p class="pl-4"><span class="text-blue-400">languages</span>: [<span class="text-cyber">"C"</span>, <span class="text-cyber">"Python"</span>, <span class="text-cyber">"HTML"</span>],</p>
-                            <p class="pl-4"><span class="text-blue-400">flagshipProject</span>: <span class="text-yellow-400">"Sentinel-X"</span></p>
+                            <p class="pl-4"><span class="text-blue-400">status</span>: <span class="text-cyber">"B.Tech ECE Student"</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">college</span>: <span class="text-cyber">"Shivalik College"</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">learning</span>: [<span class="text-cyber">"C"</span>, <span class="text-cyber">"Python"</span>, <span class="text-cyber">"Linux"</span>],</p>
+                            <p class="pl-4"><span class="text-blue-400">project</span>: <span class="text-yellow-400">"Sentinel-X"</span></p>
                             <p>};</p>
                         </div>
                     </div>
@@ -205,39 +206,35 @@
         <section id="ece-specialization" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
-                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Academic Engineering</span>
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Academic Learning</span>
                     <h2 class="text-3xl sm:text-4xl font-bold text-white">ECE Core Foundation</h2>
                     <p class="text-gray-400 text-sm">Click on any card below to view detailed course information!</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                     
-                    <!-- Domain 1 Card -->
-                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Digital Electronics', 'Covers Boolean logic, gate design, flip-flops, multiplexers, and sequential state machines. Essential for understanding processor logic and firmware development.')">
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Digital Electronics', 'Covers Boolean logic, gate design, flip-flops, multiplexers, and sequential state machines as part of my engineering coursework.')">
                         <div class="text-cyber text-3xl"><i class="fa-solid fa-[#]"></i></div>
                         <h3 class="text-lg font-semibold text-white">Digital Electronics</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Logic gates, Boolean algebra, & sequential circuits.</p>
                         <span class="text-cyber text-xs font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <!-- Domain 2 Card -->
-                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Communication Systems', 'Focuses on signal modulation (AM/FM/PSK), bandwidth management, noise filtering, and digital data packet transmission protocols across network media.')">
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Communication Systems', 'Focuses on signal modulation (AM/FM/PSK), bandwidth management, noise filtering, and digital data packet transmission protocols.')">
                         <div class="text-neonBlue text-3xl"><i class="fa-solid fa-wifi"></i></div>
                         <h3 class="text-lg font-semibold text-white">Communication Systems</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Signal modulation, bandwidth, & data transmission.</p>
                         <span class="text-neonBlue text-xs font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <!-- Domain 3 Card -->
-                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Microprocessors', 'Detailed understanding of 8085/8086 architectures, register configurations, memory mapping, interrupt handling, and low-level assembly execution.')">
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Microprocessors', 'Understanding architecture fundamentals, instruction sets, register logic, and bus interfaces during my B.Tech studies.')">
                         <div class="text-purple-400 text-3xl"><i class="fa-solid fa-microchip"></i></div>
                         <h3 class="text-lg font-semibold text-white">Microprocessors</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Architecture, instruction sets, & bus systems.</p>
                         <span class="text-purple-400 text-xs font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <!-- Domain 4 Card -->
-                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Network Protocols', 'Deep dive into OSI 7-layer model, TCP/IP socket programming, packet analysis, and network security auditing fundamentals.')">
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Network Protocols', 'Exploring TCP/IP models, OSI layers, socket communication fundamentals, and network packet workflows.')">
                         <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-diagram-project"></i></div>
                         <h3 class="text-lg font-semibold text-white">Network Protocols</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">TCP/IP, OSI layers, socket communication, & packets.</p>
@@ -254,29 +251,26 @@
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Technical Toolkit</span>
                     <h2 class="text-3xl sm:text-4xl font-bold text-white">Skills & Competencies</h2>
-                    <p class="text-gray-400 text-sm">Click any technology card for personal insights!</p>
+                    <p class="text-gray-400 text-sm">Click any technology card for details!</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     
-                    <!-- Skill 1 -->
-                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('C & Python Programming', 'Python is my primary tool for building security automation frameworks like Sentinel-X, Streamlit dashboards, and Supabase integration. C language gives me core low-level control over memory and hardware concepts.')">
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('C & Python Programming', 'Python is my go-to language for building projects like Sentinel-X and small automation scripts. C helps me understand low-level concepts and memory handling.')">
                         <div class="text-cyber text-3xl"><i class="fa-solid fa-code"></i></div>
                         <h3 class="text-xl font-bold text-white">Languages</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">C Language, Python 3, HTML5</p>
                         <span class="text-cyber text-xs font-mono block">Click to view experience →</span>
                     </div>
 
-                    <!-- Skill 2 -->
-                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('Linux & OS Systems', 'Proficient in Kali Linux, Ubuntu environments, shell scripting, GNOME environment desktop customization, process monitoring, and dual-boot configurations.')">
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('Linux & OS Systems', 'I use Linux environments (Kali/Ubuntu) for daily coding, exploring shell scripting, and customizing desktop workflows.')">
                         <div class="text-neonBlue text-3xl"><i class="fa-solid fa-desktop"></i></div>
                         <h3 class="text-xl font-bold text-white">Operating Systems</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Linux (Kali/Ubuntu), Windows, Bash CLI</p>
                         <span class="text-neonBlue text-xs font-mono block">Click to view experience →</span>
                     </div>
 
-                    <!-- Skill 3 -->
-                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('Developer Tools & Workflows', 'Experience in Git version control, Supabase database backend, Streamlit frontend design, and building custom CLI utilities.')">
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('Developer Tools & Workflows', 'Using Git and GitHub for version control, managing project files, and building custom utilities like Sentinel-X.')">
                         <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-screwdriver-wrench"></i></div>
                         <h3 class="text-xl font-bold text-white">Developer Tools</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Git, GitHub, Sentinel-X Tooling</p>
@@ -292,18 +286,18 @@
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-800 pb-6">
                     <div>
-                        <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Flagship Repository</span>
-                        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Sentinel-X Spotlight</h2>
+                        <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Student Project Spotlight</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Sentinel-X</h2>
                     </div>
                 </div>
 
                 <div class="glass-card rounded-2xl p-8 border border-cyber/30 relative">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                         <div class="lg:col-span-7 space-y-6">
-                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/40 text-cyber text-xs font-mono font-bold rounded">PYTHON / SECURITY FRAMEWORK</span>
-                            <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Sentinel-X</h3>
+                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/40 text-cyber text-xs font-mono font-bold rounded">PYTHON PROJECT</span>
+                            <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Sentinel-X Framework</h3>
                             <p class="text-gray-300 text-sm leading-relaxed">
-                                An automated penetration testing and reconnaissance framework built in Python. Designed to simplify network scanning, port diagnostics, OSINT gathering, and security reporting.
+                                A Python-based automated security and reconnaissance utility built as a self-learning project to explore network scanning, port diagnostics, and scripting workflows.
                             </p>
                             <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="px-5 py-3 bg-cyber text-black font-semibold rounded-lg hover:bg-sky-400 transition inline-flex items-center gap-2 text-xs font-mono">
                                 <i class="fa-brands fa-github text-sm"></i> View Repo: sk4702684 / Sentinel-X
@@ -330,14 +324,14 @@
                             <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
                             <span class="w-3 h-3 rounded-full bg-green-500"></span>
                         </div>
-                        <span class="text-xs">satyam@shivalik-terminal:~</span>
+                        <span class="text-xs">satyam@shivalik-student:~</span>
                     </div>
                     <div id="terminal-output" class="p-6 h-64 overflow-y-auto space-y-2 text-gray-300">
-                        <p class="text-cyber">Satyam Raj Portfolio OS v3.0 [Shivalik University Edition]</p>
+                        <p class="text-cyber">Satyam Raj Student Portfolio OS [Shivalik College Edition]</p>
                         <p class="text-gray-500">Type 'help' to see available system commands.</p>
                     </div>
                     <div class="p-4 bg-darkBg border-t border-gray-800 flex items-center space-x-2">
-                        <span class="text-cyber font-bold">guest@satyam:~$</span>
+                        <span class="text-cyber font-bold">student@satyam:~$</span>
                         <input id="terminal-input" type="text" class="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm" placeholder="type a command..." autocomplete="off">
                     </div>
                 </div>
@@ -415,8 +409,8 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Typewriter Effect
-        const words = ["ECE Student", "Security Developer", "Shivalik College", "Sentinel-X Creator"];
+        // Typewriter Effect (Student Vibe)
+        const words = ["Python Scripts", "Linux Tools", "Sentinel-X", "College Projects"];
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         const targetEl = document.getElementById('typewriter');
 
@@ -498,9 +492,9 @@
         const termOutput = document.getElementById('terminal-output');
         const commands = {
             'help': 'Commands:\n • help\n • college\n • skills\n • project\n • contact\n • clear',
-            'college': 'Shivalik College of Engineering (Shivalik University) — B.Tech in ECE.',
+            'college': 'Shivalik College of Engineering — B.Tech ECE Student.',
             'skills': 'Languages: C, Python, HTML\nOS: Linux (Kali/Ubuntu), Windows',
-            'project': 'Sentinel-X: Automated Python Security Recon Framework.',
+            'project': 'Sentinel-X: Student Python Security Recon Framework.',
             'contact': 'Email: sk4702684@gmail.com\nGitHub: github.com/sk4702684'
         };
 
@@ -510,7 +504,7 @@
                 termInput.value = '';
                 const cmdLine = document.createElement('p');
                 cmdLine.className = 'text-white font-bold';
-                cmdLine.innerHTML = `<span class="text-cyber">guest@satyam:~$</span> ${input}`;
+                cmdLine.innerHTML = `<span class="text-cyber">student@satyam:~$</span> ${input}`;
                 termOutput.appendChild(cmdLine);
 
                 if (input === 'clear') { termOutput.innerHTML = ''; }
