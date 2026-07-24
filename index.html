@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth dark">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,10 +8,10 @@
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Poppins & Fira Code -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Inter:wght@300;400;600;700;900&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- FontAwesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -23,31 +23,15 @@
             theme: {
                 extend: {
                     colors: {
-                        cyber: '#00ff66',
-                        neonBlue: '#00f0ff',
-                        darkBg: '#050811',
-                        cardBg: '#0e1626',
-                        accentDark: '#131e32'
+                        cyber: '#38bdf8',
+                        neonBlue: '#a855f7',
+                        darkBg: '#0b0f19',
+                        cardBg: 'rgba(255, 255, 255, 0.04)',
+                        accentDark: '#111827'
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace'],
-                        orbitron: ['Orbitron', 'sans-serif']
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 4s ease-in-out infinite',
-                        'glow': 'glow 2s ease-in-out infinite alternate',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        glow: {
-                            '0%': { boxShadow: '0 0 5px rgba(0, 255, 102, 0.2)' },
-                            '100%': { boxShadow: '0 0 20px rgba(0, 255, 102, 0.6)' },
-                        }
+                        sans: ['Poppins', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace']
                     }
                 }
             }
@@ -56,44 +40,37 @@
 
     <style>
         /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050811;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #1e293b;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #00ff66;
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+
+        /* Animated Mesh Gradient Background */
+        body {
+            background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 40%, #311042 75%, #0b0f19 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
         }
 
-        /* Glassmorphism Effect */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism Effect with Touch Scale Response */
         .glass-card {
-            background: rgba(14, 22, 38, 0.7);
+            background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
         }
 
-        .glass-card:hover {
-            border-color: rgba(0, 255, 102, 0.4);
-            box-shadow: 0 0 25px rgba(0, 255, 102, 0.15);
-        }
-
-        /* Cyberpunk Grid Overlay */
-        .cyber-grid {
-            background-image: linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                              linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-
-        /* Text Glitch Effect */
-        .glitch-text {
-            position: relative;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.5);
+        .glass-card:hover, .glass-card:active {
+            border-color: rgba(56, 189, 248, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.25);
+            transform: translateY(-4px) scale(1.01);
         }
 
         /* Terminal Window Styling */
@@ -101,9 +78,18 @@
             background: #1e293b;
             border-radius: 8px 8px 0 0;
         }
+
+        /* Modal Animation */
+        .modal-enter {
+            animation: modalFadeIn 0.3s ease forwards;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
-<body class="bg-darkBg text-gray-200 font-sans selection:bg-cyber selection:text-black relative overflow-x-hidden">
+<body class="text-gray-200 font-sans selection:bg-cyber selection:text-black relative overflow-x-hidden min-h-screen">
 
     <!-- Background Canvas Animation -->
     <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20"></canvas>
@@ -111,621 +97,346 @@
     <!-- Navigation Bar -->
     <header class="fixed top-0 w-full z-50 glass-card border-b border-gray-800/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Brand Logo -->
-            <a href="#" class="flex items-center space-x-3 font-orbitron text-xl font-black text-white tracking-wider group">
-                <span class="w-8 h-8 rounded bg-cyber/10 border border-cyber flex items-center justify-center text-cyber group-hover:bg-cyber group-hover:text-black transition-all">
-                    <i class="fa-solid fa-terminal text-sm"></i>
+            <a href="#" class="flex items-center space-x-3 text-xl font-bold text-white tracking-wider group">
+                <span class="w-9 h-9 rounded-lg bg-cyber/10 border border-cyber flex items-center justify-center text-cyber group-hover:bg-cyber group-hover:text-black transition-all">
+                    <i class="fa-solid fa-code text-sm"></i>
                 </span>
                 <span>SATYAM<span class="text-cyber">.RAJ</span></span>
             </a>
 
-            <!-- Desktop Menu -->
-            <nav class="hidden md:flex items-center space-x-8 text-sm font-mono font-medium">
-                <a href="#about" class="hover:text-cyber transition flex items-center gap-1.5"><span class="text-cyber">01.</span> About</a>
-                <a href="#ece-specialization" class="hover:text-cyber transition flex items-center gap-1.5"><span class="text-cyber">02.</span> ECE Core</a>
-                <a href="#skills" class="hover:text-cyber transition flex items-center gap-1.5"><span class="text-cyber">03.</span> Stack</a>
-                <a href="#projects" class="hover:text-cyber transition flex items-center gap-1.5"><span class="text-cyber">04.</span> Sentinel-X</a>
-                <a href="#terminal-section" class="hover:text-cyber transition flex items-center gap-1.5"><span class="text-cyber">05.</span> Interactive CLI</a>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="hover:text-cyber transition">01. About</a>
+                <a href="#ece-specialization" class="hover:text-cyber transition">02. ECE Core</a>
+                <a href="#skills" class="hover:text-cyber transition">03. Stack</a>
+                <a href="#projects" class="hover:text-cyber transition">04. Sentinel-X</a>
+                <a href="#terminal-section" class="hover:text-cyber transition">05. CLI</a>
             </nav>
 
-            <!-- Social Quick Links & CTA -->
             <div class="hidden md:flex items-center space-x-4">
-                <a href="https://github.com/sk4702684" target="_blank" class="p-2 text-gray-400 hover:text-cyber hover:bg-cyber/10 rounded-lg transition" title="GitHub Profile">
-                    <i class="fa-brands fa-github text-lg"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="p-2 text-gray-400 hover:text-cyber hover:bg-cyber/10 rounded-lg transition" title="LinkedIn Profile">
-                    <i class="fa-brands fa-linkedin text-lg"></i>
-                </a>
-                <a href="#contact" class="px-4 py-2 border border-cyber text-cyber text-xs font-mono font-semibold rounded hover:bg-cyber hover:text-black transition duration-300">
-                    Get In Touch
-                </a>
+                <a href="https://github.com/sk4702684" target="_blank" class="p-2 text-gray-400 hover:text-cyber transition"><i class="fa-brands fa-github text-lg"></i></a>
+                <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="p-2 text-gray-400 hover:text-cyber transition"><i class="fa-brands fa-linkedin text-lg"></i></a>
+                <a href="#contact" class="px-4 py-2 border border-cyber text-cyber text-xs font-semibold rounded-lg hover:bg-cyber hover:text-black transition">Get In Touch</a>
             </div>
 
-            <!-- Mobile Menu Toggle -->
-            <button id="menu-btn" class="md:hidden text-cyber text-2xl focus:outline-none">
-                <i class="fa-solid fa-bars"></i>
-            </button>
+            <button id="menu-btn" class="md:hidden text-cyber text-2xl focus:outline-none"><i class="fa-solid fa-bars"></i></button>
         </div>
 
-        <!-- Mobile Menu Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-gray-800 px-6 py-4 flex flex-col space-y-4 font-mono text-sm">
+        <div id="mobile-menu" class="hidden md:hidden glass-card border-b border-gray-800 px-6 py-4 flex flex-col space-y-4 text-sm font-medium">
             <a href="#about" class="hover:text-cyber transition">01. About</a>
             <a href="#ece-specialization" class="hover:text-cyber transition">02. ECE Core</a>
             <a href="#skills" class="hover:text-cyber transition">03. Tech Stack</a>
             <a href="#projects" class="hover:text-cyber transition">04. Sentinel-X</a>
             <a href="#terminal-section" class="hover:text-cyber transition">05. Interactive CLI</a>
-            <div class="flex items-center space-x-4 pt-2 border-t border-gray-800">
-                <a href="https://github.com/sk4702684" target="_blank" class="text-gray-400 hover:text-cyber"><i class="fa-brands fa-github text-xl"></i></a>
-                <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="text-gray-400 hover:text-cyber"><i class="fa-brands fa-linkedin text-xl"></i></a>
-                <a href="mailto:sk4702684@gmail.com" class="text-gray-400 hover:text-cyber"><i class="fa-solid fa-envelope text-xl"></i></a>
-            </div>
         </div>
     </header>
 
-    <!-- Main Container -->
     <main class="relative z-10">
 
         <!-- HERO SECTION -->
-        <section class="min-h-screen flex items-center justify-center pt-28 pb-16 px-6 cyber-grid relative">
+        <section class="min-h-screen flex items-center justify-center pt-28 pb-16 px-6 relative">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
-                <!-- Left Hero Column -->
                 <div class="lg:col-span-7 space-y-6">
-                    <!-- Status Badge -->
-                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-cyber/30 text-cyber text-xs font-mono">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-cyber/30 text-cyber text-xs font-medium">
                         <span class="w-2 h-2 rounded-full bg-cyber animate-ping"></span>
-                        <span>Available for Security & Hardware Projects</span>
+                        <span>Shivalik College of Engineering Student</span>
                     </div>
 
-                    <!-- Main Headline -->
                     <div class="space-y-2">
                         <h2 class="text-cyber font-mono text-sm tracking-widest uppercase">Hi, my name is</h2>
-                        <h1 class="text-5xl sm:text-6xl md:text-7xl font-orbitron font-black text-white tracking-tight leading-tight">
+                        <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight">
                             Satyam Raj<span class="text-cyber">.</span>
                         </h1>
-                        <p class="text-2xl sm:text-3xl font-semibold text-gray-400 font-mono flex items-center gap-2">
+                        <p class="text-2xl sm:text-3xl font-semibold text-gray-400 flex items-center gap-2">
                             <span>I build</span>
                             <span id="typewriter" class="text-neonBlue border-b-2 border-neonBlue"></span>
                         </p>
                     </div>
 
-                    <!-- Short Bio -->
-                    <p class="text-gray-400 text-base sm:text-lg leading-relaxed max-w-2xl font-sans">
-                        An <span class="text-white font-medium">Electronics & Communication Engineering (ECE)</span> student passionate about bridging hardware architecture with software security. Developer of <span class="text-cyber font-mono font-semibold">Sentinel-X</span>—an automated reconnaissance and vulnerability intelligence tool.
+                    <p class="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
+                        Engineering student at <span class="text-white font-semibold">Shivalik College of Engineering (Shivalik University)</span> specializing in Electronics & Communication. Passionate about software security, Linux customization, and automated tools like <span class="text-cyber font-medium">Sentinel-X</span>.
                     </p>
 
-                    <!-- Tech Badges -->
-                    <div class="flex flex-wrap gap-2 pt-2 font-mono text-xs">
-                        <span class="px-3 py-1 rounded bg-darkBg border border-gray-800 text-gray-300"><i class="fa-solid fa-[#] text-cyber mr-1.5"></i>ECE Systems</span>
-                        <span class="px-3 py-1 rounded bg-darkBg border border-gray-800 text-gray-300"><i class="fa-brands fa-python text-yellow-400 mr-1.5"></i>Python</span>
-                        <span class="px-3 py-1 rounded bg-darkBg border border-gray-800 text-gray-300"><i class="fa-solid fa-c text-blue-400 mr-1.5"></i>C Programming</span>
-                        <span class="px-3 py-1 rounded bg-darkBg border border-gray-800 text-gray-300"><i class="fa-brands fa-linux text-orange-400 mr-1.5"></i>Linux Environments</span>
+                    <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono">
+                        <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-solid fa-graduation-cap text-cyber mr-1.5"></i>Shivalik University</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-brands fa-python text-yellow-400 mr-1.5"></i>Python</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-solid fa-c text-blue-400 mr-1.5"></i>C Lang</span>
+                        <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-brands fa-linux text-orange-400 mr-1.5"></i>Linux OS</span>
                     </div>
 
-                    <!-- Action Buttons -->
-                    <div class="flex flex-wrap items-center gap-4 pt-4 font-mono">
-                        <a href="#projects" class="px-6 py-3.5 bg-cyber text-black font-bold rounded-lg hover:bg-emerald-400 transition shadow-lg shadow-cyber/20 flex items-center gap-2">
+                    <div class="flex flex-wrap items-center gap-4 pt-4 font-medium">
+                        <a href="#projects" class="px-6 py-3.5 bg-cyber text-black font-semibold rounded-xl hover:bg-sky-400 transition shadow-lg shadow-cyber/20 flex items-center gap-2">
                             <i class="fa-solid fa-shield-halved"></i> Explore Sentinel-X
                         </a>
-                        <a href="https://github.com/sk4702684" target="_blank" class="px-6 py-3.5 glass-card border border-gray-700 hover:border-cyber text-white font-semibold rounded-lg transition flex items-center gap-2">
+                        <a href="https://github.com/sk4702684" target="_blank" class="px-6 py-3.5 glass-card border border-gray-700 hover:border-cyber text-white font-semibold rounded-xl transition flex items-center gap-2">
                             <i class="fa-brands fa-github"></i> GitHub Repos
                         </a>
                     </div>
                 </div>
 
-                <!-- Right Hero Column: Interactive Card Display -->
+                <!-- Right JSON Card -->
                 <div class="lg:col-span-5">
-                    <div class="glass-card rounded-2xl p-6 border border-gray-800 shadow-2xl relative overflow-hidden animate-float">
-                        <!-- Top Terminal Bar -->
+                    <div class="glass-card rounded-2xl p-6 border border-gray-800 shadow-2xl relative overflow-hidden">
                         <div class="flex items-center justify-between pb-4 border-b border-gray-800 text-xs font-mono text-gray-400">
                             <div class="flex items-center space-x-2">
-                                <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
-                                <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
-                                <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500"></span>
                             </div>
-                            <span>profile.json — bash</span>
+                            <span>profile.json</span>
                         </div>
 
-                        <!-- JSON Profile Content -->
                         <div class="py-4 font-mono text-xs sm:text-sm space-y-2 text-gray-300 leading-relaxed">
                             <p><span class="text-purple-400">const</span> <span class="text-yellow-300">developer</span> = {</p>
                             <p class="pl-4"><span class="text-blue-400">name</span>: <span class="text-cyber">"Satyam Raj"</span>,</p>
+                            <p class="pl-4"><span class="text-blue-400">college</span>: <span class="text-cyber">"Shivalik College of Engineering"</span>,</p>
                             <p class="pl-4"><span class="text-blue-400">degree</span>: <span class="text-cyber">"B.Tech in ECE"</span>,</p>
-                            <p class="pl-4"><span class="text-blue-400">primaryLanguage</span>: <span class="text-cyber">"C, Python"</span>,</p>
-                            <p class="pl-4"><span class="text-blue-400">coreFocus</span>: [<span class="text-cyber">"Security Tooling"</span>, <span class="text-cyber">"Linux"</span>, <span class="text-cyber">"Embedded Logic"</span>],</p>
-                            <p class="pl-4"><span class="text-blue-400">featuredProject</span>: <span class="text-yellow-400">"Sentinel-X"</span>,</p>
-                            <p class="pl-4"><span class="text-blue-400">status</span>: <span class="text-emerald-400">"Compiling Knowledge..."</span></p>
+                            <p class="pl-4"><span class="text-blue-400">languages</span>: [<span class="text-cyber">"C"</span>, <span class="text-cyber">"Python"</span>, <span class="text-cyber">"HTML"</span>],</p>
+                            <p class="pl-4"><span class="text-blue-400">flagshipProject</span>: <span class="text-yellow-400">"Sentinel-X"</span></p>
                             <p>};</p>
                         </div>
-
-                        <!-- Quick Stats Footer -->
-                        <div class="pt-4 border-t border-gray-800/80 grid grid-cols-3 gap-2 text-center font-mono">
-                            <div class="bg-darkBg/60 p-2 rounded border border-gray-800">
-                                <span class="block text-lg font-bold text-cyber font-orbitron">ECE</span>
-                                <span class="text-[10px] text-gray-400">Engineering</span>
-                            </div>
-                            <div class="bg-darkBg/60 p-2 rounded border border-gray-800">
-                                <span class="block text-lg font-bold text-neonBlue font-orbitron">CLI</span>
-                                <span class="text-[10px] text-gray-400">Tool Dev</span>
-                            </div>
-                            <div class="bg-darkBg/60 p-2 rounded border border-gray-800">
-                                <span class="block text-lg font-bold text-yellow-400 font-orbitron">Linux</span>
-                                <span class="text-[10px] text-gray-400">OS Systems</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
-        <section id="about" class="py-20 px-6 relative bg-cardBg/30 border-y border-gray-800/80">
-            <div class="max-w-6xl mx-auto space-y-12">
-                
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-800 pb-6">
-                    <div>
-                        <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Background</span>
-                        <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-1">About Me</h2>
-                    </div>
-                    <p class="text-gray-400 text-sm font-mono">Bridging Hardware Intelligence & Cybersecurity</p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
-                    <!-- Bio Description Card -->
-                    <div class="glass-card p-8 rounded-xl space-y-4 text-gray-300 leading-relaxed font-sans flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <div class="w-12 h-12 rounded-lg bg-cyber/10 border border-cyber/30 flex items-center justify-center text-cyber text-xl font-mono">
-                                <i class="fa-solid fa-microchip"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-white font-orbitron">Electronics & System Software</h3>
-                            <p class="text-gray-400 text-sm leading-relaxed">
-                                As an Electronics & Communication Engineering student, I possess a solid understanding of fundamental hardware logic, circuit design, and signal processing, alongside modern high-level software development.
-                            </p>
-                            <p class="text-gray-400 text-sm leading-relaxed">
-                                My software focus lies in system-level programming using C and Python. I enjoy leveraging Linux environments to research network protocol analysis, automated security reconnaissance, and operating system workflows.
-                            </p>
-                        </div>
-
-                        <div class="pt-4 border-t border-gray-800 grid grid-cols-2 gap-4 font-mono text-xs">
-                            <div>
-                                <span class="text-gray-500 block">Location:</span>
-                                <span class="text-white font-medium"><i class="fa-solid fa-location-dot text-cyber mr-1"></i> India</span>
-                            </div>
-                            <div>
-                                <span class="text-gray-500 block">Degree Track:</span>
-                                <span class="text-white font-medium">B.Tech (ECE)</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- ECE & Systems Focus Cards -->
-                    <div class="space-y-4">
-                        <div class="glass-card p-6 rounded-xl border border-gray-800 flex items-start gap-4 hover:border-cyber/50 transition">
-                            <div class="p-3 bg-neonBlue/10 border border-neonBlue/30 rounded-lg text-neonBlue text-xl">
-                                <i class="fa-solid fa-code-branch"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-white font-orbitron">C & Systems Programming</h4>
-                                <p class="text-xs text-gray-400 mt-1 leading-relaxed">
-                                    Deep interest in core low-level C programming, memory allocation concepts, pointer manipulation, and foundational algorithm execution.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="glass-card p-6 rounded-xl border border-gray-800 flex items-start gap-4 hover:border-cyber/50 transition">
-                            <div class="p-3 bg-cyber/10 border border-cyber/30 rounded-lg text-cyber text-xl">
-                                <i class="fa-brands fa-linux"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-white font-orbitron">Linux Administration & Tooling</h4>
-                                <p class="text-xs text-gray-400 mt-1 leading-relaxed">
-                                    Proficient in navigating terminal environments, shell scripting automation, process management, and configuring Linux security tools.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="glass-card p-6 rounded-xl border border-gray-800 flex items-start gap-4 hover:border-cyber/50 transition">
-                            <div class="p-3 bg-yellow-400/10 border border-yellow-400/30 rounded-lg text-yellow-400 text-xl">
-                                <i class="fa-solid fa-shield-virus"></i>
-                            </div>
-                            <div>
-                                <h4 class="text-lg font-bold text-white font-orbitron">Cybersecurity Automation</h4>
-                                <p class="text-xs text-gray-400 mt-1 leading-relaxed">
-                                    Building custom Python-based command-line utilities for security auditing, network scanning, and automated intelligence gathering.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ECE SPECIALIZATION SECTION -->
+        <!-- ECE CORE CARDS SECTION (CLICKABLE) -->
         <section id="ece-specialization" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
-                
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Academic Engineering</span>
-                    <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white">ECE Core Foundation</h2>
-                    <p class="text-gray-400 text-sm">Key concepts and domain knowledge from Electronics & Communication Engineering</p>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white">ECE Core Foundation</h2>
+                    <p class="text-gray-400 text-sm">Click on any card below to view detailed course information!</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <!-- Domain 1 -->
-                    <div class="glass-card p-6 rounded-xl space-y-3 hover:-translate-y-1 transition duration-300">
+                    
+                    <!-- Domain 1 Card -->
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Digital Electronics', 'Covers Boolean logic, gate design, flip-flops, multiplexers, and sequential state machines. Essential for understanding processor logic and firmware development.')">
                         <div class="text-cyber text-3xl"><i class="fa-solid fa-[#]"></i></div>
-                        <h3 class="text-base font-bold text-white font-orbitron">Digital Electronics</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">
-                            Logic gates, Boolean algebra, flip-flops, multiplexers, and sequential logic design principles.
-                        </p>
+                        <h3 class="text-lg font-semibold text-white">Digital Electronics</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Logic gates, Boolean algebra, & sequential circuits.</p>
+                        <span class="text-cyber text-xs font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <!-- Domain 2 -->
-                    <div class="glass-card p-6 rounded-xl space-y-3 hover:-translate-y-1 transition duration-300">
+                    <!-- Domain 2 Card -->
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Communication Systems', 'Focuses on signal modulation (AM/FM/PSK), bandwidth management, noise filtering, and digital data packet transmission protocols across network media.')">
                         <div class="text-neonBlue text-3xl"><i class="fa-solid fa-wifi"></i></div>
-                        <h3 class="text-base font-bold text-white font-orbitron">Communication Systems</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">
-                            Signal modulation techniques, bandwidth analysis, digital protocols, and data transmission basics.
-                        </p>
+                        <h3 class="text-lg font-semibold text-white">Communication Systems</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Signal modulation, bandwidth, & data transmission.</p>
+                        <span class="text-neonBlue text-xs font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <!-- Domain 3 -->
-                    <div class="glass-card p-6 rounded-xl space-y-3 hover:-translate-y-1 transition duration-300">
+                    <!-- Domain 3 Card -->
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Microprocessors', 'Detailed understanding of 8085/8086 architectures, register configurations, memory mapping, interrupt handling, and low-level assembly execution.')">
                         <div class="text-purple-400 text-3xl"><i class="fa-solid fa-microchip"></i></div>
-                        <h3 class="text-base font-bold text-white font-orbitron">Microprocessors</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">
-                            Understanding architecture fundamentals, instruction sets, register logic, and bus interfaces.
-                        </p>
+                        <h3 class="text-lg font-semibold text-white">Microprocessors</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Architecture, instruction sets, & bus systems.</p>
+                        <span class="text-purple-400 text-xs font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <!-- Domain 4 -->
-                    <div class="glass-card p-6 rounded-xl space-y-3 hover:-translate-y-1 transition duration-300">
+                    <!-- Domain 4 Card -->
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer hover:border-cyber transition space-y-3" onclick="openModal('Network Protocols', 'Deep dive into OSI 7-layer model, TCP/IP socket programming, packet analysis, and network security auditing fundamentals.')">
                         <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-diagram-project"></i></div>
-                        <h3 class="text-base font-bold text-white font-orbitron">Network Protocols</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">
-                            TCP/IP model, OSI layers, socket communication fundamentals, and packet packet analysis.
-                        </p>
+                        <h3 class="text-lg font-semibold text-white">Network Protocols</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">TCP/IP, OSI layers, socket communication, & packets.</p>
+                        <span class="text-yellow-400 text-xs font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
-                </div>
 
+                </div>
             </div>
         </section>
 
-        <!-- TECH STACK & SKILLS -->
-        <section id="skills" class="py-20 px-6 relative bg-cardBg/30 border-y border-gray-800/80">
+        <!-- TECH STACK CARDS (CLICKABLE) -->
+        <section id="skills" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
-                
-                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-800 pb-6">
-                    <div>
-                        <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Technical Toolkit</span>
-                        <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-1">Tech Stack & Tools</h2>
-                    </div>
-                    <p class="text-gray-400 text-sm font-mono">Languages, Operating Systems & Security Tooling</p>
+                <div class="text-center max-w-2xl mx-auto space-y-2">
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Technical Toolkit</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-white">Skills & Competencies</h2>
+                    <p class="text-gray-400 text-sm">Click any technology card for personal insights!</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     
-                    <!-- Languages -->
-                    <div class="glass-card p-8 rounded-xl space-y-6">
-                        <div class="flex items-center space-x-3 text-cyber">
-                            <i class="fa-solid fa-code text-2xl"></i>
-                            <h3 class="text-xl font-bold font-orbitron text-white">Languages</h3>
-                        </div>
-
-                        <div class="space-y-4 font-mono text-xs">
-                            <div>
-                                <div class="flex justify-between text-gray-300 mb-1">
-                                    <span>C Programming</span>
-                                    <span class="text-cyber">Intermediate</span>
-                                </div>
-                                <div class="w-full bg-darkBg h-2 rounded-full overflow-hidden border border-gray-800">
-                                    <div class="bg-cyber h-full rounded-full" style="width: 75%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-gray-300 mb-1">
-                                    <span>Python 3</span>
-                                    <span class="text-cyber">Advanced / Primary</span>
-                                </div>
-                                <div class="w-full bg-darkBg h-2 rounded-full overflow-hidden border border-gray-800">
-                                    <div class="bg-cyber h-full rounded-full" style="width: 85%"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div class="flex justify-between text-gray-300 mb-1">
-                                    <span>HTML5 & Frontend</span>
-                                    <span class="text-cyber">Intermediate</span>
-                                </div>
-                                <div class="w-full bg-darkBg h-2 rounded-full overflow-hidden border border-gray-800">
-                                    <div class="bg-cyber h-full rounded-full" style="width: 70%"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <!-- Skill 1 -->
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('C & Python Programming', 'Python is my primary tool for building security automation frameworks like Sentinel-X, Streamlit dashboards, and Supabase integration. C language gives me core low-level control over memory and hardware concepts.')">
+                        <div class="text-cyber text-3xl"><i class="fa-solid fa-code"></i></div>
+                        <h3 class="text-xl font-bold text-white">Languages</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">C Language, Python 3, HTML5</p>
+                        <span class="text-cyber text-xs font-mono block">Click to view experience →</span>
                     </div>
 
-                    <!-- Operating Systems -->
-                    <div class="glass-card p-8 rounded-xl space-y-6">
-                        <div class="flex items-center space-x-3 text-neonBlue">
-                            <i class="fa-solid fa-desktop text-2xl"></i>
-                            <h3 class="text-xl font-bold font-orbitron text-white">Operating Systems</h3>
-                        </div>
-
-                        <ul class="space-y-4 font-mono text-xs text-gray-300">
-                            <li class="p-3 bg-darkBg/60 rounded-lg border border-gray-800 flex items-center justify-between">
-                                <span class="flex items-center"><i class="fa-brands fa-linux text-orange-400 mr-2 text-base"></i> Linux (Kali / Ubuntu)</span>
-                                <span class="text-neonBlue">Primary OS</span>
-                            </li>
-                            <li class="p-3 bg-darkBg/60 rounded-lg border border-gray-800 flex items-center justify-between">
-                                <span class="flex items-center"><i class="fa-brands fa-windows text-blue-400 mr-2 text-base"></i> Windows Systems</span>
-                                <span class="text-gray-400">Workstation</span>
-                            </li>
-                            <li class="p-3 bg-darkBg/60 rounded-lg border border-gray-800 flex items-center justify-between">
-                                <span class="flex items-center"><i class="fa-solid fa-terminal text-cyber mr-2 text-base"></i> Bash Shell Scripting</span>
-                                <span class="text-cyber">Active</span>
-                            </li>
-                        </ul>
+                    <!-- Skill 2 -->
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('Linux & OS Systems', 'Proficient in Kali Linux, Ubuntu environments, shell scripting, GNOME environment desktop customization, process monitoring, and dual-boot configurations.')">
+                        <div class="text-neonBlue text-3xl"><i class="fa-solid fa-desktop"></i></div>
+                        <h3 class="text-xl font-bold text-white">Operating Systems</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Linux (Kali/Ubuntu), Windows, Bash CLI</p>
+                        <span class="text-neonBlue text-xs font-mono block">Click to view experience →</span>
                     </div>
 
-                    <!-- Tools & Frameworks -->
-                    <div class="glass-card p-8 rounded-xl space-y-6">
-                        <div class="flex items-center space-x-3 text-yellow-400">
-                            <i class="fa-solid fa-screwdriver-wrench text-2xl"></i>
-                            <h3 class="text-xl font-bold font-orbitron text-white">Developer Tools</h3>
-                        </div>
-
-                        <ul class="space-y-4 font-mono text-xs text-gray-300">
-                            <li class="p-3 bg-darkBg/60 rounded-lg border border-gray-800 flex items-center justify-between">
-                                <span class="flex items-center"><i class="fa-brands fa-git-alt text-red-500 mr-2 text-base"></i> Git & Version Control</span>
-                                <span class="text-gray-400">CLI & Web</span>
-                            </li>
-                            <li class="p-3 bg-darkBg/60 rounded-lg border border-gray-800 flex items-center justify-between">
-                                <span class="flex items-center"><i class="fa-solid fa-shield-halved text-cyber mr-2 text-base"></i> Sentinel-X Tooling</span>
-                                <span class="text-yellow-400">Author</span>
-                            </li>
-                            <li class="p-3 bg-darkBg/60 rounded-lg border border-gray-800 flex items-center justify-between">
-                                <span class="flex items-center"><i class="fa-solid fa-network-wired text-purple-400 mr-2 text-base"></i> Network Analysis</span>
-                                <span class="text-gray-400">Sockets / Logs</span>
-                            </li>
-                        </ul>
+                    <!-- Skill 3 -->
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer hover:border-cyber transition space-y-4" onclick="openModal('Developer Tools & Workflows', 'Experience in Git version control, Supabase database backend, Streamlit frontend design, and building custom CLI utilities.')">
+                        <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+                        <h3 class="text-xl font-bold text-white">Developer Tools</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Git, GitHub, Sentinel-X Tooling</p>
+                        <span class="text-yellow-400 text-xs font-mono block">Click to view experience →</span>
                     </div>
 
                 </div>
-
             </div>
         </section>
 
         <!-- FEATURED PROJECT: SENTINEL-X -->
         <section id="projects" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
-                
                 <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-800 pb-6">
                     <div>
                         <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Flagship Repository</span>
-                        <h2 class="text-3xl sm:text-4xl font-orbitron font-bold text-white mt-1">Project Spotlight</h2>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Sentinel-X Spotlight</h2>
                     </div>
-                    <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="text-cyber hover:underline font-mono text-sm flex items-center gap-2">
-                        View Source Repository <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                    </a>
                 </div>
 
-                <!-- Showcase Card -->
-                <div class="glass-card rounded-2xl p-8 border border-cyber/30 relative overflow-hidden">
+                <div class="glass-card rounded-2xl p-8 border border-cyber/30 relative">
                     <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                        
-                        <!-- Left Details -->
                         <div class="lg:col-span-7 space-y-6">
-                            <div class="flex items-center space-x-3">
-                                <span class="px-3 py-1 bg-cyber/10 border border-cyber/40 text-cyber text-xs font-mono font-bold rounded">PYTHON / SECURITY TOOL</span>
-                                <span class="text-gray-500 font-mono text-xs">v1.0 Release</span>
-                            </div>
-
-                            <h3 class="text-3xl sm:text-4xl font-black font-orbitron text-white">
-                                Sentinel-X <span class="text-cyber font-sans font-normal text-lg">Automated Recon Suite</span>
-                            </h3>
-
-                            <p class="text-gray-300 text-sm leading-relaxed font-sans">
-                                <strong class="text-white">Sentinel-X</strong> is an automated cybersecurity reconnaissance and intelligence gathering framework engineered in Python. It streamlines target vulnerability assessment, automated port evaluation, OSINT processing, and diagnostic security audits for Linux platforms.
+                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/40 text-cyber text-xs font-mono font-bold rounded">PYTHON / SECURITY FRAMEWORK</span>
+                            <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Sentinel-X</h3>
+                            <p class="text-gray-300 text-sm leading-relaxed">
+                                An automated penetration testing and reconnaissance framework built in Python. Designed to simplify network scanning, port diagnostics, OSINT gathering, and security reporting.
                             </p>
-
-                            <!-- Key Architecture Features -->
-                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 font-mono text-xs pt-2">
-                                <div class="flex items-start gap-2 text-gray-300">
-                                    <i class="fa-solid fa-circle-check text-cyber mt-0.5"></i>
-                                    <span>Automated Network Scanning</span>
-                                </div>
-                                <div class="flex items-start gap-2 text-gray-300">
-                                    <i class="fa-solid fa-circle-check text-cyber mt-0.5"></i>
-                                    <span>Vulnerability Reconnaissance</span>
-                                </div>
-                                <div class="flex items-start gap-2 text-gray-300">
-                                    <i class="fa-solid fa-circle-check text-cyber mt-0.5"></i>
-                                    <span>CLI Terminal Execution</span>
-                                </div>
-                                <div class="flex items-start gap-2 text-gray-300">
-                                    <i class="fa-solid fa-circle-check text-cyber mt-0.5"></i>
-                                    <span>Linux Ecosystem Native</span>
-                                </div>
-                            </div>
-
-                            <!-- Buttons -->
-                            <div class="flex flex-wrap items-center gap-4 pt-4 font-mono text-xs">
-                                <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="px-5 py-3 bg-cyber text-black font-bold rounded hover:bg-emerald-400 transition flex items-center gap-2">
-                                    <i class="fa-brands fa-github text-sm"></i> sk4702684 / Sentinel-X
-                                </a>
-                                <a href="https://github.com/sk4702684/Sentinel-X/archive/refs/heads/main.zip" target="_blank" class="px-5 py-3 glass-card border border-gray-700 hover:border-cyber text-white font-semibold rounded transition flex items-center gap-2">
-                                    <i class="fa-solid fa-download"></i> Download Source Code
-                                </a>
-                            </div>
+                            <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="px-5 py-3 bg-cyber text-black font-semibold rounded-lg hover:bg-sky-400 transition inline-flex items-center gap-2 text-xs font-mono">
+                                <i class="fa-brands fa-github text-sm"></i> View Repo: sk4702684 / Sentinel-X
+                            </a>
                         </div>
-
-                        <!-- Right Interactive Code Preview Box -->
-                        <div class="lg:col-span-5 font-mono text-xs">
-                            <div class="bg-darkBg rounded-xl border border-gray-800 p-5 space-y-3 shadow-inner">
-                                <div class="flex items-center justify-between border-b border-gray-800 pb-2 text-gray-500">
-                                    <span>sentinel_x.py</span>
-                                    <span class="text-cyber"><i class="fa-solid fa-bolt mr-1"></i>Active</span>
-                                </div>
-                                <div class="space-y-1.5 text-gray-300">
-                                    <p class="text-gray-500"># Cloning and running Sentinel-X</p>
-                                    <p class="text-cyber">$ git clone https://github.com/sk4702684/Sentinel-X.git</p>
-                                    <p class="text-cyber">$ cd Sentinel-X</p>
-                                    <p class="text-cyber">$ python3 sentinel_x.py --target local</p>
-                                    <div class="pt-2 text-yellow-300 space-y-1">
-                                        <p>[+] Initializing Sentinel-X Engine v1.0...</p>
-                                        <p>[+] Target set: 127.0.0.1</p>
-                                        <p>[+] Initiating port scan on target range...</p>
-                                        <p class="text-emerald-400">[✓] Port 22/tcp OPEN (SSH)</p>
-                                        <p class="text-emerald-400">[✓] Port 80/tcp OPEN (HTTP)</p>
-                                        <p class="text-cyber">[+] Generating Security Audit Report...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-
             </div>
         </section>
 
         <!-- INTERACTIVE CLI TERMINAL -->
-        <section id="terminal-section" class="py-20 px-6 relative bg-cardBg/30 border-y border-gray-800/80">
+        <section id="terminal-section" class="py-20 px-6 relative">
             <div class="max-w-4xl mx-auto space-y-6">
-                
                 <div class="text-center space-y-2">
-                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Interactive Command Line</span>
-                    <h2 class="text-3xl font-orbitron font-bold text-white">Terminal Interface</h2>
-                    <p class="text-gray-400 text-sm">Type <code class="text-cyber bg-darkBg px-2 py-0.5 rounded border border-gray-800">help</code> to list available commands</p>
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Interactive Console</span>
+                    <h2 class="text-3xl font-bold text-white">Terminal</h2>
+                    <p class="text-gray-400 text-sm">Type <code class="text-cyber bg-darkBg px-2 py-0.5 rounded">help</code> for commands</p>
                 </div>
 
-                <!-- Terminal Container -->
-                <div class="glass-card rounded-xl border border-gray-800 shadow-2xl overflow-hidden font-mono text-xs sm:text-sm">
-                    <!-- Top Window Bar -->
+                <div class="glass-card rounded-xl border border-gray-800 overflow-hidden font-mono text-xs sm:text-sm">
                     <div class="term-header px-4 py-3 flex items-center justify-between text-gray-400 border-b border-gray-800">
                         <div class="flex items-center space-x-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500 inline-block cursor-pointer"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block cursor-pointer"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500 inline-block cursor-pointer"></span>
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
                         </div>
-                        <span class="text-xs">satyam@sk4702684-terminal:~</span>
-                        <i class="fa-solid fa-terminal text-cyber"></i>
+                        <span class="text-xs">satyam@shivalik-terminal:~</span>
                     </div>
-
-                    <!-- Output Area -->
-                    <div id="terminal-output" class="p-6 h-72 overflow-y-auto space-y-2 text-gray-300">
-                        <p class="text-cyber">Satyam Raj Portfolio OS v2.0 [x86_64-ece-linux]</p>
-                        <p class="text-gray-500">Type 'help' for available system commands.</p>
-                        <br>
+                    <div id="terminal-output" class="p-6 h-64 overflow-y-auto space-y-2 text-gray-300">
+                        <p class="text-cyber">Satyam Raj Portfolio OS v3.0 [Shivalik University Edition]</p>
+                        <p class="text-gray-500">Type 'help' to see available system commands.</p>
                     </div>
-
-                    <!-- Prompt Input Form -->
                     <div class="p-4 bg-darkBg border-t border-gray-800 flex items-center space-x-2">
-                        <span class="text-cyber font-bold">satyam@guest:~$</span>
+                        <span class="text-cyber font-bold">guest@satyam:~$</span>
                         <input id="terminal-input" type="text" class="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm" placeholder="type a command..." autocomplete="off">
                     </div>
                 </div>
-
             </div>
         </section>
 
         <!-- CONTACT SECTION -->
         <section id="contact" class="py-20 px-6 relative">
             <div class="max-w-4xl mx-auto text-center space-y-12">
-                
                 <div class="space-y-3">
                     <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Get In Touch</span>
-                    <h2 class="text-4xl sm:text-5xl font-orbitron font-bold text-white">Let's Connect</h2>
-                    <p class="text-gray-400 max-w-xl mx-auto text-sm">
-                        Whether you want to discuss Electronics & Communication concepts, security automation, or collaborate on projects—feel free to reach out!
-                    </p>
+                    <h2 class="text-4xl font-bold text-white">Let's Connect</h2>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                    <!-- Email Card -->
-                    <a href="mailto:sk4702684@gmail.com" class="glass-card p-6 rounded-xl border border-gray-800 hover:border-cyber transition space-y-3 group">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 border border-cyber/30 flex items-center justify-center text-cyber text-xl mx-auto group-hover:bg-cyber group-hover:text-black transition">
-                            <i class="fa-solid fa-envelope"></i>
-                        </div>
-                        <h3 class="text-base font-bold text-white font-orbitron">Direct Email</h3>
+                    <a href="mailto:sk4702684@gmail.com" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
+                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-solid fa-envelope"></i></div>
+                        <h3 class="text-base font-semibold text-white">Email</h3>
                         <p class="text-xs font-mono text-gray-400 truncate">sk4702684@gmail.com</p>
                     </a>
-
-                    <!-- LinkedIn Card -->
-                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="glass-card p-6 rounded-xl border border-gray-800 hover:border-cyber transition space-y-3 group">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 border border-cyber/30 flex items-center justify-center text-cyber text-xl mx-auto group-hover:bg-cyber group-hover:text-black transition">
-                            <i class="fa-brands fa-linkedin"></i>
-                        </div>
-                        <h3 class="text-base font-bold text-white font-orbitron">LinkedIn</h3>
+                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
+                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-brands fa-linkedin"></i></div>
+                        <h3 class="text-base font-semibold text-white">LinkedIn</h3>
                         <p class="text-xs font-mono text-gray-400">Satyam Raj</p>
                     </a>
-
-                    <!-- GitHub Card -->
-                    <a href="https://github.com/sk4702684" target="_blank" class="glass-card p-6 rounded-xl border border-gray-800 hover:border-cyber transition space-y-3 group">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 border border-cyber/30 flex items-center justify-center text-cyber text-xl mx-auto group-hover:bg-cyber group-hover:text-black transition">
-                            <i class="fa-brands fa-github"></i>
-                        </div>
-                        <h3 class="text-base font-bold text-white font-orbitron">GitHub</h3>
+                    <a href="https://github.com/sk4702684" target="_blank" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
+                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-brands fa-github"></i></div>
+                        <h3 class="text-base font-semibold text-white">GitHub</h3>
                         <p class="text-xs font-mono text-gray-400">sk4702684</p>
                     </a>
                 </div>
-
             </div>
         </section>
 
     </main>
 
     <!-- FOOTER -->
-    <footer class="py-8 border-t border-gray-800/80 bg-darkBg text-center font-mono text-xs text-gray-500 space-y-2">
-        <p>© 2026 Satyam Raj. All rights reserved.</p>
-        <p class="text-gray-600">Built with HTML5, Tailwind CSS, & Custom Canvas Graphics</p>
+    <footer class="py-8 border-t border-gray-800/80 bg-darkBg text-center font-mono text-xs text-gray-500">
+        © 2026 Satyam Raj | Shivalik College of Engineering
     </footer>
 
-    <!-- JAVASCRIPT ANIMATIONS & TERMINAL INTERACTION -->
+    <!-- DYNAMIC DETAIL MODAL POPUP -->
+    <div id="infoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-6">
+        <div class="glass-card max-w-lg w-full rounded-2xl p-6 border border-cyber/50 modal-enter space-y-4 text-left">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                <h3 id="modalTitle" class="text-xl font-bold text-white">Card Detail</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-cyber text-xl">&times;</button>
+            </div>
+            <p id="modalBody" class="text-sm text-gray-300 leading-relaxed font-light"></p>
+            <div class="pt-2 text-right">
+                <button onclick="closeModal()" class="px-4 py-2 bg-cyber text-black text-xs font-semibold rounded-lg hover:bg-sky-400 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT -->
     <script>
-        // 1. Mobile Menu Toggle
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        // Modal Handlers
+        function openModal(title, text) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = text;
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Mobile Menu Toggle
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // 2. Typewriter Effect
-        const words = ["ECE Student", "Security Enthusiast", "Linux Enthusiast", "Sentinel-X Creator"];
-        let wordIdx = 0;
-        let charIdx = 0;
-        let isDeleting = false;
+        // Typewriter Effect
+        const words = ["ECE Student", "Security Developer", "Shivalik College", "Sentinel-X Creator"];
+        let wordIdx = 0, charIdx = 0, isDeleting = false;
         const targetEl = document.getElementById('typewriter');
 
         function type() {
             const currentWord = words[wordIdx];
-            if (isDeleting) {
-                targetEl.textContent = currentWord.substring(0, charIdx - 1);
-                charIdx--;
-            } else {
-                targetEl.textContent = currentWord.substring(0, charIdx + 1);
-                charIdx++;
-            }
+            targetEl.textContent = isDeleting 
+                ? currentWord.substring(0, charIdx - 1) 
+                : currentWord.substring(0, charIdx + 1);
+            
+            charIdx += isDeleting ? -1 : 1;
+            let speed = isDeleting ? 40 : 100;
 
-            let typeSpeed = isDeleting ? 50 : 100;
+            if (!isDeleting && charIdx === currentWord.length) { speed = 1800; isDeleting = true; }
+            else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; speed = 400; }
 
-            if (!isDeleting && charIdx === currentWord.length) {
-                typeSpeed = 2000;
-                isDeleting = true;
-            } else if (isDeleting && charIdx === 0) {
-                isDeleting = false;
-                wordIdx = (wordIdx + 1) % words.length;
-                typeSpeed = 500;
-            }
-
-            setTimeout(type, typeSpeed);
+            setTimeout(type, speed);
         }
         document.addEventListener('DOMContentLoaded', type);
 
-        // 3. Canvas Node Network Background Animation
+        // Canvas Particles Background
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
@@ -740,43 +451,39 @@
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.8;
-                this.vy = (Math.random() - 0.5) * 0.8;
-                this.radius = Math.random() * 1.8 + 1;
+                this.vx = (Math.random() - 0.5) * 0.6;
+                this.vy = (Math.random() - 0.5) * 0.6;
+                this.radius = 1.5;
             }
             update() {
-                this.x += this.vx;
-                this.y += this.vy;
+                this.x += this.vx; this.y += this.vy;
                 if (this.x < 0 || this.x > width) this.vx *= -1;
                 if (this.y < 0 || this.y > height) this.vy *= -1;
             }
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = '#00ff66';
+                ctx.fillStyle = '#38bdf8';
                 ctx.fill();
             }
         }
 
-        const particles = Array.from({ length: 45 }, () => new Particle());
+        const particles = Array.from({ length: 35 }, () => new Particle());
 
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
-
             for (let i = 0; i < particles.length; i++) {
                 particles[i].update();
                 particles[i].draw();
-
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
+                    if (dist < 110) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(0, 255, 102, ${1 - dist / 120})`;
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / 110})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -786,32 +493,28 @@
         }
         animateCanvas();
 
-        // 4. Interactive Terminal Simulation
+        // Terminal Commands
         const termInput = document.getElementById('terminal-input');
         const termOutput = document.getElementById('terminal-output');
-
         const commands = {
-            'help': 'Available commands:\n • help : List available commands\n • about : View bio details\n • skills : Show technical competencies\n • project : Sentinel-X overview\n • contact : Show email & links\n • clear : Clear terminal screen',
-            'about': 'Satyam Raj — Electronics & Communication Engineering (ECE) Student.\nFocused on Linux systems, Python tools, and Hardware-Software integration.',
-            'skills': 'Languages: C, Python, HTML5\nOS: Linux (Kali, Ubuntu), Windows\nTools: Sentinel-X, Git, Bash Shell',
-            'project': 'Sentinel-X: Python-based automated security reconnaissance tool.\nRepo: https://github.com/sk4702684/Sentinel-X.git',
-            'contact': 'Email: sk4702684@gmail.com\nLinkedIn: https://www.linkedin.com/in/satyam-raj-24908a388\nGitHub: https://github.com/sk4702684'
+            'help': 'Commands:\n • help\n • college\n • skills\n • project\n • contact\n • clear',
+            'college': 'Shivalik College of Engineering (Shivalik University) — B.Tech in ECE.',
+            'skills': 'Languages: C, Python, HTML\nOS: Linux (Kali/Ubuntu), Windows',
+            'project': 'Sentinel-X: Automated Python Security Recon Framework.',
+            'contact': 'Email: sk4702684@gmail.com\nGitHub: github.com/sk4702684'
         };
 
         termInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
                 const input = termInput.value.trim().toLowerCase();
                 termInput.value = '';
-
-                // Echo command
                 const cmdLine = document.createElement('p');
                 cmdLine.className = 'text-white font-bold';
-                cmdLine.innerHTML = `<span class="text-cyber">satyam@guest:~$</span> ${input}`;
+                cmdLine.innerHTML = `<span class="text-cyber">guest@satyam:~$</span> ${input}`;
                 termOutput.appendChild(cmdLine);
 
-                if (input === 'clear') {
-                    termOutput.innerHTML = '';
-                } else if (commands[input]) {
+                if (input === 'clear') { termOutput.innerHTML = ''; }
+                else if (commands[input]) {
                     const resLine = document.createElement('p');
                     resLine.className = 'text-gray-300 whitespace-pre-line';
                     resLine.textContent = commands[input];
@@ -819,10 +522,9 @@
                 } else if (input !== '') {
                     const errLine = document.createElement('p');
                     errLine.className = 'text-red-400';
-                    errLine.textContent = `Command not found: '${input}'. Type 'help' for commands.`;
+                    errLine.textContent = `Command not found: '${input}'`;
                     termOutput.appendChild(errLine);
                 }
-
                 termOutput.scrollTop = termOutput.scrollHeight;
             }
         });
