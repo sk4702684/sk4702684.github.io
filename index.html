@@ -25,9 +25,9 @@
                     colors: {
                         cyber: "#38bdf8",
                         neonBlue: "#a855f7",
-                        darkBg: "#0b0f19",
-                        cardBg: "rgba(255, 255, 255, 0.04)",
-                        accentDark: "#111827"
+                        darkBg: "#070a13",
+                        cardBg: "rgba(255, 255, 255, 0.03)",
+                        accentDark: "#0f172a"
                     },
                     fontFamily: {
                         sans: ["Poppins", "sans-serif"],
@@ -38,81 +38,74 @@
         }
     </script>
 
-    <!-- Custom CSS Styles -->
+    <!-- Enhanced Glassmorphic & Animation CSS -->
     <style>
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0b0f19; }
+        ::-webkit-scrollbar-track { background: #070a13; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
 
         body {
-            background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 40%, #311042 75%, #0b0f19 100%);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            background: radial-gradient(circle at 50% -20%, #1e1b4b 0%, #070a13 60%, #030509 100%);
+            min-height: 100vh;
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.04);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .glass-card:hover, .glass-card:active {
             border-color: rgba(56, 189, 248, 0.5);
-            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
-            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 35px -10px rgba(56, 189, 248, 0.25), 0 0 15px rgba(168, 85, 247, 0.15);
+            transform: translateY(-6px) scale(1.01);
         }
 
         .profile-glow {
-            box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.6), 0 0 10px rgba(168, 85, 247, 0.4);
             border: 2px solid rgba(56, 189, 248, 0.8);
         }
 
-        .term-header { background: #1e293b; border-radius: 8px 8px 0 0; }
+        .term-header { background: #0f172a; border-radius: 12px 12px 0 0; }
 
-        .modal-enter { animation: modalFadeIn 0.3s ease forwards; }
+        .modal-enter { animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
     </style>
 </head>
 <body class="text-gray-200 font-sans selection:bg-cyber selection:text-black relative overflow-x-hidden min-h-screen">
 
-    <!-- Interactive Particle Background -->
-    <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-25"></canvas>
+    <!-- Interactive Canvas Background -->
+    <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-30"></canvas>
 
     <!-- Header / Navbar -->
     <header class="fixed top-0 w-full z-50 glass-card border-b border-gray-800/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-3 text-xl font-bold text-white tracking-wider group">
-                <span class="w-9 h-9 rounded-lg bg-cyber/10 border border-cyber flex items-center justify-center text-cyber group-hover:bg-cyber group-hover:text-black transition-all">
-                    <i class="fa-solid fa-code text-sm"></i>
+                <span class="w-10 h-10 rounded-xl bg-cyber/10 border border-cyber/40 flex items-center justify-center text-cyber group-hover:bg-cyber group-hover:text-black transition-all shadow-lg shadow-cyber/10">
+                    <i class="fa-solid fa-code text-base"></i>
                 </span>
                 <span>SATYAM<span class="text-cyber">.RAJ</span></span>
             </a>
 
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
-                <a href="#about" class="hover:text-cyber transition">01. About</a>
-                <a href="#ece-specialization" class="hover:text-cyber transition">02. ECE Core</a>
-                <a href="#skills" class="hover:text-cyber transition">03. Stack</a>
-                <a href="#projects" class="hover:text-cyber transition">04. Sentinel-X</a>
-                <a href="#terminal-section" class="hover:text-cyber transition">05. CLI</a>
-                <a href="#contact" class="hover:text-cyber transition">06. Contact</a>
+                <a href="#about" class="hover:text-cyber transition-colors">01. About</a>
+                <a href="#ece-specialization" class="hover:text-cyber transition-colors">02. ECE Core</a>
+                <a href="#skills" class="hover:text-cyber transition-colors">03. Stack</a>
+                <a href="#projects" class="hover:text-cyber transition-colors">04. Sentinel-X</a>
+                <a href="#terminal-section" class="hover:text-cyber transition-colors">05. CLI</a>
+                <a href="#contact" class="hover:text-cyber transition-colors">06. Contact</a>
             </nav>
 
             <div class="hidden md:flex items-center space-x-4">
                 <a href="https://github.com/sk4702684" target="_blank" class="p-2 text-gray-400 hover:text-cyber transition"><i class="fa-brands fa-github text-lg"></i></a>
                 <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="p-2 text-gray-400 hover:text-cyber transition"><i class="fa-brands fa-linkedin text-lg"></i></a>
-                <a href="#contact" class="px-4 py-2 border border-cyber text-cyber text-xs font-semibold rounded-lg hover:bg-cyber hover:text-black transition">Get In Touch</a>
+                <a href="#contact" class="px-5 py-2 border border-cyber text-cyber text-xs font-semibold rounded-xl hover:bg-cyber hover:text-black transition shadow-md shadow-cyber/10">Get In Touch</a>
             </div>
         </div>
     </header>
@@ -126,14 +119,14 @@
                 <div class="lg:col-span-7 space-y-6">
                     <div class="flex items-center gap-4">
                         <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover profile-glow">
-                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-card border border-cyber/30 text-cyber text-xs font-medium">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-card border border-cyber/40 text-cyber text-xs font-medium shadow-lg shadow-cyber/5">
                             <span class="w-2 h-2 rounded-full bg-cyber animate-ping"></span>
                             <span>Shivalik College of Engineering Student</span>
                         </div>
                     </div>
 
                     <div class="space-y-2">
-                        <h2 class="text-cyber font-mono text-sm tracking-widest uppercase">Hi, my name is</h2>
+                        <h2 class="text-cyber font-mono text-sm tracking-widest uppercase">// Hi, my name is</h2>
                         <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight">Satyam Raj<span class="text-cyber">.</span></h1>
                         <p class="text-xl sm:text-2xl font-medium text-gray-400 flex items-center gap-2">
                             <span>Exploring code & building things like</span>
@@ -146,10 +139,10 @@
                     </p>
 
                     <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono">
-                        <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-solid fa-graduation-cap text-cyber mr-1.5"></i>Shivalik University</span>
-                        <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-brands fa-python text-yellow-400 mr-1.5"></i>Python</span>
-                        <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-solid fa-c text-blue-400 mr-1.5"></i>C Lang</span>
-                        <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-brands fa-linux text-orange-400 mr-1.5"></i>Linux OS</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-solid fa-graduation-cap text-cyber mr-1.5"></i>Shivalik University</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-brands fa-python text-yellow-400 mr-1.5"></i>Python</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-solid fa-c text-blue-400 mr-1.5"></i>C Lang</span>
+                        <span class="px-3 py-1.5 rounded-xl bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-brands fa-linux text-orange-400 mr-1.5"></i>Linux OS</span>
                     </div>
 
                     <div class="flex flex-wrap items-center gap-4 pt-4 font-medium">
@@ -164,12 +157,12 @@
 
                 <!-- Right JSON Card -->
                 <div class="lg:col-span-5">
-                    <div class="glass-card rounded-2xl p-6 border border-gray-800 shadow-2xl relative overflow-hidden">
+                    <div class="glass-card rounded-2xl p-6 border border-gray-800/80 shadow-2xl relative overflow-hidden">
                         <div class="flex items-center justify-between pb-4 border-b border-gray-800 text-xs font-mono text-gray-400">
                             <div class="flex items-center space-x-2">
-                                <span class="w-3 h-3 rounded-full bg-red-500"></span>
-                                <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-                                <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
                             </div>
                             <span>student_profile.json</span>
                         </div>
@@ -188,7 +181,7 @@
             </div>
         </section>
 
-        <!-- ECE CORE SECTION (TOUCH INTERACTIVE CARDS) -->
+        <!-- ECE CORE SECTION (Interactive Cards) -->
         <section id="ece-specialization" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
@@ -229,7 +222,7 @@
             </div>
         </section>
 
-        <!-- TECH STACK SECTION (TOUCH INTERACTIVE CARDS) -->
+        <!-- TECH STACK SECTION (Interactive Cards & Kali Tools) -->
         <section id="skills" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
@@ -251,7 +244,7 @@
                         <h3 class="text-xl font-bold text-white">Operating Systems</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Linux (Kali, Ubuntu), Windows, Bash CLI</p>
                         
-                        <div class="pt-3 border-t border-gray-800 space-y-2">
+                        <div class="pt-3 border-t border-gray-800/80 space-y-2">
                             <p class="text-neonBlue font-mono text-[11px] font-bold tracking-wider uppercase">// Kali Security Tools:</p>
                             <div class="flex flex-wrap gap-1.5 font-mono text-[10px] text-gray-300">
                                 <span class="px-2 py-0.5 rounded bg-darkBg border border-gray-800"><i class="fa-solid fa-terminal text-cyber mr-1"></i>Nmap</span>
@@ -262,7 +255,7 @@
                                 <span class="px-2 py-0.5 rounded bg-darkBg border border-gray-800"><i class="fa-solid fa-folder-tree text-cyber mr-1"></i>Dirsearch</span>
                             </div>
                         </div>
-                        <span class="text-neonBlue text-xs font-mono block">Tap to view details →</span>
+                        <span class="text-neonBlue text-xs font-mono block pt-1">Tap to view details →</span>
                     </div>
 
                     <div class="glass-card p-8 rounded-2xl cursor-pointer transition hover:border-yellow-400 space-y-4 active:scale-95" onclick="openModal('Developer Tools', 'Version control with Git/GitHub, database integration with Supabase, Streamlit dashboard development, and VS Code.')">
@@ -278,29 +271,29 @@
         <!-- SENTINEL-X DETAILED SECTION -->
         <section id="projects" class="py-20 px-6 relative bg-darkBg/50">
             <div class="max-w-6xl mx-auto space-y-12">
-                <div class="border-b border-gray-800 pb-6">
+                <div class="border-b border-gray-800/80 pb-6">
                     <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Featured Work</span>
                     <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Sentinel-X Framework</h2>
                 </div>
 
-                <div class="glass-card rounded-2xl p-8 border border-gray-800 relative space-y-8">
+                <div class="glass-card rounded-2xl p-8 border border-gray-800/80 relative space-y-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="space-y-4">
-                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/30 text-cyber text-xs font-mono rounded">Automated Security Framework</span>
+                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/30 text-cyber text-xs font-mono rounded-lg">Automated Security Framework</span>
                             <h3 class="text-2xl font-bold text-white">Sentinel-X</h3>
-                            <p class="text-gray-300 text-xs leading-relaxed">
+                            <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
                                 Automated multi-tool penetration testing & reconnaissance framework built using Python, Streamlit UI, and Supabase backend for active threat scanning and system analysis.
                             </p>
                             <div class="flex flex-wrap gap-1.5 font-mono text-gray-400 text-[10px]">
-                                <span class="px-2 py-0.5 rounded-md border border-gray-800">Python 3</span>
-                                <span class="px-2 py-0.5 rounded-md border border-gray-800">Streamlit UI</span>
-                                <span class="px-2 py-0.5 rounded-md border border-gray-800">Supabase DB</span>
-                                <span class="px-2 py-0.5 rounded-md border border-gray-800">Nmap API</span>
+                                <span class="px-2.5 py-1 rounded-md border border-gray-800 bg-darkBg">Python 3</span>
+                                <span class="px-2.5 py-1 rounded-md border border-gray-800 bg-darkBg">Streamlit UI</span>
+                                <span class="px-2.5 py-1 rounded-md border border-gray-800 bg-darkBg">Supabase DB</span>
+                                <span class="px-2.5 py-1 rounded-md border border-gray-800 bg-darkBg">Nmap API</span>
                             </div>
                         </div>
 
-                        <div class="glass-card p-4 rounded-xl border border-gray-800 space-y-2 text-xs text-gray-300 font-mono leading-relaxed">
-                            <p class="text-neonBlue">// Sentinel-X Core Features</p>
+                        <div class="glass-card p-5 rounded-xl border border-gray-800/80 space-y-2 text-xs sm:text-sm text-gray-300 font-mono leading-relaxed">
+                            <p class="text-neonBlue font-bold">// Sentinel-X Core Features</p>
                             <p>+ Subdomain Enumeration & IP Tracking</p>
                             <p>+ Automated Port & Service Diagnostic</p>
                             <p>+ Web Security Header & Vulnerability Auditing</p>
@@ -309,7 +302,7 @@
                     </div>
 
                     <div class="pt-6 border-t border-gray-800/80 flex items-center justify-between">
-                        <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="px-4 py-2 border border-cyber text-cyber text-xs font-semibold rounded-lg hover:bg-cyber hover:text-black transition flex items-center gap-1.5">
+                        <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="px-5 py-2.5 border border-cyber text-cyber text-xs font-semibold rounded-xl hover:bg-cyber hover:text-black transition flex items-center gap-2 shadow-md shadow-cyber/10">
                             <i class="fa-brands fa-github text-sm"></i> View Sentinel-X Repository
                         </a>
                     </div>
@@ -323,20 +316,20 @@
                 <div class="text-center space-y-2">
                     <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Interactive Console</span>
                     <h2 class="text-3xl font-bold text-white">Terminal CLI</h2>
-                    <p class="text-gray-400 text-xs sm:text-sm">Type <code class="text-cyber bg-darkBg px-2 py-0.5 rounded">help</code> for commands</p>
+                    <p class="text-gray-400 text-xs sm:text-sm">Type <code class="text-cyber bg-darkBg px-2 py-0.5 rounded border border-gray-800">help</code> for commands</p>
                 </div>
 
-                <div class="glass-card rounded-xl border border-gray-800 overflow-hidden font-mono text-xs sm:text-sm">
+                <div class="glass-card rounded-2xl border border-gray-800/80 overflow-hidden font-mono text-xs sm:text-sm shadow-2xl">
                     <div class="term-header px-4 py-3 flex items-center justify-between text-gray-400 border-b border-gray-800">
                         <div class="flex items-center space-x-2">
-                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
-                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
-                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-red-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500/80"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500/80"></span>
                         </div>
                         <span class="text-xs">satyam@shivalik-student:~</span>
                     </div>
                     <div id="terminal-output" class="p-6 h-64 overflow-y-auto space-y-2 text-gray-300">
-                        <p class="text-cyber">Satyam Raj Student Portfolio OS [Shivalik College Edition]</p>
+                        <p class="text-cyber font-bold">Satyam Raj Student Portfolio OS [Shivalik College Edition]</p>
                         <p class="text-gray-500">Type 'help' to see available system commands.</p>
                     </div>
                     <div class="p-4 bg-darkBg border-t border-gray-800 flex items-center space-x-2">
@@ -382,23 +375,22 @@
         © 2026 Satyam Raj | Shivalik College of Engineering
     </footer>
 
-    <!-- MODAL POPUP (FOR TOUCH INTERACTIVE CARDS) -->
+    <!-- MODAL POPUP -->
     <div id="infoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-6">
-        <div class="glass-card max-w-lg w-full rounded-2xl p-6 border border-cyber/50 modal-enter space-y-4 text-left">
+        <div class="glass-card max-w-lg w-full rounded-2xl p-6 border border-cyber/50 modal-enter space-y-4 text-left shadow-2xl">
             <div class="flex items-center justify-between border-b border-gray-800 pb-3">
                 <h3 id="modalTitle" class="text-xl font-bold text-white">Card Detail</h3>
                 <button onclick="closeModal()" class="text-gray-400 hover:text-cyber text-2xl font-bold">&times;</button>
             </div>
             <p id="modalBody" class="text-sm text-gray-300 leading-relaxed font-light"></p>
             <div class="pt-2 text-right">
-                <button onclick="closeModal()" class="px-5 py-2 bg-cyber text-black text-xs font-semibold rounded-lg hover:bg-sky-400 transition">Close</button>
+                <button onclick="closeModal()" class="px-5 py-2 bg-cyber text-black text-xs font-semibold rounded-xl hover:bg-sky-400 transition">Close</button>
             </div>
         </div>
     </div>
 
     <!-- SCRIPTS -->
     <script>
-        // Modal functions
         function openModal(title, text) {
             document.getElementById('modalTitle').innerText = title;
             document.getElementById('modalBody').innerText = text;
@@ -413,7 +405,6 @@
             modal.classList.remove('flex');
         }
 
-        // Typewriter Effect
         const words = ["Python Scripts", "Linux Tools", "Sentinel-X", "College Projects"];
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         const targetEl = document.getElementById("typewriter");
@@ -434,7 +425,6 @@
         }
         document.addEventListener("DOMContentLoaded", type);
 
-        // Particle Background
         const canvas = document.getElementById('canvas-bg');
         const ctx = canvas.getContext('2d');
         let width = canvas.width = window.innerWidth;
@@ -466,7 +456,7 @@
             }
         }
 
-        const particles = Array.from({ length: 35 }, () => new Particle());
+        const particles = Array.from({ length: 40 }, () => new Particle());
 
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
@@ -477,11 +467,11 @@
                     const dx = particles[i].x - particles[j].x;
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
-                    if (dist < 110) {
+                    if (dist < 120) {
                         ctx.beginPath();
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / 110})`;
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / 120})`;
                         ctx.lineWidth = 0.5;
                         ctx.stroke();
                     }
@@ -491,14 +481,13 @@
         }
         animateCanvas();
 
-        // Terminal Script
         const termInput = document.getElementById('terminal-input');
         const termOutput = document.getElementById('terminal-output');
         const commands = {
             'help': 'Commands:\n • help\n • college\n • skills\n • project\n • contact\n • clear',
             'college': 'Shivalik College of Engineering — B.Tech ECE Student.',
-            'skills': 'Languages: C, Python, HTML, CSS\nTools: Kali Linux, Nmap, Wireshark, Metasploit, Burp Suite, Dirsearch',
-            'project': 'Sentinel-X: Multi-tool Recon & Penetration Testing Framework.',
+            'skills': 'Languages: C, Python, HTML, CSS\nTools: Kali Linux, Nmap, Wireshark, Metasploit, Burp Suite, Dirsearch, John',
+            'project': 'Sentinel-X: Multi-tool Recon & Penetration Testing Framework (Streamlit + Supabase + Nmap).',
             'contact': 'Email: sk4702684@gmail.com\nGitHub: github.com/sk4702684'
         };
 
