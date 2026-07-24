@@ -66,21 +66,29 @@
         }
 
         .glass-card:hover, .glass-card:active {
-            border-color: rgba(56, 189, 248, 0.4);
-            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.25);
-            transform: translateY(-4px) scale(1.01);
+            border-color: rgba(56, 189, 248, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+            transform: translateY(-4px) scale(1.02);
         }
 
         .profile-glow {
             box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
             border: 2px solid rgba(56, 189, 248, 0.8);
         }
+
+        .term-header { background: #1e293b; border-radius: 8px 8px 0 0; }
+
+        .modal-enter { animation: modalFadeIn 0.3s ease forwards; }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
     </style>
 </head>
 <body class="text-gray-200 font-sans selection:bg-cyber selection:text-black relative overflow-x-hidden min-h-screen">
 
-    <!-- Canvas Particles -->
-    <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20"></canvas>
+    <!-- Interactive Particle Background -->
+    <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-25"></canvas>
 
     <!-- Header / Navbar -->
     <header class="fixed top-0 w-full z-50 glass-card border-b border-gray-800/80 transition-all duration-300">
@@ -97,7 +105,8 @@
                 <a href="#ece-specialization" class="hover:text-cyber transition">02. ECE Core</a>
                 <a href="#skills" class="hover:text-cyber transition">03. Stack</a>
                 <a href="#projects" class="hover:text-cyber transition">04. Sentinel-X</a>
-                <a href="#contact" class="hover:text-cyber transition">05. Contact</a>
+                <a href="#terminal-section" class="hover:text-cyber transition">05. CLI</a>
+                <a href="#contact" class="hover:text-cyber transition">06. Contact</a>
             </nav>
 
             <div class="hidden md:flex items-center space-x-4">
@@ -179,64 +188,69 @@
             </div>
         </section>
 
-        <!-- ECE CORE SECTION (FULL RESTORED & ENHANCED) -->
+        <!-- ECE CORE SECTION (TOUCH INTERACTIVE CARDS) -->
         <section id="ece-specialization" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Academic Foundation</span>
                     <h2 class="text-3xl sm:text-4xl font-bold text-white">ECE Core Foundation</h2>
-                    <p class="text-gray-400 text-xs sm:text-sm">Core Engineering Subjects & Electronics Specialization</p>
+                    <p class="text-gray-400 text-xs sm:text-sm">Tap any card below for details!</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-cyber hover:shadow-lg hover:shadow-cyber/20 space-y-3 group">
-                        <div class="text-cyber text-3xl group-hover:scale-110 transition-transform duration-300"><i class="fa-solid fa-microchip"></i></div>
-                        <h3 class="text-lg font-semibold text-white group-hover:text-cyber transition">Digital Electronics</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">Logic gates, Boolean algebra, flip-flops & sequential circuit design.</p>
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-cyber space-y-3 active:scale-95" onclick="openModal('Digital Electronics', 'Covers Boolean logic, gate design, flip-flops, multiplexers, and sequential state machines as part of my B.Tech coursework.')">
+                        <div class="text-cyber text-3xl"><i class="fa-solid fa-microchip"></i></div>
+                        <h3 class="text-lg font-semibold text-white">Digital Electronics</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Logic gates, Boolean algebra, & sequential circuits.</p>
+                        <span class="text-cyber text-[11px] font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-neonBlue hover:shadow-lg hover:shadow-neonBlue/20 space-y-3 group">
-                        <div class="text-neonBlue text-3xl group-hover:scale-110 transition-transform duration-300"><i class="fa-solid fa-satellite-dish"></i></div>
-                        <h3 class="text-lg font-semibold text-white group-hover:text-neonBlue transition">Communication Systems</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">Analog & digital modulation, signals, noise filtering & bandwidth.</p>
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-neonBlue space-y-3 active:scale-95" onclick="openModal('Communication Systems', 'Focuses on signal modulation (AM/FM/PSK), bandwidth management, noise filtering, and digital data packet transmission protocols.')">
+                        <div class="text-neonBlue text-3xl"><i class="fa-solid fa-satellite-dish"></i></div>
+                        <h3 class="text-lg font-semibold text-white">Communication Systems</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">Signal modulation, bandwidth, & data transmission.</p>
+                        <span class="text-neonBlue text-[11px] font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-purple-400 hover:shadow-lg hover:shadow-purple-400/20 space-y-3 group">
-                        <div class="text-purple-400 text-3xl group-hover:scale-110 transition-transform duration-300"><i class="fa-solid fa-memory"></i></div>
-                        <h3 class="text-lg font-semibold text-white group-hover:text-purple-400 transition">Microprocessors</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">8085/8086 architecture, assembly instruction sets & memory bus logic.</p>
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-purple-400 space-y-3 active:scale-95" onclick="openModal('Microprocessors', 'Understanding 8085/8086 architecture fundamentals, instruction sets, register logic, and bus interfaces during my engineering studies.')">
+                        <div class="text-purple-400 text-3xl"><i class="fa-solid fa-memory"></i></div>
+                        <h3 class="text-lg font-semibold text-white">Microprocessors</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">8085/8086 architecture, instruction sets, & bus systems.</p>
+                        <span class="text-purple-400 text-[11px] font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-yellow-400 hover:shadow-lg hover:shadow-yellow-400/20 space-y-3 group">
-                        <div class="text-yellow-400 text-3xl group-hover:scale-110 transition-transform duration-300"><i class="fa-solid fa-network-wired"></i></div>
-                        <h3 class="text-lg font-semibold text-white group-hover:text-yellow-400 transition">Network Protocols</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">TCP/IP stack, OSI models, socket connections & packet flow.</p>
+                    <div class="glass-card p-6 rounded-2xl cursor-pointer transition hover:border-yellow-400 space-y-3 active:scale-95" onclick="openModal('Network Protocols', 'Exploring TCP/IP models, OSI layers, socket communication fundamentals, and network packet workflows.')">
+                        <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-network-wired"></i></div>
+                        <h3 class="text-lg font-semibold text-white">Network Protocols</h3>
+                        <p class="text-xs text-gray-400 leading-relaxed">TCP/IP stack, OSI layers, socket communication, & packets.</p>
+                        <span class="text-yellow-400 text-[11px] font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- TECH STACK SECTION (With Kali Tools List) -->
+        <!-- TECH STACK SECTION (TOUCH INTERACTIVE CARDS) -->
         <section id="skills" class="py-20 px-6 relative">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Technical Toolkit</span>
                     <h2 class="text-3xl sm:text-4xl font-bold text-white">Skills & Competencies</h2>
+                    <p class="text-gray-400 text-xs sm:text-sm">Tap any skill card for details!</p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="glass-card p-8 rounded-2xl space-y-4 hover:border-cyber transition">
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer transition hover:border-cyber space-y-4 active:scale-95" onclick="openModal('Programming Languages', 'Python is my primary tool for building applications like Sentinel-X. C language provides a strong core for low-level system logic.')">
                         <div class="text-cyber text-3xl"><i class="fa-solid fa-code"></i></div>
                         <h3 class="text-xl font-bold text-white">Programming</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">C Language, Python 3, HTML5, CSS3, TailwindCSS</p>
+                        <span class="text-cyber text-xs font-mono block">Tap to view details →</span>
                     </div>
 
-                    <div class="glass-card p-8 rounded-2xl space-y-4 hover:border-neonBlue transition">
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer transition hover:border-neonBlue space-y-4 active:scale-95" onclick="openModal('Linux & Kali Tools', 'Adept at working in Linux environments, utilizing Kali Linux tools like Nmap, Wireshark, Metasploit, Burp Suite, Dirsearch, and JohnTheRipper for network diagnostics and auditing.')">
                         <div class="text-neonBlue text-3xl"><i class="fa-solid fa-desktop"></i></div>
                         <h3 class="text-xl font-bold text-white">Operating Systems</h3>
-                        <p class="text-xs text-gray-400 leading-relaxed">Linux (Kali Linux, Ubuntu), Windows, Bash CLI</p>
+                        <p class="text-xs text-gray-400 leading-relaxed">Linux (Kali, Ubuntu), Windows, Bash CLI</p>
                         
-                        <!-- KALI TOOLS LIST -->
                         <div class="pt-3 border-t border-gray-800 space-y-2">
                             <p class="text-neonBlue font-mono text-[11px] font-bold tracking-wider uppercase">// Kali Security Tools:</p>
                             <div class="flex flex-wrap gap-1.5 font-mono text-[10px] text-gray-300">
@@ -248,12 +262,14 @@
                                 <span class="px-2 py-0.5 rounded bg-darkBg border border-gray-800"><i class="fa-solid fa-folder-tree text-cyber mr-1"></i>Dirsearch</span>
                             </div>
                         </div>
+                        <span class="text-neonBlue text-xs font-mono block">Tap to view details →</span>
                     </div>
 
-                    <div class="glass-card p-8 rounded-2xl space-y-4 hover:border-yellow-400 transition">
+                    <div class="glass-card p-8 rounded-2xl cursor-pointer transition hover:border-yellow-400 space-y-4 active:scale-95" onclick="openModal('Developer Tools', 'Version control with Git/GitHub, database integration with Supabase, Streamlit dashboard development, and VS Code.')">
                         <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-screwdriver-wrench"></i></div>
                         <h3 class="text-xl font-bold text-white">Developer Tools</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Git, GitHub, Streamlit, Supabase, VS Code</p>
+                        <span class="text-yellow-400 text-xs font-mono block">Tap to view details →</span>
                     </div>
                 </div>
             </div>
@@ -301,6 +317,36 @@
             </div>
         </section>
 
+        <!-- CLI TERMINAL SECTION -->
+        <section id="terminal-section" class="py-20 px-6 relative">
+            <div class="max-w-4xl mx-auto space-y-6">
+                <div class="text-center space-y-2">
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Interactive Console</span>
+                    <h2 class="text-3xl font-bold text-white">Terminal CLI</h2>
+                    <p class="text-gray-400 text-xs sm:text-sm">Type <code class="text-cyber bg-darkBg px-2 py-0.5 rounded">help</code> for commands</p>
+                </div>
+
+                <div class="glass-card rounded-xl border border-gray-800 overflow-hidden font-mono text-xs sm:text-sm">
+                    <div class="term-header px-4 py-3 flex items-center justify-between text-gray-400 border-b border-gray-800">
+                        <div class="flex items-center space-x-2">
+                            <span class="w-3 h-3 rounded-full bg-red-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-green-500"></span>
+                        </div>
+                        <span class="text-xs">satyam@shivalik-student:~</span>
+                    </div>
+                    <div id="terminal-output" class="p-6 h-64 overflow-y-auto space-y-2 text-gray-300">
+                        <p class="text-cyber">Satyam Raj Student Portfolio OS [Shivalik College Edition]</p>
+                        <p class="text-gray-500">Type 'help' to see available system commands.</p>
+                    </div>
+                    <div class="p-4 bg-darkBg border-t border-gray-800 flex items-center space-x-2">
+                        <span class="text-cyber font-bold">student@satyam:~$</span>
+                        <input id="terminal-input" type="text" class="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs sm:text-sm" placeholder="type a command..." autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact" class="py-20 px-6 relative">
             <div class="max-w-4xl mx-auto text-center space-y-12">
@@ -336,8 +382,38 @@
         © 2026 Satyam Raj | Shivalik College of Engineering
     </footer>
 
-    <!-- Scripts -->
+    <!-- MODAL POPUP (FOR TOUCH INTERACTIVE CARDS) -->
+    <div id="infoModal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-6">
+        <div class="glass-card max-w-lg w-full rounded-2xl p-6 border border-cyber/50 modal-enter space-y-4 text-left">
+            <div class="flex items-center justify-between border-b border-gray-800 pb-3">
+                <h3 id="modalTitle" class="text-xl font-bold text-white">Card Detail</h3>
+                <button onclick="closeModal()" class="text-gray-400 hover:text-cyber text-2xl font-bold">&times;</button>
+            </div>
+            <p id="modalBody" class="text-sm text-gray-300 leading-relaxed font-light"></p>
+            <div class="pt-2 text-right">
+                <button onclick="closeModal()" class="px-5 py-2 bg-cyber text-black text-xs font-semibold rounded-lg hover:bg-sky-400 transition">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
     <script>
+        // Modal functions
+        function openModal(title, text) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerText = text;
+            const modal = document.getElementById('infoModal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('infoModal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Typewriter Effect
         const words = ["Python Scripts", "Linux Tools", "Sentinel-X", "College Projects"];
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         const targetEl = document.getElementById("typewriter");
@@ -357,6 +433,99 @@
             setTimeout(type, speed);
         }
         document.addEventListener("DOMContentLoaded", type);
+
+        // Particle Background
+        const canvas = document.getElementById('canvas-bg');
+        const ctx = canvas.getContext('2d');
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.6;
+                this.vy = (Math.random() - 0.5) * 0.6;
+                this.radius = 1.5;
+            }
+            update() {
+                this.x += this.vx; this.y += this.vy;
+                if (this.x < 0 || this.x > width) this.vx *= -1;
+                if (this.y < 0 || this.y > height) this.vy *= -1;
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#38bdf8';
+                ctx.fill();
+            }
+        }
+
+        const particles = Array.from({ length: 35 }, () => new Particle());
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, width, height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 110) {
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(56, 189, 248, ${1 - dist / 110})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        // Terminal Script
+        const termInput = document.getElementById('terminal-input');
+        const termOutput = document.getElementById('terminal-output');
+        const commands = {
+            'help': 'Commands:\n • help\n • college\n • skills\n • project\n • contact\n • clear',
+            'college': 'Shivalik College of Engineering — B.Tech ECE Student.',
+            'skills': 'Languages: C, Python, HTML, CSS\nTools: Kali Linux, Nmap, Wireshark, Metasploit, Burp Suite, Dirsearch',
+            'project': 'Sentinel-X: Multi-tool Recon & Penetration Testing Framework.',
+            'contact': 'Email: sk4702684@gmail.com\nGitHub: github.com/sk4702684'
+        };
+
+        termInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const input = termInput.value.trim().toLowerCase();
+                termInput.value = '';
+                const cmdLine = document.createElement('p');
+                cmdLine.className = 'text-white font-bold';
+                cmdLine.innerHTML = `<span class="text-cyber">student@satyam:~$</span> ${input}`;
+                termOutput.appendChild(cmdLine);
+
+                if (input === 'clear') { termOutput.innerHTML = ''; }
+                else if (commands[input]) {
+                    const resLine = document.createElement('p');
+                    resLine.className = 'text-gray-300 whitespace-pre-line';
+                    resLine.textContent = commands[input];
+                    termOutput.appendChild(resLine);
+                } else if (input !== '') {
+                    const errLine = document.createElement('p');
+                    errLine.className = 'text-red-400';
+                    errLine.textContent = `Command not found: '${input}'`;
+                    termOutput.appendChild(errLine);
+                }
+                termOutput.scrollTop = termOutput.scrollHeight;
+            }
+        });
     </script>
 </body>
 </html>
