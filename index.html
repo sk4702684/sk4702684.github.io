@@ -4,46 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Satyam Raj | ECE Engineer & Cybersecurity Developer</title>
+    
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Tailwind Configuration -->
     <script>
         tailwind.config = {
-            darkMode: 'class',
+            darkMode: "class",
             theme: {
                 extend: {
                     colors: {
-                        cyber: '#38bdf8',
-                        neonBlue: '#a855f7',
-                        darkBg: '#0b0f19',
-                        cardBg: 'rgba(255, 255, 255, 0.04)',
-                        accentDark: '#111827'
+                        cyber: "#38bdf8",
+                        neonBlue: "#a855f7",
+                        darkBg: "#0b0f19",
+                        cardBg: "rgba(255, 255, 255, 0.04)",
+                        accentDark: "#111827"
                     },
                     fontFamily: {
-                        sans: ['Poppins', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace']
+                        sans: ["Poppins", "sans-serif"],
+                        mono: ["Fira Code", "monospace"]
                     }
                 }
             }
         }
     </script>
+
+    <!-- Custom CSS Styles -->
     <style>
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0b0f19; }
         ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #38bdf8; }
+
         body {
             background: linear-gradient(135deg, #0b0f19 0%, #1e1b4b 40%, #311042 75%, #0b0f19 100%);
             background-size: 400% 400%;
             animation: gradientBG 15s ease infinite;
         }
+
         @keyframes gradientBG {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
         .glass-card {
             background: rgba(255, 255, 255, 0.04);
             backdrop-filter: blur(12px);
@@ -51,11 +64,13 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
             transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
         }
+
         .glass-card:hover, .glass-card:active {
             border-color: rgba(56, 189, 248, 0.4);
             box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.25);
             transform: translateY(-4px) scale(1.01);
         }
+
         .profile-glow {
             box-shadow: 0 0 25px rgba(56, 189, 248, 0.5);
             border: 2px solid rgba(56, 189, 248, 0.8);
@@ -64,8 +79,10 @@
 </head>
 <body class="text-gray-200 font-sans selection:bg-cyber selection:text-black relative overflow-x-hidden min-h-screen">
 
+    <!-- Background Canvas -->
     <canvas id="canvas-bg" class="fixed top-0 left-0 w-full h-full pointer-events-none z-0 opacity-20"></canvas>
 
+    <!-- Header / Navbar -->
     <header class="fixed top-0 w-full z-50 glass-card border-b border-gray-800/80 transition-all duration-300">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center space-x-3 text-xl font-bold text-white tracking-wider group">
@@ -74,11 +91,13 @@
                 </span>
                 <span>SATYAM<span class="text-cyber">.RAJ</span></span>
             </a>
+
             <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
                 <a href="#about" class="hover:text-cyber transition">01. About</a>
                 <a href="#projects" class="hover:text-cyber transition">02. Sentinel-X</a>
                 <a href="#contact" class="hover:text-cyber transition">03. Contact</a>
             </nav>
+
             <div class="hidden md:flex items-center space-x-4">
                 <a href="https://github.com/sk4702684" target="_blank" class="p-2 text-gray-400 hover:text-cyber transition"><i class="fa-brands fa-github text-lg"></i></a>
                 <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="p-2 text-gray-400 hover:text-cyber transition"><i class="fa-brands fa-linkedin text-lg"></i></a>
@@ -88,9 +107,11 @@
     </header>
 
     <main class="relative z-10">
-        <!-- HERO -->
+
+        <!-- Hero Section -->
         <section id="about" class="min-h-screen flex items-center justify-center pt-28 pb-16 px-6 relative">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
                 <div class="lg:col-span-7 space-y-6">
                     <div class="flex items-center gap-4">
                         <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-20 h-20 sm:w-24 sm:h-24 rounded-full object-cover profile-glow">
@@ -99,6 +120,7 @@
                             <span>Shivalik College of Engineering Student</span>
                         </div>
                     </div>
+
                     <div class="space-y-2">
                         <h2 class="text-cyber font-mono text-sm tracking-widest uppercase">Hi, my name is</h2>
                         <h1 class="text-5xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight">Satyam Raj<span class="text-cyber">.</span></h1>
@@ -107,16 +129,29 @@
                             <span id="typewriter" class="text-neonBlue border-b-2 border-neonBlue font-semibold"></span>
                         </p>
                     </div>
+
                     <p class="text-gray-300 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
                         An engineering student at <span class="text-white font-semibold">Shivalik College of Engineering (Shivalik University)</span> currently pursuing my B.Tech in Electronics & Communication. Passionate about learning programming, tinkering with Linux systems, and building tools like <span class="text-cyber font-medium">Sentinel-X</span>.
                     </p>
+
                     <div class="flex flex-wrap gap-2 pt-2 text-xs font-mono">
                         <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-solid fa-graduation-cap text-cyber mr-1.5"></i>Shivalik University</span>
                         <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-brands fa-python text-yellow-400 mr-1.5"></i>Python</span>
                         <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-solid fa-c text-blue-400 mr-1.5"></i>C Lang</span>
                         <span class="px-3 py-1.5 rounded-lg bg-darkBg/80 border border-gray-800 text-gray-300"><i class="fa-brands fa-linux text-orange-400 mr-1.5"></i>Linux OS</span>
                     </div>
+
+                    <div class="flex flex-wrap items-center gap-4 pt-4 font-medium">
+                        <a href="#projects" class="px-6 py-3.5 bg-cyber text-black font-semibold rounded-xl hover:bg-sky-400 transition shadow-lg shadow-cyber/20 flex items-center gap-2">
+                            <i class="fa-solid fa-shield-halved"></i> Explore Sentinel-X
+                        </a>
+                        <a href="https://github.com/sk4702684" target="_blank" class="px-6 py-3.5 glass-card border border-gray-700 hover:border-cyber text-white font-semibold rounded-xl transition flex items-center gap-2">
+                            <i class="fa-brands fa-github"></i> GitHub Repos
+                        </a>
+                    </div>
                 </div>
+
+                <!-- Right JSON Card -->
                 <div class="lg:col-span-5">
                     <div class="glass-card rounded-2xl p-6 border border-gray-800 shadow-2xl relative overflow-hidden">
                         <div class="flex items-center justify-between pb-4 border-b border-gray-800 text-xs font-mono text-gray-400">
@@ -138,89 +173,122 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
 
-        <!-- SENTINEL-X DETAILED SECTION -->
+        <!-- Sentinel-X Project Section -->
         <section id="projects" class="py-20 px-6 relative bg-darkBg/50">
             <div class="max-w-6xl mx-auto space-y-12">
-                <div class="border-b border-gray-800 pb-6">
-                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Featured Work</span>
-                    <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Sentinel-X Framework</h2>
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 border-b border-gray-800 pb-6">
+                    <div>
+                        <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Featured Projects</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-white mt-1">Key Developer Work</h2>
+                    </div>
                 </div>
+
                 <div class="glass-card rounded-2xl p-8 border border-gray-800 relative space-y-8">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="space-y-4">
-                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/30 text-cyber text-xs font-mono rounded">Python Cybersecurity Tool</span>
-                            <h3 class="text-2xl font-bold text-white">Automated Security Suite</h3>
-                            <p class="text-gray-300 text-xs leading-relaxed">Automated security assessment framework built with Python for reconnaissance, network diagnostics, and vulnerability scanning.</p>
+                            <span class="px-3 py-1 bg-cyber/10 border border-cyber/30 text-cyber text-xs font-mono rounded">Python Security Tool</span>
+                            <h3 class="text-2xl font-bold text-white">Sentinel-X</h3>
+                            <p class="text-gray-300 text-xs leading-relaxed max-w-md">
+                                Automated security assessment framework built with Python for reconnaissance, network diagnostics, and vulnerability scanning.
+                            </p>
                             <div class="flex flex-wrap gap-1.5 font-mono text-gray-400 text-[10px]">
                                 <span class="px-2 py-0.5 rounded-md border border-gray-800">Python 3</span>
                                 <span class="px-2 py-0.5 rounded-md border border-gray-800">Streamlit</span>
                                 <span class="px-2 py-0.5 rounded-md border border-gray-800">Supabase</span>
                                 <span class="px-2 py-0.5 rounded-md border border-gray-800">Nmap API</span>
+                                <span class="px-2 py-0.5 rounded-md border border-gray-800">Threading</span>
                             </div>
                         </div>
+
                         <div class="glass-card p-4 rounded-xl border border-gray-800 space-y-2 text-xs text-gray-300 font-mono leading-relaxed">
-                            <p class="text-neonBlue">// Features Overview</p>
+                            <p class="text-neonBlue">// Features Description</p>
                             <p>+ Automated Subdomain Discovery</p>
                             <p>+ Port Scanning & Service Identification</p>
                             <p>+ Security Header & Vulnerability Analysis</p>
                             <p>+ Interactive Dashboard & Logging</p>
                         </div>
                     </div>
-                    <div class="pt-6 border-t border-gray-800/80 flex items-center justify-between">
+
+                    <div class="pt-6 border-t border-gray-800/80 flex items-center justify-between gap-4">
+                        <p class="text-gray-500 text-xs font-mono flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>In Active Development: Finalizing Reporting Module
+                        </p>
                         <a href="https://github.com/sk4702684/Sentinel-X.git" target="_blank" class="px-4 py-2 border border-cyber text-cyber text-xs font-semibold rounded-lg hover:bg-cyber hover:text-black transition flex items-center gap-1.5">
-                            <i class="fa-brands fa-github text-sm"></i> View Sentinel-X Repository
+                            <i class="fa-brands fa-github text-sm"></i> View Repository
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT -->
+        <!-- Contact Section -->
         <section id="contact" class="py-20 px-6 relative">
             <div class="max-w-4xl mx-auto text-center space-y-12">
                 <div class="space-y-3">
-                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Let us Connect</span>
+                    <span class="text-cyber font-mono text-sm uppercase tracking-widest">// Let's Build Something</span>
                     <h2 class="text-4xl font-bold text-white">Get In Touch</h2>
+                    <p class="text-gray-400 max-w-lg mx-auto text-sm leading-relaxed">
+                        Whether you want to discuss ECE core concepts, Python scripting, or just say hello, feel free to reach out!
+                    </p>
                 </div>
+
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <a href="mailto:sk4702684@gmail.com" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-solid fa-envelope"></i></div>
+                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
                         <h3 class="text-base font-semibold text-white">Email</h3>
                         <p class="text-xs font-mono text-gray-400 truncate">sk4702684@gmail.com</p>
                     </a>
+
                     <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-brands fa-linkedin"></i></div>
+                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </div>
                         <h3 class="text-base font-semibold text-white">LinkedIn</h3>
                         <p class="text-xs font-mono text-gray-400">Satyam Raj</p>
                     </a>
+
                     <a href="https://github.com/sk4702684" target="_blank" class="glass-card p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
-                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto"><i class="fa-brands fa-github"></i></div>
+                        <div class="w-12 h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-xl mx-auto">
+                            <i class="fa-brands fa-github"></i>
+                        </div>
                         <h3 class="text-base font-semibold text-white">GitHub</h3>
                         <p class="text-xs font-mono text-gray-400">sk4702684</p>
                     </a>
                 </div>
             </div>
         </section>
+
     </main>
 
+    <!-- Footer -->
     <footer class="py-8 border-t border-gray-800/80 bg-darkBg text-center font-mono text-xs text-gray-500">
         © 2026 Satyam Raj | Shivalik College of Engineering
     </footer>
 
+    <!-- Typewriter Script -->
     <script>
         const words = ["Python Scripts", "Linux Tools", "Sentinel-X", "College Projects"];
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         const targetEl = document.getElementById("typewriter");
+
         function type() {
             const currentWord = words[wordIdx];
-            targetEl.textContent = isDeleting ? currentWord.substring(0, charIdx - 1) : currentWord.substring(0, charIdx + 1);
+            targetEl.textContent = isDeleting 
+                ? currentWord.substring(0, charIdx - 1) 
+                : currentWord.substring(0, charIdx + 1);
+            
             charIdx += isDeleting ? -1 : 1;
             let speed = isDeleting ? 40 : 100;
+
             if (!isDeleting && charIdx === currentWord.length) { speed = 1800; isDeleting = true; }
             else if (isDeleting && charIdx === 0) { isDeleting = false; wordIdx = (wordIdx + 1) % words.length; speed = 400; }
+
             setTimeout(type, speed);
         }
         document.addEventListener("DOMContentLoaded", type);
