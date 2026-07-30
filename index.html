@@ -39,7 +39,7 @@
         }
     </script>
 
-    <!-- Custom CSS Styles & Animations -->
+    <!-- Custom CSS Styles & Scroll Reveal Animations -->
     <style>
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #06090e; }
@@ -64,13 +64,13 @@
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .glass-card:hover, .glass-card:active {
             border-color: rgba(56, 189, 248, 0.5);
             box-shadow: 0 10px 25px -10px rgba(56, 189, 248, 0.25);
-            transform: translateY(-2px);
+            transform: translateY(-4px);
         }
 
         .profile-glow {
@@ -88,6 +88,19 @@
         @keyframes modalFadeIn {
             from { opacity: 0; transform: scale(0.9) translateY(20px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* Sexy Scroll Reveal Animation Utilities */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+
+        .reveal-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -150,7 +163,7 @@
     <main class="relative z-10">
 
         <!-- Hero Section -->
-        <section id="about" class="min-h-screen flex items-center justify-center pt-24 sm:pt-28 pb-16 px-4 sm:px-6 relative">
+        <section id="about" class="min-h-screen flex items-center justify-center pt-24 sm:pt-28 pb-16 px-4 sm:px-6 relative reveal-on-scroll">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
                 
                 <div class="lg:col-span-7 space-y-4 sm:space-y-6">
@@ -219,7 +232,7 @@
         </section>
 
         <!-- ECE CORE SECTION -->
-        <section id="ece-specialization" class="py-16 sm:py-20 px-4 sm:px-6 relative">
+        <section id="ece-specialization" class="py-16 sm:py-20 px-4 sm:px-6 relative reveal-on-scroll">
             <div class="max-w-6xl mx-auto space-y-8 sm:space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <span class="text-cyber font-mono text-xs sm:text-sm uppercase tracking-widest">// Academic Foundation</span>
@@ -228,28 +241,28 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                    <div class="glass-card p-5 sm:p-6 rounded-2xl cursor-pointer transition hover:border-cyber space-y-3 active:scale-95" onclick="openModal('Digital Electronics', 'Covers Boolean logic, gate design, flip-flops, multiplexers, and sequential state machines as part of my B.Tech coursework.')">
+                    <div class="glass-card p-5 sm:p-6 rounded-2xl cursor-pointer transition hover:border-cyber space-y-3 active:scale-95 reveal-on-scroll" onclick="openModal('Digital Electronics', 'Covers Boolean logic, gate design, flip-flops, multiplexers, and sequential state machines as part of my B.Tech coursework.')">
                         <div class="text-cyber text-2xl sm:text-3xl"><i class="fa-solid fa-microchip"></i></div>
                         <h3 class="text-base sm:text-lg font-semibold text-white">Digital Electronics</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Logic gates, Boolean algebra, & sequential circuits.</p>
                         <span class="text-cyber text-[11px] font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <div class="glass-card p-5 sm:p-6 rounded-2xl cursor-pointer transition hover:border-neonBlue space-y-3 active:scale-95" onclick="openModal('Communication Systems', 'Focuses on signal modulation (AM/FM/PSK), bandwidth management, noise filtering, and digital data packet transmission protocols.')">
+                    <div class="glass-card p-5 sm:p-6 rounded-2xl cursor-pointer transition hover:border-neonBlue space-y-3 active:scale-95 reveal-on-scroll" onclick="openModal('Communication Systems', 'Focuses on signal modulation (AM/FM/PSK), bandwidth management, noise filtering, and digital data packet transmission protocols.')">
                         <div class="text-neonBlue text-2xl sm:text-3xl"><i class="fa-solid fa-satellite-dish"></i></div>
                         <h3 class="text-base sm:text-lg font-semibold text-white">Communication Systems</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Signal modulation, bandwidth, & data transmission.</p>
                         <span class="text-neonBlue text-[11px] font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <div class="glass-card p-5 sm:p-6 rounded-2xl cursor-pointer transition hover:border-purple-400 space-y-3 active:scale-95" onclick="openModal('Microprocessors', 'Understanding 8085/8086 architecture fundamentals, instruction sets, register logic, and bus interfaces during my engineering studies.')">
+                    <div class="glass-card p-5 sm:p-6 rounded-2xl cursor-pointer transition hover:border-purple-400 space-y-3 active:scale-95 reveal-on-scroll" onclick="openModal('Microprocessors', 'Understanding 8085/8086 architecture fundamentals, instruction sets, register logic, and bus interfaces during my engineering studies.')">
                         <div class="text-purple-400 text-2xl sm:text-3xl"><i class="fa-solid fa-memory"></i></div>
                         <h3 class="text-base sm:text-lg font-semibold text-white">Microprocessors</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">8085/8086 architecture, instruction sets, & bus systems.</p>
                         <span class="text-purple-400 text-[11px] font-mono flex items-center gap-1 pt-2">Tap for details <i class="fa-solid fa-chevron-right text-[10px]"></i></span>
                     </div>
 
-                    <div class="glass-card p-5 sm:p-6 rounded-2xl cursor-pointer transition hover:border-yellow-400 space-y-3 active:scale-95" onclick="openModal('Network Protocols', 'Exploring TCP/IP models, OSI layers, socket communication fundamentals, and network packet workflows.')">
+                    <div class="glass-card p-5 sm:p-6 rounded-2xl cursor-pointer transition hover:border-yellow-400 space-y-3 active:scale-95 reveal-on-scroll" onclick="openModal('Network Protocols', 'Exploring TCP/IP models, OSI layers, socket communication fundamentals, and network packet workflows.')">
                         <div class="text-yellow-400 text-2xl sm:text-3xl"><i class="fa-solid fa-network-wired"></i></div>
                         <h3 class="text-base sm:text-lg font-semibold text-white">Network Protocols</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">TCP/IP stack, OSI layers, socket communication, & packets.</p>
@@ -260,7 +273,7 @@
         </section>
 
         <!-- TECH STACK SECTION -->
-        <section id="skills" class="py-16 sm:py-20 px-4 sm:px-6 relative">
+        <section id="skills" class="py-16 sm:py-20 px-4 sm:px-6 relative reveal-on-scroll">
             <div class="max-w-6xl mx-auto space-y-8 sm:space-y-12">
                 <div class="text-center max-w-2xl mx-auto space-y-2">
                     <span class="text-cyber font-mono text-xs sm:text-sm uppercase tracking-widest">// Technical Toolkit</span>
@@ -269,14 +282,14 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-                    <div class="glass-card p-6 sm:p-8 rounded-2xl cursor-pointer transition hover:border-cyber space-y-4 active:scale-95" onclick="openModal('Programming Languages', 'Python is my primary tool for building applications like Sentinel-X. C language provides a strong core for low-level system logic.')">
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl cursor-pointer transition hover:border-cyber space-y-4 active:scale-95 reveal-on-scroll" onclick="openModal('Programming Languages', 'Python is my primary tool for building applications like Sentinel-X. C language provides a strong core for low-level system logic.')">
                         <div class="text-cyber text-3xl"><i class="fa-solid fa-code"></i></div>
                         <h3 class="text-lg sm:text-xl font-bold text-white">Programming</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">C Language, Python 3, HTML5, CSS3, TailwindCSS</p>
                         <span class="text-cyber text-xs font-mono block">Tap to view details →</span>
                     </div>
 
-                    <div class="glass-card p-6 sm:p-8 rounded-2xl cursor-pointer transition hover:border-neonBlue space-y-4 active:scale-95" onclick="openModal('Linux & Kali Tools', 'Adept at working in Linux environments, utilizing Kali Linux tools like Nmap, Wireshark, Metasploit, Burp Suite, Dirsearch, and JohnTheRipper for network diagnostics and auditing.')">
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl cursor-pointer transition hover:border-neonBlue space-y-4 active:scale-95 reveal-on-scroll" onclick="openModal('Linux & Kali Tools', 'Adept at working in Linux environments, utilizing Kali Linux tools like Nmap, Wireshark, Metasploit, Burp Suite, Dirsearch, and JohnTheRipper for network diagnostics and auditing.')">
                         <div class="text-neonBlue text-3xl"><i class="fa-solid fa-desktop"></i></div>
                         <h3 class="text-lg sm:text-xl font-bold text-white">Operating Systems</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Linux (Kali, Ubuntu), Windows, Bash CLI</p>
@@ -295,7 +308,7 @@
                         <span class="text-neonBlue text-xs font-mono block pt-1">Tap to view details →</span>
                     </div>
 
-                    <div class="glass-card p-6 sm:p-8 rounded-2xl cursor-pointer transition hover:border-yellow-400 space-y-4 active:scale-95" onclick="openModal('Developer Tools', 'Version control with Git/GitHub, database integration with Supabase, Streamlit dashboard development, and VS Code.')">
+                    <div class="glass-card p-6 sm:p-8 rounded-2xl cursor-pointer transition hover:border-yellow-400 space-y-4 active:scale-95 reveal-on-scroll" onclick="openModal('Developer Tools', 'Version control with Git/GitHub, database integration with Supabase, Streamlit dashboard development, and VS Code.')">
                         <div class="text-yellow-400 text-3xl"><i class="fa-solid fa-screwdriver-wrench"></i></div>
                         <h3 class="text-lg sm:text-xl font-bold text-white">Developer Tools</h3>
                         <p class="text-xs text-gray-400 leading-relaxed">Git, GitHub, Streamlit, Supabase, VS Code</p>
@@ -306,7 +319,7 @@
         </section>
 
         <!-- SENTINEL-X DETAILED SECTION -->
-        <section id="projects" class="py-16 sm:py-20 px-4 sm:px-6 relative bg-darkBg/50">
+        <section id="projects" class="py-16 sm:py-20 px-4 sm:px-6 relative bg-darkBg/50 reveal-on-scroll">
             <div class="max-w-6xl mx-auto space-y-8 sm:space-y-12">
                 <div class="border-b border-gray-800/80 pb-4 sm:pb-6">
                     <span class="text-cyber font-mono text-xs sm:text-sm uppercase tracking-widest">// Featured Work</span>
@@ -348,7 +361,7 @@
         </section>
 
         <!-- CLI TERMINAL SECTION -->
-        <section id="terminal-section" class="py-16 sm:py-20 px-4 sm:px-6 relative">
+        <section id="terminal-section" class="py-16 sm:py-20 px-4 sm:px-6 relative reveal-on-scroll">
             <div class="max-w-4xl mx-auto space-y-6">
                 <div class="text-center space-y-2">
                     <span class="text-cyber font-mono text-xs sm:text-sm uppercase tracking-widest">// Interactive Console</span>
@@ -378,7 +391,7 @@
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-16 sm:py-20 px-4 sm:px-6 relative">
+        <section id="contact" class="py-16 sm:py-20 px-4 sm:px-6 relative reveal-on-scroll">
             <div class="max-w-4xl mx-auto text-center space-y-8 sm:space-y-12">
                 <div class="space-y-3">
                     <span class="text-cyber font-mono text-xs sm:text-sm uppercase tracking-widest">// Let's Connect</span>
@@ -386,17 +399,17 @@
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-                    <a href="mailto:sk4702684@gmail.com" class="glass-card p-5 sm:p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
+                    <a href="mailto:sk4702684@gmail.com" class="glass-card p-5 sm:p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3 reveal-on-scroll">
                         <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-lg sm:text-xl mx-auto"><i class="fa-solid fa-envelope"></i></div>
                         <h3 class="text-sm sm:text-base font-semibold text-white">Email</h3>
                         <p class="text-xs font-mono text-gray-400 truncate">sk4702684@gmail.com</p>
                     </a>
-                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="glass-card p-5 sm:p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
+                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" class="glass-card p-5 sm:p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3 reveal-on-scroll">
                         <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-lg sm:text-xl mx-auto"><i class="fa-brands fa-linkedin"></i></div>
                         <h3 class="text-sm sm:text-base font-semibold text-white">LinkedIn</h3>
                         <p class="text-xs font-mono text-gray-400">Satyam Raj</p>
                     </a>
-                    <a href="https://github.com/sk4702684" target="_blank" class="glass-card p-5 sm:p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3">
+                    <a href="https://github.com/sk4702684" target="_blank" class="glass-card p-5 sm:p-6 rounded-2xl border border-gray-800 hover:border-cyber transition space-y-3 reveal-on-scroll">
                         <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-cyber/10 text-cyber flex items-center justify-center text-lg sm:text-xl mx-auto"><i class="fa-brands fa-github"></i></div>
                         <h3 class="text-sm sm:text-base font-semibold text-white">GitHub</h3>
                         <p class="text-xs font-mono text-gray-400">sk4702684</p>
@@ -428,6 +441,23 @@
 
     <!-- SCRIPTS -->
     <script>
+        // Smooth Intersection Observer Scroll Reveal Logic
+        const observerOptions = {
+            root: null,
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => revealObserver.observe(el));
+
         // Custom Neon Cursor Follower Logic
         const ring = document.getElementById('cursor-ring');
         const dot = document.getElementById('cursor-dot');
