@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SATYAM | Security & System Labs</title>
+  <title>SATYAM | Cyber & System Engineering Labs</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- Cyberpunk & Mono Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500;700&family=Bangers&display=swap" rel="stylesheet">
   
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -24,7 +24,11 @@
     .font-mono-code {
       font-family: 'JetBrains Mono', 'Fira Code', monospace;
     }
-    /* Dynamic Grid Background */
+    .font-comic {
+      font-family: 'Bangers', cursive;
+      letter-spacing: 1px;
+    }
+    /* Dynamic Cyber Grid Background */
     .bg-cyber-grid {
       background-size: 40px 40px;
       background-image: 
@@ -35,10 +39,17 @@
     .text-glow-emerald {
       text-shadow: 0 0 12px rgba(16, 185, 129, 0.6), 0 0 25px rgba(16, 185, 129, 0.3);
     }
+    .text-glow-spider {
+      text-shadow: 0 0 12px rgba(239, 68, 68, 0.8), 0 0 25px rgba(239, 68, 68, 0.4);
+    }
     .box-glow-emerald {
       box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.15);
     }
-    /* Custom Sleek Scrollbar */
+    /* Comic Spider Glow Profile Ring */
+    .spider-avatar-glow {
+      box-shadow: 0 0 20px #EF4444, 0 0 40px #3B82F6;
+    }
+    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #06090E; }
     ::-webkit-scrollbar-thumb { background: #1F2937; border-radius: 4px; }
@@ -56,7 +67,7 @@
     <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
       <div class="flex items-center gap-3">
         <div class="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-400">
-          <i class="fa-solid fa-shield-halved"></i>
+          <i class="fa-solid fa-spider text-red-500"></i>
         </div>
         <span class="font-mono-code font-bold tracking-wider text-lg text-white">
           SATYAM<span class="text-emerald-400">_LABS</span>
@@ -65,41 +76,81 @@
 
       <div class="flex items-center gap-2 bg-slate-900/80 border border-emerald-500/20 px-3 py-1.5 rounded-full text-xs font-mono-code text-emerald-400">
         <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-        <span>SYSTEM: OPERATIONAL</span>
+        <span>SYSTEM: ONLINE</span>
       </div>
     </div>
   </nav>
 
-  <!-- 3. HERO SECTION -->
-  <header class="max-w-6xl mx-auto px-6 pt-20 pb-16">
-    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono-code text-emerald-400 mb-6">
-      <i class="fa-solid fa-terminal"></i>
-      <span>Security Researcher & Cyber Engineer</span>
+  <!-- 3. HERO SECTION (WITH PROFILE PIC & ACADEMICS) -->
+  <header class="max-w-6xl mx-auto px-6 pt-16 pb-12 flex flex-col md:flex-row items-center gap-10">
+    
+    <!-- Profile Pic Container (Spider-Verse Glow Effect) -->
+    <div class="relative group">
+      <div class="w-44 h-44 md:w-56 md:h-56 rounded-full p-1 spider-avatar-glow bg-gradient-to-tr from-red-600 via-purple-600 to-blue-600 transition-transform duration-300 group-hover:scale-105">
+        <img 
+          src="le77023329c0623606.html" 
+          alt="Satyam Profile" 
+          onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=Satyam'"
+          class="w-full h-full object-cover rounded-full bg-slate-900 border-2 border-slate-800"
+        />
+      </div>
+      <span class="absolute bottom-2 right-2 bg-slate-900 border border-red-500/40 text-red-400 text-xs font-mono-code px-2 py-0.5 rounded-full shadow-lg">
+        🕷️ Spidey-Sense
+      </span>
     </div>
 
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 text-white">
-      Building Next-Gen <br />
-      <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-500 text-glow-emerald">
-        Cybersecurity & OS Systems
-      </span>
-    </h1>
+    <!-- Intro Text -->
+    <div class="flex-1 text-center md:text-left">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono-code text-emerald-400 mb-4">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>B.Tech CSE Student @ Shivalik College of Engineering</span>
+      </div>
 
-    <p class="text-slate-400 max-w-2xl text-base md:text-lg leading-relaxed mb-8">
-      Specializing in automated penetration testing toolchains, Red Team command frameworks, and custom Linux environment customization.
-    </p>
+      <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-4 text-white">
+        Hey, I'm <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-emerald-400 to-cyan-400 text-glow-emerald">Satyam</span>
+      </h1>
 
-    <div class="flex flex-wrap gap-4">
-      <a href="#projects" class="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold font-mono-code text-sm transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)] flex items-center gap-2">
-        Explore Projects <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
-      </a>
+      <p class="text-slate-400 max-w-2xl text-base md:text-lg leading-relaxed mb-6">
+        Cybersecurity researcher, penetration testing developer, and custom Linux environment enthusiast. Building production-grade security automation and isolated operating systems.
+      </p>
+
+      <div class="flex flex-wrap justify-center md:justify-start gap-4">
+        <a href="#projects" class="px-6 py-3 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold font-mono-code text-sm transition-all shadow-[0_0_20px_rgba(16,185,129,0.4)] flex items-center gap-2">
+          View My Projects <i class="fa-solid fa-arrow-down text-xs"></i>
+        </a>
+        <a href="#skills" class="px-6 py-3 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-200 font-mono-code text-sm transition-all flex items-center gap-2">
+          Tech Stack <i class="fa-solid fa-code text-xs text-emerald-400"></i>
+        </a>
+      </div>
     </div>
   </header>
 
-  <!-- 4. PROJECTS GRID -->
-  <main id="projects" class="max-w-6xl mx-auto px-6 py-12">
+  <!-- 4. TECH SKILLS SECTION -->
+  <section id="skills" class="max-w-6xl mx-auto px-6 py-8 border-t border-slate-800/60">
+    <h2 class="text-xl font-bold font-mono-code text-white mb-6 flex items-center gap-2">
+      <i class="fa-solid fa-layer-group text-emerald-400"></i> Tech Arsenal & Capabilities
+    </h2>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-800 font-mono-code text-sm text-slate-300 flex items-center gap-3">
+        <i class="fa-brands fa-python text-emerald-400 text-lg"></i> Python & CLI Scripting
+      </div>
+      <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-800 font-mono-code text-sm text-slate-300 flex items-center gap-3">
+        <i class="fa-solid fa-shield-halved text-cyan-400 text-lg"></i> Pentesting & Recon
+      </div>
+      <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-800 font-mono-code text-sm text-slate-300 flex items-center gap-3">
+        <i class="fa-brands fa-linux text-purple-400 text-lg"></i> GNOME & Custom OS
+      </div>
+      <div class="p-4 rounded-lg bg-slate-900/40 border border-slate-800 font-mono-code text-sm text-slate-300 flex items-center gap-3">
+        <i class="fa-solid fa-database text-red-400 text-lg"></i> Supabase & Streamlit
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. PROJECTS GRID -->
+  <main id="projects" class="max-w-6xl mx-auto px-6 py-12 border-t border-slate-800/60">
     <div class="flex items-center justify-between mb-8">
       <h2 class="text-2xl font-bold font-mono-code text-white flex items-center gap-2">
-        <i class="fa-solid fa-microchip text-emerald-400"></i> Key Frameworks & Tools
+        <i class="fa-solid fa-microchip text-emerald-400"></i> Featured Engineering Projects
       </h2>
     </div>
 
@@ -109,19 +160,19 @@
       <div class="relative group p-6 rounded-xl bg-slate-900/40 backdrop-blur-md border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1 box-glow-emerald">
         <div class="flex justify-between items-center mb-4">
           <span class="text-xs font-mono-code text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded border border-emerald-500/30">
-            CYBERSECURITY / RED TEAM
+            PENTESTING FRAMEWORK
           </span>
           <span class="text-[10px] font-mono-code text-slate-400 flex items-center gap-1">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> ACTIVE DEV
           </span>
         </div>
-        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">Sentinel-X Framework</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Automated reconnaissance & penetration testing engine. Integrates Subfinder, Nuclei v3, ffuf, and TruffleHog into a real-time dashboard.</p>
+        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">Sentinel-X</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Automated multi-tool pentesting command center. Integrates Nmap, Dirsearch, Subfinder, Nuclei v3, and TruffleHog with Supabase real-time backend.</p>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#Python</span>
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#Streamlit</span>
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#Supabase</span>
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#Nuclei</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#Python</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#Streamlit</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#Supabase</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#Nmap</span>
         </div>
       </div>
 
@@ -129,50 +180,50 @@
       <div class="relative group p-6 rounded-xl bg-slate-900/40 backdrop-blur-md border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1 box-glow-emerald">
         <div class="flex justify-between items-center mb-4">
           <span class="text-xs font-mono-code text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded border border-emerald-500/30">
-            SECURE OS ENVIRONMENT
+            ISOLATED OPERATING SYSTEM
           </span>
           <span class="text-[10px] font-mono-code text-slate-400 flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> ARCHITECTURE
+            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> IN ARCHITECTURE
           </span>
         </div>
         <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">CordonVaultOS</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Isolated, highly custom operating system environment optimized for restricted app execution and real-time activity tracing.</p>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">An isolated custom OS infrastructure engineered to restrict unverified execution and enforce strict user app sandboxing and traceability.</p>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#Linux</span>
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#GNOME</span>
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#Custom ISO</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#Linux Architecture</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#GNOME</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#Security Kernel</span>
         </div>
       </div>
 
-      <!-- OSINT Radar Card -->
+      <!-- OSINT & Fuzzing Engine Card -->
       <div class="relative group p-6 rounded-xl bg-slate-900/40 backdrop-blur-md border border-slate-800 hover:border-emerald-500/40 transition-all duration-300 hover:-translate-y-1 box-glow-emerald">
         <div class="flex justify-between items-center mb-4">
           <span class="text-xs font-mono-code text-emerald-400 bg-emerald-950/60 px-3 py-1 rounded border border-emerald-500/30">
-            THREAT INTELLIGENCE
+            SECURITY UTILITIES
           </span>
           <span class="text-[10px] font-mono-code text-slate-400 flex items-center gap-1">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> STABLE
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> COMPLETED
           </span>
         </div>
-        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">Automated OSINT Radar</h3>
-        <p class="text-slate-400 text-sm leading-relaxed mb-4">Real-time threat intelligence crawler fetching exposed cloud keys, Git secrets, and Shodan asset telemetry automatically.</p>
+        <h3 class="text-xl font-bold text-white group-hover:text-emerald-400 transition-colors mb-2">Recon & Fuzzing Suite</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-4">Automated endpoint brute-forcing, directory discovery, and live parameter fuzzing tools customized for deep penetration testing.</p>
         <div class="flex flex-wrap gap-2">
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#Shodan API</span>
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#TruffleHog</span>
-          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2.5 py-1 rounded border border-slate-700/50">#Python</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#ffuf</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#dirsearch</span>
+          <span class="text-xs font-mono-code text-slate-300 bg-slate-800/80 px-2 py-0.5 rounded border border-slate-700/50">#Arjun</span>
         </div>
       </div>
 
     </div>
   </main>
 
-  <!-- 5. FOOTER -->
+  <!-- 6. FOOTER -->
   <footer class="border-t border-slate-800/80 mt-20 py-8 bg-slate-950/40">
     <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs font-mono-code text-slate-500">
-      <div>© 2026 SATYAM | CORDONVAULT CORE</div>
+      <div>© 2026 SATYAM | SHIVALIK COLLEGE OF ENGINEERING (CSE)</div>
       <div class="flex items-center gap-4">
-        <span>Supabase DB [Sync Ready]</span>
-        <span>Streamlit Core</span>
+        <span>Sentinel-X Framework</span>
+        <span>CordonVault Core</span>
       </div>
     </div>
   </footer>
