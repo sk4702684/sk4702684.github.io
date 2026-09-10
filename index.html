@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -23,61 +23,119 @@
             theme: {
                 extend: {
                     colors: {
-                        matteBlack: "#000000",
-                        zincSurface: "#09090b",
-                        zincElevated: "#121215",
-                        borderDefault: "#27272a",
-                        borderHover: "#52525b"
+                        // Dark Mode Palette
+                        dbBg: "#203850",
+                        dbSurface: "#182d42",
+                        dbIvory: "#e4e1d0",
+                        dbMuted: "#a9bccb",
+                        
+                        // Light Mode Palette
+                        awBg: "#f6e8d0",
+                        awSurface: "#ebdcc0",
+                        awAqua: "#6ba9a7",
+                        awDark: "#1a3038"
                     },
                     fontFamily: {
-                        sans: ["'Geist'", "sans-serif"],
-                        mono: ["'Geist Mono'", "monospace"]
+                        sans: ["'Plus Jakarta Sans'", "sans-serif"],
+                        mono: ["'JetBrains Mono'", "monospace"]
                     }
                 }
             }
         }
     </script>
 
-    <!-- Custom Monochrome Styles -->
+    <!-- Custom Theme Switching & Glassmorphism Styles -->
     <style>
         * {
             -webkit-tap-highlight-color: transparent;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
         }
 
         body {
-            background-color: #000000;
-            color: #fafafa;
             touch-action: manipulation;
         }
 
-        /* Vercel-style Microdot Grid */
-        .bg-vercel-grid {
-            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 0);
-            background-size: 24px 24px;
+        /* Dark Mode Theme */
+        body.theme-dark {
+            background-color: #203850;
+            color: #e4e1d0;
         }
 
-        /* Minimalist Bordered Card */
-        .monochrome-card {
-            background: rgba(9, 9, 11, 0.85);
-            border: 1px solid #27272a;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: border-color 0.2s ease, transform 0.2s ease;
+        body.theme-dark .glass-nav {
+            background: rgba(32, 56, 80, 0.85);
+            border-bottom: 1px solid rgba(228, 225, 208, 0.12);
         }
 
-        @media (hover: hover) {
-            .monochrome-card:hover {
-                border-color: #71717a;
-                transform: translateY(-2px);
-            }
+        body.theme-dark .glass-card {
+            background: rgba(24, 45, 66, 0.65);
+            border: 1px solid rgba(228, 225, 208, 0.14);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
         }
 
-        .monochrome-card:active {
-            transform: scale(0.985);
-            border-color: #a1a1aa;
+        body.theme-dark .glass-card:hover {
+            border-color: rgba(228, 225, 208, 0.4);
+            box-shadow: 0 12px 28px -8px rgba(10, 20, 30, 0.6);
         }
 
-        /* High-contrast Touch Buttons */
+        body.theme-dark .subtle-grid {
+            background-image: radial-gradient(rgba(228, 225, 208, 0.08) 1px, transparent 0);
+            background-size: 26px 26px;
+        }
+
+        /* Light Mode Theme */
+        body.theme-light {
+            background-color: #f6e8d0;
+            color: #1a3038;
+        }
+
+        body.theme-light .glass-nav {
+            background: rgba(246, 232, 208, 0.88);
+            border-bottom: 1px solid rgba(107, 169, 167, 0.28);
+        }
+
+        body.theme-light .glass-card {
+            background: rgba(235, 220, 192, 0.6);
+            border: 1px solid rgba(107, 169, 167, 0.35);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        body.theme-light .glass-card:hover {
+            border-color: #6ba9a7;
+            box-shadow: 0 12px 28px -8px rgba(107, 169, 167, 0.25);
+        }
+
+        body.theme-light .subtle-grid {
+            background-image: radial-gradient(rgba(107, 169, 167, 0.18) 1px, transparent 0);
+            background-size: 26px 26px;
+        }
+
+        /* Glassmorphic Dedicated Toggle Switch */
+        .glass-toggle-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.15), 0 4px 14px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        body.theme-light .glass-toggle-btn {
+            background: rgba(107, 169, 167, 0.18);
+            border: 1px solid rgba(107, 169, 167, 0.35);
+            box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.4), 0 4px 14px rgba(107, 169, 167, 0.15);
+        }
+
+        .glass-toggle-btn:active {
+            transform: scale(0.92);
+        }
+
+        .toggle-thumb {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
+        }
+
+        /* Touch-first enhancements */
         .touch-btn {
             min-height: 44px;
             display: inline-flex;
@@ -85,18 +143,12 @@
             justify-content: center;
             touch-action: manipulation;
             user-select: none;
-            transition: all 0.15s ease;
+            transition: transform 0.15s ease, opacity 0.15s ease;
         }
 
         .touch-btn:active {
             transform: scale(0.96);
         }
-
-        /* Minimalist Scrollbar */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #000000; }
-        ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 2px; }
-        ::-webkit-scrollbar-thumb:hover { background: #52525b; }
 
         .line-clamp-2 {
             display: -webkit-box;
@@ -105,6 +157,7 @@
             overflow: hidden;
         }
 
+        /* Mobile Drawer Transition */
         #mobile-menu {
             transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease;
         }
@@ -120,49 +173,58 @@
         }
     </style>
 </head>
-<body class="bg-matteBlack bg-vercel-grid font-sans selection:bg-white selection:text-black relative overflow-x-hidden min-h-screen">
+<body class="theme-dark subtle-grid font-sans relative overflow-x-hidden min-h-screen">
 
     <!-- Header / Navbar -->
-    <header class="fixed top-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-zinc-900">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
-            <a href="#" class="flex items-center space-x-2.5 text-sm font-semibold tracking-tight text-white touch-btn">
-                <span class="w-7 h-7 rounded-md bg-white text-black flex items-center justify-center font-mono text-xs font-bold">
+    <header class="fixed top-0 w-full z-50 glass-nav backdrop-blur-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-2.5 text-sm font-bold tracking-tight touch-btn">
+                <span class="w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold border" id="brand-badge">
                     SR
                 </span>
-                <span>Satyam Raj</span>
+                <span class="tracking-wide">Satyam Raj</span>
             </a>
 
             <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center space-x-7 text-xs font-mono text-zinc-400">
-                <a href="#about" class="hover:text-white transition-colors">/about</a>
-                <a href="#skills" class="hover:text-white transition-colors">/stack</a>
-                <a href="#projects" class="hover:text-white transition-colors">/projects</a>
-                <a href="#terminal-section" class="hover:text-white transition-colors">/terminal</a>
-                <a href="#contact" class="hover:text-white transition-colors">/contact</a>
+            <nav class="hidden md:flex items-center space-x-7 text-xs font-mono opacity-80">
+                <a href="#about" class="hover:opacity-100 transition-opacity">/about</a>
+                <a href="#skills" class="hover:opacity-100 transition-opacity">/stack</a>
+                <a href="#projects" class="hover:opacity-100 transition-opacity">/projects</a>
+                <a href="#terminal-section" class="hover:opacity-100 transition-opacity">/terminal</a>
+                <a href="#contact" class="hover:opacity-100 transition-opacity">/contact</a>
             </nav>
 
-            <div class="hidden md:flex items-center space-x-3">
-                <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="p-2 text-zinc-400 hover:text-white transition" aria-label="GitHub"><i class="fa-brands fa-github text-base"></i></a>
-                <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="p-2 text-zinc-400 hover:text-white transition" aria-label="LinkedIn"><i class="fa-brands fa-linkedin text-base"></i></a>
-                <a href="#contact" class="touch-btn px-3.5 py-1.5 bg-white text-black text-xs font-medium rounded-md hover:bg-zinc-200 transition">Get In Touch</a>
-            </div>
+            <div class="flex items-center space-x-3">
+                
+                <!-- Dedicated Glassmorphic Theme Switch Button -->
+                <button id="theme-switch-btn" aria-label="Toggle Color Theme" class="glass-toggle-btn relative w-16 h-8 rounded-full p-1 flex items-center cursor-pointer touch-btn min-h-0">
+                    <div id="toggle-indicator" class="toggle-thumb w-6 h-6 rounded-full flex items-center justify-center text-xs shadow-md transform translate-x-0">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </div>
+                </button>
 
-            <!-- Mobile Hamburger Button -->
-            <button id="mobile-menu-btn" aria-label="Toggle menu" class="md:hidden touch-btn p-2 text-zinc-300 rounded-md active:bg-zinc-900 focus:outline-none">
-                <i id="menu-icon" class="fa-solid fa-bars text-base"></i>
-            </button>
+                <div class="hidden sm:flex items-center space-x-2">
+                    <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="p-2 opacity-80 hover:opacity-100 transition" aria-label="GitHub"><i class="fa-brands fa-github text-base"></i></a>
+                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="p-2 opacity-80 hover:opacity-100 transition" aria-label="LinkedIn"><i class="fa-brands fa-linkedin text-base"></i></a>
+                </div>
+
+                <!-- Mobile Drawer Toggle -->
+                <button id="mobile-menu-btn" aria-label="Toggle navigation" class="md:hidden touch-btn p-2 rounded-lg focus:outline-none">
+                    <i id="menu-icon" class="fa-solid fa-bars text-base"></i>
+                </button>
+            </div>
         </div>
 
-        <!-- Mobile Navigation Drawer -->
-        <div id="mobile-menu" class="menu-closed absolute top-full left-0 w-full bg-black border-b border-zinc-800 px-6 py-6 flex flex-col space-y-4 text-xs font-mono">
-            <a href="#about" onclick="closeMenu()" class="text-zinc-300 py-2 border-b border-zinc-900 flex items-center justify-between">/about <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i></a>
-            <a href="#skills" onclick="closeMenu()" class="text-zinc-300 py-2 border-b border-zinc-900 flex items-center justify-between">/stack <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i></a>
-            <a href="#projects" onclick="closeMenu()" class="text-zinc-300 py-2 border-b border-zinc-900 flex items-center justify-between">/projects <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i></a>
-            <a href="#terminal-section" onclick="closeMenu()" class="text-zinc-300 py-2 border-b border-zinc-900 flex items-center justify-between">/terminal <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i></a>
-            <a href="#contact" onclick="closeMenu()" class="text-zinc-300 py-2 flex items-center justify-between">/contact <i class="fa-solid fa-chevron-right text-[10px] text-zinc-600"></i></a>
-            <div class="flex items-center space-x-3 pt-3 border-t border-zinc-900">
-                <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="touch-btn flex-1 py-2.5 rounded-md bg-zinc-900 text-zinc-300 text-xs font-mono border border-zinc-800"><i class="fa-brands fa-github mr-2"></i>GitHub</a>
-                <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="touch-btn flex-1 py-2.5 rounded-md bg-white text-black text-xs font-mono font-medium"><i class="fa-brands fa-linkedin mr-2"></i>LinkedIn</a>
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="menu-closed absolute top-full left-0 w-full glass-card border-b px-6 py-5 flex flex-col space-y-4 text-xs font-mono shadow-2xl">
+            <a href="#about" onclick="closeMenu()" class="py-2 border-b border-white/10 flex items-center justify-between">/about <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#skills" onclick="closeMenu()" class="py-2 border-b border-white/10 flex items-center justify-between">/stack <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#projects" onclick="closeMenu()" class="py-2 border-b border-white/10 flex items-center justify-between">/projects <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#terminal-section" onclick="closeMenu()" class="py-2 border-b border-white/10 flex items-center justify-between">/terminal <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#contact" onclick="closeMenu()" class="py-2 flex items-center justify-between">/contact <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <div class="flex items-center space-x-3 pt-3 border-t border-white/10">
+                <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="touch-btn flex-1 py-2.5 rounded-lg border text-xs font-mono"><i class="fa-brands fa-github mr-2"></i>GitHub</a>
+                <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="touch-btn flex-1 py-2.5 rounded-lg border text-xs font-mono"><i class="fa-brands fa-linkedin mr-2"></i>LinkedIn</a>
             </div>
         </div>
     </header>
@@ -175,65 +237,65 @@
                 
                 <div class="lg:col-span-7 space-y-6">
                     <div class="flex items-center gap-3.5 flex-wrap">
-                        <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border border-zinc-800 p-0.5">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-zinc-300 text-xs font-mono">
-                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-pulse"></span>
+                        <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border p-0.5" id="hero-avatar">
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono border" id="status-pill">
+                            <span class="w-2 h-2 rounded-full animate-ping" id="status-dot"></span>
                             <span>Cybersecurity & Software Developer</span>
                         </div>
                     </div>
 
                     <div class="space-y-2">
-                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-tight">
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight">
                             Satyam Raj
                         </h1>
-                        <p class="text-base sm:text-lg font-mono text-zinc-400 flex flex-wrap items-center gap-2">
+                        <p class="text-base sm:text-lg font-mono opacity-80 flex flex-wrap items-center gap-2">
                             <span>Building</span>
-                            <span id="typewriter" class="text-white border-b border-white font-medium"></span>
+                            <span id="typewriter" class="border-b-2 font-semibold"></span>
                         </p>
                     </div>
 
-                    <p class="text-zinc-400 text-sm sm:text-base leading-relaxed max-w-2xl font-normal">
-                        Engineering student at <span class="text-zinc-200 font-medium">Shivalik College of Engineering, Dehradun</span>[cite: 1]. Focused on full-stack Python development, Linux systems customization, and cybersecurity tooling[cite: 1]. Architecting automated pentesting frameworks and modular software solutions[cite: 1].
+                    <p class="text-sm sm:text-base leading-relaxed max-w-2xl font-normal opacity-90">
+                        Engineering student at <span class="font-semibold">Shivalik College of Engineering, Dehradun</span>[cite: 1]. Focused on full-stack Python development, Linux systems customization, and cybersecurity frameworks[cite: 1]. Architecting automated pentesting solutions like Sentinel-X and modular web software[cite: 1].
                     </p>
 
-                    <div class="flex flex-wrap gap-2 pt-1 text-xs font-mono text-zinc-300">
-                        <span class="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800"><i class="fa-brands fa-python text-white mr-1.5"></i>Python & Bash</span>
-                        <span class="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800"><i class="fa-solid fa-terminal text-white mr-1.5"></i>Nmap & Pentesting</span>
-                        <span class="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800"><i class="fa-brands fa-linux text-white mr-1.5"></i>Linux Customization</span>
-                        <span class="px-2.5 py-1 rounded-md bg-zinc-900 border border-zinc-800"><i class="fa-solid fa-server text-white mr-1.5"></i>Supabase & APIs</span>
+                    <div class="flex flex-wrap gap-2 pt-1 text-xs font-mono">
+                        <span class="px-2.5 py-1 rounded-md border" id="tech-badge-1"><i class="fa-brands fa-python mr-1.5"></i>Python & Bash</span>
+                        <span class="px-2.5 py-1 rounded-md border" id="tech-badge-2"><i class="fa-solid fa-terminal mr-1.5"></i>Nmap & Pentesting</span>
+                        <span class="px-2.5 py-1 rounded-md border" id="tech-badge-3"><i class="fa-brands fa-linux mr-1.5"></i>Linux Customization</span>
+                        <span class="px-2.5 py-1 rounded-md border" id="tech-badge-4"><i class="fa-solid fa-database mr-1.5"></i>Supabase & REST APIs</span>
                     </div>
 
                     <div class="flex flex-wrap items-center gap-3 pt-3">
-                        <a href="#projects" class="touch-btn w-full sm:w-auto px-5 py-2.5 bg-white text-black font-medium rounded-md hover:bg-zinc-200 transition gap-2 text-xs font-mono">
+                        <a href="#projects" class="touch-btn w-full sm:w-auto px-5 py-2.5 font-medium rounded-lg transition gap-2 text-xs font-mono shadow-md" id="primary-cta">
                             <i class="fa-solid fa-arrow-down text-xs"></i> View Projects
                         </a>
-                        <a href="mailto:sk4702684@gmail.com" class="touch-btn w-full sm:w-auto px-5 py-2.5 bg-zinc-900 border border-zinc-800 text-zinc-200 hover:border-zinc-700 rounded-md transition gap-2 text-xs font-mono">
+                        <a href="mailto:sk4702684@gmail.com" class="touch-btn w-full sm:w-auto px-5 py-2.5 border rounded-lg transition gap-2 text-xs font-mono" id="secondary-cta">
                             <i class="fa-solid fa-envelope text-xs"></i> Get In Touch
                         </a>
-                        <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="touch-btn w-full sm:w-auto px-4 py-2.5 bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-white rounded-md transition gap-2 text-xs font-mono">
-                            <i class="fa-brands fa-github"></i> github.com/sk4702684
+                        <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="touch-btn w-full sm:w-auto px-4 py-2.5 border rounded-lg transition gap-2 text-xs font-mono" id="ghost-cta">
+                            <i class="fa-brands fa-github"></i> sk4702684
                         </a>
                     </div>
                 </div>
 
                 <!-- Right JSON Profile Card -->
                 <div class="lg:col-span-5">
-                    <div class="monochrome-card rounded-lg p-5 border border-zinc-800 font-mono shadow-2xl">
-                        <div class="flex items-center justify-between pb-3 border-b border-zinc-900 text-xs text-zinc-500">
+                    <div class="glass-card rounded-xl p-5 font-mono shadow-2xl">
+                        <div class="flex items-center justify-between pb-3 border-b border-current border-opacity-10 text-xs opacity-75">
                             <div class="flex items-center space-x-1.5">
-                                <span class="w-2.5 h-2.5 rounded-full bg-zinc-800"></span>
-                                <span class="w-2.5 h-2.5 rounded-full bg-zinc-800"></span>
-                                <span class="w-2.5 h-2.5 rounded-full bg-zinc-800"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
                             </div>
-                            <span class="text-[11px]">profile.json</span>
+                            <span class="text-[11px]">manifest.json</span>
                         </div>
-                        <div class="pt-3.5 text-xs space-y-1.5 text-zinc-400 leading-relaxed overflow-x-auto">
-                            <p><span class="text-zinc-600">const</span> <span class="text-white">engineer</span> = {</p>
-                            <p class="pl-4"><span class="text-zinc-500">name</span>: <span class="text-zinc-200">"Satyam Raj"</span>,</p>
-                            <p class="pl-4"><span class="text-zinc-500">focus</span>: <span class="text-zinc-200">"Cybersecurity & Software"</span>,</p>
-                            <p class="pl-4"><span class="text-zinc-500">institute</span>: <span class="text-zinc-200">"Shivalik College of Engineering"</span>,</p>
-                            <p class="pl-4"><span class="text-zinc-500">flagship</span>: <span class="text-white font-medium">"Sentinel-X"</span>,</p>
-                            <p class="pl-4"><span class="text-zinc-500">status</span>: <span class="text-white">"Deploying Systems"</span></p>
+                        <div class="pt-3.5 text-xs space-y-1.5 leading-relaxed overflow-x-auto opacity-90">
+                            <p><span class="opacity-60">const</span> <span class="font-bold">developer</span> = {</p>
+                            <p class="pl-4"><span class="opacity-60">name</span>: <span>"Satyam Raj"</span>,</p>
+                            <p class="pl-4"><span class="opacity-60">focus</span>: <span>"Cybersecurity & Software"</span>,</p>
+                            <p class="pl-4"><span class="opacity-60">education</span>: <span>"Shivalik College of Eng."</span>,</p>
+                            <p class="pl-4"><span class="opacity-60">flagship</span>: <span class="font-semibold">"Sentinel-X"</span>,</p>
+                            <p class="pl-4"><span class="opacity-60">mode</span>: <span id="json-theme-text" class="font-bold">"Dark Blue Mode"</span></p>
                             <p>};</p>
                         </div>
                     </div>
@@ -243,54 +305,54 @@
         </section>
 
         <!-- SKILLS SECTION -->
-        <section id="skills" class="py-16 px-4 sm:px-6 border-t border-zinc-900">
+        <section id="skills" class="py-16 px-4 sm:px-6 border-t border-current border-opacity-10">
             <div class="max-w-6xl mx-auto space-y-10">
                 <div class="space-y-1">
-                    <span class="text-zinc-500 font-mono text-xs uppercase tracking-wider">// Technical Capabilities</span>
-                    <h2 class="text-2xl font-bold tracking-tight text-white">Stack & Competencies</h2>
+                    <span class="font-mono text-xs uppercase tracking-wider opacity-60">// Technical Capabilities</span>
+                    <h2 class="text-2xl font-bold tracking-tight">Stack & Competencies</h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    <div class="monochrome-card p-6 rounded-lg space-y-4">
-                        <div class="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 flex items-center justify-center text-white text-xs font-mono">
+                    <div class="glass-card p-6 rounded-xl space-y-4">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-mono border" id="skill-icon-1">
                             <i class="fa-solid fa-code"></i>
                         </div>
-                        <h3 class="text-base font-semibold text-white">Core Languages</h3>
-                        <p class="text-xs text-zinc-400 leading-relaxed">High-level software scripting and low-level system development.</p>
-                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-zinc-300 pt-1">
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Python 3</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Bash Scripting</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">C / C++</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">TypeScript</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">TailwindCSS</span>
+                        <h3 class="text-base font-semibold">Languages & Scripting</h3>
+                        <p class="text-xs opacity-75 leading-relaxed">System-level execution, automation utilities, and backend programming.</p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] pt-1">
+                            <span class="px-2 py-0.5 rounded border">Python 3</span>
+                            <span class="px-2 py-0.5 rounded border">Bash</span>
+                            <span class="px-2 py-0.5 rounded border">C / C++</span>
+                            <span class="px-2 py-0.5 rounded border">TypeScript</span>
+                            <span class="px-2 py-0.5 rounded border">TailwindCSS</span>
                         </div>
                     </div>
 
-                    <div class="monochrome-card p-6 rounded-lg space-y-4">
-                        <div class="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 flex items-center justify-center text-white text-xs font-mono">
+                    <div class="glass-card p-6 rounded-xl space-y-4">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-mono border" id="skill-icon-2">
                             <i class="fa-solid fa-shield-halved"></i>
                         </div>
-                        <h3 class="text-base font-semibold text-white">Security & Auditing</h3>
-                        <p class="text-xs text-zinc-400 leading-relaxed">Automated vulnerability discovery, port inspection, and mapping workflows[cite: 1].</p>
-                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-zinc-300 pt-1">
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Nmap</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Dirsearch</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Network Mapping</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Vulnerability Assessment</span>
+                        <h3 class="text-base font-semibold">Security & Pentesting</h3>
+                        <p class="text-xs opacity-75 leading-relaxed">Automated vulnerability discovery, port auditing, and network reconnaissance[cite: 1].</p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] pt-1">
+                            <span class="px-2 py-0.5 rounded border">Nmap</span>
+                            <span class="px-2 py-0.5 rounded border">Dirsearch</span>
+                            <span class="px-2 py-0.5 rounded border">Recon Workflows</span>
+                            <span class="px-2 py-0.5 rounded border">Vulnerability Assessment</span>
                         </div>
                     </div>
 
-                    <div class="monochrome-card p-6 rounded-lg space-y-4">
-                        <div class="w-8 h-8 rounded bg-zinc-900 border border-zinc-800 flex items-center justify-center text-white text-xs font-mono">
+                    <div class="glass-card p-6 rounded-xl space-y-4">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-mono border" id="skill-icon-3">
                             <i class="fa-solid fa-layer-group"></i>
                         </div>
-                        <h3 class="text-base font-semibold text-white">Architecture & Tools</h3>
-                        <p class="text-xs text-zinc-400 leading-relaxed">Custom frontend dashboards, managed cloud DBs, and Linux environments[cite: 1].</p>
-                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] text-zinc-300 pt-1">
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Streamlit</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Supabase</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Linux & GNOME</span>
-                            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Git & GitHub</span>
+                        <h3 class="text-base font-semibold">Architecture & Tools</h3>
+                        <p class="text-xs opacity-75 leading-relaxed">Interactive GUI creation, managed databases, and Linux customizations[cite: 1].</p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] pt-1">
+                            <span class="px-2 py-0.5 rounded border">Streamlit</span>
+                            <span class="px-2 py-0.5 rounded border">Supabase</span>
+                            <span class="px-2 py-0.5 rounded border">Linux & GNOME</span>
+                            <span class="px-2 py-0.5 rounded border">Git & GitHub</span>
                         </div>
                     </div>
                 </div>
@@ -298,77 +360,77 @@
         </section>
 
         <!-- PROJECTS & REPOSITORIES SECTION -->
-        <section id="projects" class="py-16 px-4 sm:px-6 border-t border-zinc-900">
+        <section id="projects" class="py-16 px-4 sm:px-6 border-t border-current border-opacity-10">
             <div class="max-w-6xl mx-auto space-y-10">
                 <div class="space-y-1">
-                    <span class="text-zinc-500 font-mono text-xs uppercase tracking-wider">// Engineering Solutions</span>
-                    <h2 class="text-2xl font-bold tracking-tight text-white">Featured Projects</h2>
+                    <span class="font-mono text-xs uppercase tracking-wider opacity-60">// Engineering Deployments</span>
+                    <h2 class="text-2xl font-bold tracking-tight">Featured Projects</h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     
                     <!-- 1. Sentinel-X -->
-                    <div class="monochrome-card rounded-lg p-6 sm:p-7 border border-zinc-800 flex flex-col justify-between space-y-5">
+                    <div class="glass-card rounded-xl p-6 sm:p-7 border flex flex-col justify-between space-y-5">
                         <div class="space-y-3.5">
                             <div class="flex items-center justify-between">
-                                <span class="px-2.5 py-0.5 bg-zinc-900 text-zinc-300 text-[11px] font-mono rounded border border-zinc-800">
-                                    Flagship • Pen-Testing Platform[cite: 1]
+                                <span class="px-2.5 py-0.5 text-[11px] font-mono rounded border font-semibold">
+                                    Flagship • Pentesting Platform[cite: 1]
                                 </span>
-                                <span class="text-xs font-mono text-zinc-500">MIT License</span>
+                                <span class="text-xs font-mono opacity-70">MIT License</span>
                             </div>
 
-                            <h3 class="text-xl font-bold text-white">Sentinel-X</h3>
+                            <h3 class="text-xl font-bold">Sentinel-X</h3>
                             
-                            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
+                            <p class="text-xs sm:text-sm leading-relaxed opacity-85">
                                 Automated multi-tool penetration testing framework featuring an interactive GUI built with Streamlit[cite: 1]. Integrated Supabase for secure backend database management, user authentication, and activity logging[cite: 1]. Streamlines network mapping and vulnerability assessment workflows into a unified dashboard[cite: 1].
                             </p>
 
-                            <div class="flex flex-wrap gap-1.5 font-mono text-zinc-400 text-xs">
-                                <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Python</span>
-                                <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Streamlit</span>
-                                <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Supabase</span>
-                                <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Nmap</span>
+                            <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                                <span class="px-2 py-0.5 rounded border">Python</span>
+                                <span class="px-2 py-0.5 rounded border">Streamlit</span>
+                                <span class="px-2 py-0.5 rounded border">Supabase</span>
+                                <span class="px-2 py-0.5 rounded border">Nmap</span>
                             </div>
                         </div>
 
-                        <div class="pt-4 border-t border-zinc-900 flex items-center justify-between">
-                            <a href="https://github.com/sk4702684/Sentinel-X" target="_blank" rel="noopener noreferrer" class="touch-btn px-4 py-2 bg-white text-black text-xs font-mono font-medium rounded hover:bg-zinc-200 transition gap-2">
+                        <div class="pt-4 border-t border-current border-opacity-10 flex items-center justify-between">
+                            <a href="https://github.com/sk4702684/Sentinel-X" target="_blank" rel="noopener noreferrer" class="touch-btn px-4 py-2 text-xs font-mono font-semibold rounded-lg transition gap-2 shadow-sm" id="repo-cta-1">
                                 <i class="fa-brands fa-github"></i> Repository
                             </a>
-                            <span class="text-zinc-400 font-mono text-xs flex items-center gap-1.5">
-                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Public
+                            <span class="font-mono text-xs flex items-center gap-1.5 opacity-80">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400"></span> Public
                             </span>
                         </div>
                     </div>
 
                     <!-- 2. rento-marketplace -->
-                    <div class="monochrome-card rounded-lg p-6 sm:p-7 border border-zinc-800 flex flex-col justify-between space-y-5">
+                    <div class="glass-card rounded-xl p-6 sm:p-7 border flex flex-col justify-between space-y-5">
                         <div class="space-y-3.5">
                             <div class="flex items-center justify-between">
-                                <span class="px-2.5 py-0.5 bg-zinc-900 text-zinc-300 text-[11px] font-mono rounded border border-zinc-800">
+                                <span class="px-2.5 py-0.5 text-[11px] font-mono rounded border font-semibold">
                                     Full-Stack • Marketplace
                                 </span>
-                                <span class="text-[11px] font-mono text-zinc-500 border border-zinc-800 px-2 py-0.5 rounded bg-zinc-900/50"><i class="fa-solid fa-lock mr-1 text-[10px]"></i>Private</span>
+                                <span class="text-[11px] font-mono opacity-80 border px-2 py-0.5 rounded"><i class="fa-solid fa-lock mr-1 text-[10px]"></i>Private</span>
                             </div>
 
-                            <h3 class="text-xl font-bold text-white">rento-marketplace</h3>
+                            <h3 class="text-xl font-bold">rento-marketplace</h3>
                             
-                            <p class="text-zinc-400 text-xs sm:text-sm leading-relaxed">
-                                A hyperlocal real-estate and to-let marketplace tailored for Patna and Bihar. Enables brokers and landlords to publish listings while allowing prospective tenants and buyers to discover properties with paid detail unlocks and direct contact gateways.
+                            <p class="text-xs sm:text-sm leading-relaxed opacity-85">
+                                A hyperlocal real-estate and to-let marketplace tailored for Patna and Bihar. Enables brokers and landlords to publish listings while allowing prospective tenants and buyers to discover properties with paid detail unlocks and contact gateways.
                             </p>
 
-                            <div class="flex flex-wrap gap-1.5 font-mono text-zinc-400 text-xs">
-                                <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">TypeScript</span>
-                                <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Web Marketplace</span>
-                                <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Manus Built</span>
+                            <div class="flex flex-wrap gap-1.5 font-mono text-xs">
+                                <span class="px-2 py-0.5 rounded border">TypeScript</span>
+                                <span class="px-2 py-0.5 rounded border">Web Marketplace</span>
+                                <span class="px-2 py-0.5 rounded border">Manus Built</span>
                             </div>
                         </div>
 
-                        <div class="pt-4 border-t border-zinc-900 flex items-center justify-between">
-                            <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="touch-btn px-4 py-2 bg-zinc-900 border border-zinc-800 text-zinc-300 hover:border-zinc-700 text-xs font-mono rounded transition gap-2">
-                                <i class="fa-brands fa-github"></i> Profile
+                        <div class="pt-4 border-t border-current border-opacity-10 flex items-center justify-between">
+                            <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="touch-btn px-4 py-2 border text-xs font-mono rounded-lg transition gap-2" id="repo-cta-2">
+                                <i class="fa-brands fa-github"></i> GitHub Profile
                             </a>
-                            <span class="text-zinc-500 font-mono text-xs">Production Project</span>
+                            <span class="font-mono text-xs opacity-70">Production Project</span>
                         </div>
                     </div>
 
@@ -376,33 +438,33 @@
 
                 <!-- ALL GITHUB REPOSITORIES LIVE SYNC -->
                 <div class="space-y-6 pt-4">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-t border-zinc-900 pt-8">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-t border-current border-opacity-10 pt-8">
                         <div>
-                            <h3 class="text-lg font-bold text-white flex items-center gap-2">
-                                <i class="fa-brands fa-github text-zinc-400"></i> All Repositories
+                            <h3 class="text-lg font-bold flex items-center gap-2">
+                                <i class="fa-brands fa-github"></i> All Repositories
                             </h3>
-                            <p class="text-xs text-zinc-500 mt-0.5">Live fetched from GitHub API (@sk4702684)</p>
+                            <p class="text-xs opacity-60 mt-0.5">Live fetched from GitHub API (@sk4702684)</p>
                         </div>
                         <div>
-                            <span id="repo-count" class="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 text-xs font-mono">Syncing...</span>
+                            <span id="repo-count" class="px-2.5 py-1 rounded border text-xs font-mono">Syncing...</span>
                         </div>
                     </div>
 
                     <!-- Search / Filter -->
                     <div class="flex flex-col sm:flex-row gap-3">
                         <div class="relative flex-1">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-zinc-600 text-xs"></i>
-                            <input id="repo-search" type="text" placeholder="Search repository by name..." class="w-full pl-9 pr-4 py-2.5 bg-zinc-950 border border-zinc-800 rounded text-xs sm:text-sm text-zinc-200 focus:outline-none focus:border-zinc-500 font-mono">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 opacity-50 text-xs"></i>
+                            <input id="repo-search" type="text" placeholder="Search repository by name..." class="w-full pl-9 pr-4 py-2.5 rounded-lg border text-xs sm:text-sm focus:outline-none font-mono bg-transparent">
                         </div>
-                        <select id="repo-lang-filter" class="touch-btn bg-zinc-950 border border-zinc-800 rounded px-4 py-2.5 text-xs text-zinc-300 focus:outline-none focus:border-zinc-500 font-mono">
+                        <select id="repo-lang-filter" class="touch-btn rounded-lg border px-4 py-2.5 text-xs focus:outline-none font-mono bg-transparent">
                             <option value="ALL">All Languages</option>
                         </select>
                     </div>
 
                     <!-- Dynamic Repos Container -->
                     <div id="github-repos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div class="monochrome-card p-6 rounded text-center py-10 col-span-full font-mono text-xs text-zinc-500">
-                            <i class="fa-solid fa-circle-notch fa-spin text-white text-base mb-2"></i>
+                        <div class="glass-card p-6 rounded-xl text-center py-10 col-span-full font-mono text-xs opacity-60">
+                            <i class="fa-solid fa-circle-notch fa-spin text-base mb-2"></i>
                             <p>Loading repositories...</p>
                         </div>
                     </div>
@@ -411,68 +473,68 @@
             </div>
         </section>
 
-        <!-- TERMINAL INTERACTIVE SECTION -->
-        <section id="terminal-section" class="py-16 px-4 sm:px-6 border-t border-zinc-900">
+        <!-- TERMINAL SECTION -->
+        <section id="terminal-section" class="py-16 px-4 sm:px-6 border-t border-current border-opacity-10">
             <div class="max-w-3xl mx-auto space-y-6">
                 <div class="space-y-1 text-center">
-                    <span class="text-zinc-500 font-mono text-xs uppercase tracking-wider">// Command Line</span>
-                    <h2 class="text-2xl font-bold text-white">Terminal</h2>
-                    <p class="text-zinc-400 text-xs">Type <code class="text-white bg-zinc-900 px-1.5 py-0.5 rounded border border-zinc-800 font-mono">help</code> to run commands</p>
+                    <span class="font-mono text-xs uppercase tracking-wider opacity-60">// Command Shell</span>
+                    <h2 class="text-2xl font-bold">Terminal CLI</h2>
+                    <p class="text-xs opacity-75">Type <code class="px-1.5 py-0.5 rounded border font-mono">help</code> to run commands</p>
                 </div>
 
-                <div class="monochrome-card rounded-lg border border-zinc-800 overflow-hidden font-mono text-xs shadow-2xl">
-                    <div class="bg-zinc-950 px-4 py-2.5 flex items-center justify-between text-zinc-500 border-b border-zinc-900">
+                <div class="glass-card rounded-xl border overflow-hidden font-mono text-xs shadow-2xl">
+                    <div class="px-4 py-2.5 flex items-center justify-between border-b border-current border-opacity-10 opacity-70">
                         <div class="flex items-center space-x-1.5">
-                            <span class="w-2.5 h-2.5 rounded-full bg-zinc-800"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-zinc-800"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-zinc-800"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                            <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
                         </div>
-                        <span class="text-[11px] text-zinc-600">satyam@terminal:~</span>
+                        <span class="text-[11px]">satyam@box:~</span>
                     </div>
-                    <div id="terminal-output" class="p-4 h-56 overflow-y-auto space-y-2 text-zinc-300">
-                        <p class="text-white font-medium">Satyam Raj System Shell [v2.6-monochrome]</p>
-                        <p class="text-zinc-600">Enter 'help' to see executable commands.</p>
+                    <div id="terminal-output" class="p-4 h-56 overflow-y-auto space-y-2 opacity-90">
+                        <p class="font-semibold">Satyam Raj System Shell [v3.0-duo-palette]</p>
+                        <p class="opacity-60">Enter 'help' to see executable commands.</p>
                     </div>
-                    <div class="p-3 bg-zinc-950 border-t border-zinc-900 flex items-center space-x-2">
-                        <span class="text-white font-medium text-xs">satyam@box:~$</span>
-                        <input id="terminal-input" type="text" class="flex-1 bg-transparent text-white focus:outline-none font-mono text-xs py-1" placeholder="enter command..." autocomplete="off">
+                    <div class="p-3 border-t border-current border-opacity-10 flex items-center space-x-2">
+                        <span class="font-semibold text-xs opacity-80">satyam@box:~$</span>
+                        <input id="terminal-input" type="text" class="flex-1 bg-transparent focus:outline-none font-mono text-xs py-1" placeholder="enter command..." autocomplete="off">
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- CONTACT SECTION -->
-        <section id="contact" class="py-16 px-4 sm:px-6 border-t border-zinc-900">
+        <section id="contact" class="py-16 px-4 sm:px-6 border-t border-current border-opacity-10">
             <div class="max-w-4xl mx-auto text-center space-y-8">
                 <div class="space-y-2">
-                    <span class="text-zinc-500 font-mono text-xs uppercase tracking-wider">// Dispatch</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Let's Connect</h2>
-                    <p class="text-zinc-400 text-xs sm:text-sm max-w-md mx-auto">Open for software engineering roles, security research, and system projects.</p>
+                    <span class="font-mono text-xs uppercase tracking-wider opacity-60">// Communication</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Let's Connect</h2>
+                    <p class="text-xs sm:text-sm max-w-md mx-auto opacity-75">Open for technical engineering roles, pentesting research, and system projects.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-4">
-                    <a href="mailto:sk4702684@gmail.com" class="monochrome-card p-5 rounded border border-zinc-800 space-y-2.5 block text-center touch-btn flex-col h-auto">
-                        <div class="w-8 h-8 rounded bg-zinc-900 text-white flex items-center justify-center text-sm mx-auto border border-zinc-800"><i class="fa-solid fa-envelope"></i></div>
-                        <h3 class="text-xs font-semibold text-white">Email</h3>
-                        <p class="text-[11px] font-mono text-zinc-400 truncate w-full">sk4702684@gmail.com</p>
+                    <a href="mailto:sk4702684@gmail.com" class="glass-card p-5 rounded-xl border space-y-2.5 block text-center touch-btn flex-col h-auto">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm mx-auto border"><i class="fa-solid fa-envelope"></i></div>
+                        <h3 class="text-xs font-semibold">Email</h3>
+                        <p class="text-[11px] font-mono opacity-70 truncate w-full">sk4702684@gmail.com</p>
                     </a>
 
-                    <a href="tel:+917260865157" class="monochrome-card p-5 rounded border border-zinc-800 space-y-2.5 block text-center touch-btn flex-col h-auto">
-                        <div class="w-8 h-8 rounded bg-zinc-900 text-white flex items-center justify-center text-sm mx-auto border border-zinc-800"><i class="fa-solid fa-phone"></i></div>
-                        <h3 class="text-xs font-semibold text-white">Phone</h3>
-                        <p class="text-[11px] font-mono text-zinc-400">+91 7260865157[cite: 1]</p>
+                    <a href="tel:+917260865157" class="glass-card p-5 rounded-xl border space-y-2.5 block text-center touch-btn flex-col h-auto">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm mx-auto border"><i class="fa-solid fa-phone"></i></div>
+                        <h3 class="text-xs font-semibold">Phone</h3>
+                        <p class="text-[11px] font-mono opacity-70">+91 7260865157[cite: 1]</p>
                     </a>
 
-                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="monochrome-card p-5 rounded border border-zinc-800 space-y-2.5 block text-center touch-btn flex-col h-auto">
-                        <div class="w-8 h-8 rounded bg-zinc-900 text-white flex items-center justify-center text-sm mx-auto border border-zinc-800"><i class="fa-brands fa-linkedin"></i></div>
-                        <h3 class="text-xs font-semibold text-white">LinkedIn</h3>
-                        <p class="text-[11px] font-mono text-zinc-400">Satyam Raj</p>
+                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-xl border space-y-2.5 block text-center touch-btn flex-col h-auto">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm mx-auto border"><i class="fa-brands fa-linkedin"></i></div>
+                        <h3 class="text-xs font-semibold">LinkedIn</h3>
+                        <p class="text-[11px] font-mono opacity-70">Satyam Raj</p>
                     </a>
 
-                    <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="monochrome-card p-5 rounded border border-zinc-800 space-y-2.5 block text-center touch-btn flex-col h-auto">
-                        <div class="w-8 h-8 rounded bg-zinc-900 text-white flex items-center justify-center text-sm mx-auto border border-zinc-800"><i class="fa-brands fa-github"></i></div>
-                        <h3 class="text-xs font-semibold text-white">GitHub</h3>
-                        <p class="text-[11px] font-mono text-zinc-400">sk4702684</p>
+                    <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="glass-card p-5 rounded-xl border space-y-2.5 block text-center touch-btn flex-col h-auto">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm mx-auto border"><i class="fa-brands fa-github"></i></div>
+                        <h3 class="text-xs font-semibold">GitHub</h3>
+                        <p class="text-[11px] font-mono opacity-70">sk4702684</p>
                     </a>
                 </div>
             </div>
@@ -481,12 +543,87 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-6 border-t border-zinc-900 bg-black text-center font-mono text-xs text-zinc-600">
+    <footer class="py-6 border-t border-current border-opacity-10 text-center font-mono text-xs opacity-60">
         © 2026 Satyam Raj • Dehradun, Uttarakhand[cite: 1]
     </footer>
 
     <!-- SCRIPTS -->
     <script>
+        // THEME CONTROLLER (Dark Blue #203850 & Ivory vs Aqua Blue #6ba9a7 & Albescent White)
+        const themeBtn = document.getElementById('theme-switch-btn');
+        const toggleIndicator = document.getElementById('toggle-indicator');
+        const themeIcon = document.getElementById('theme-icon');
+        const jsonThemeText = document.getElementById('json-theme-text');
+        
+        // Element specific styling targets for high-contrast tuning
+        const brandBadge = document.getElementById('brand-badge');
+        const primaryCta = document.getElementById('primary-cta');
+        const repoCta1 = document.getElementById('repo-cta-1');
+        const statusDot = document.getElementById('status-dot');
+
+        let currentTheme = localStorage.getItem('portfolio-palette') || 'dark';
+
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                document.body.classList.remove('theme-dark');
+                document.body.classList.add('theme-light');
+                
+                // Toggle animation slide right
+                toggleIndicator.style.transform = "translateX(32px)";
+                toggleIndicator.style.backgroundColor = "#6ba9a7";
+                toggleIndicator.style.color = "#ffffff";
+                themeIcon.className = "fa-solid fa-sun text-yellow-100";
+
+                // Accents for Light Mode (#6ba9a7 / #f6e8d0)
+                brandBadge.style.borderColor = "#6ba9a7";
+                brandBadge.style.backgroundColor = "rgba(107, 169, 167, 0.15)";
+                brandBadge.style.color = "#1a3038";
+
+                primaryCta.style.backgroundColor = "#6ba9a7";
+                primaryCta.style.color = "#ffffff";
+
+                repoCta1.style.backgroundColor = "#6ba9a7";
+                repoCta1.style.color = "#ffffff";
+
+                statusDot.style.backgroundColor = "#6ba9a7";
+                jsonThemeText.textContent = '"Light Aqua Mode"';
+                jsonThemeText.style.color = "#6ba9a7";
+            } else {
+                document.body.classList.remove('theme-light');
+                document.body.classList.add('theme-dark');
+
+                // Toggle animation slide left
+                toggleIndicator.style.transform = "translateX(0px)";
+                toggleIndicator.style.backgroundColor = "#e4e1d0";
+                toggleIndicator.style.color = "#203850";
+                themeIcon.className = "fa-solid fa-moon";
+
+                // Accents for Dark Mode (#203850 / #e4e1d0)
+                brandBadge.style.borderColor = "rgba(228, 225, 208, 0.3)";
+                brandBadge.style.backgroundColor = "rgba(228, 225, 208, 0.1)";
+                brandBadge.style.color = "#e4e1d0";
+
+                primaryCta.style.backgroundColor = "#e4e1d0";
+                primaryCta.style.color = "#203850";
+
+                repoCta1.style.backgroundColor = "#e4e1d0";
+                repoCta1.style.color = "#203850";
+
+                statusDot.style.backgroundColor = "#e4e1d0";
+                jsonThemeText.textContent = '"Dark Blue Mode"';
+                jsonThemeText.style.color = "#e4e1d0";
+            }
+            localStorage.setItem('portfolio-palette', theme);
+        }
+
+        themeBtn.addEventListener('click', () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            applyTheme(currentTheme);
+        });
+
+        // Initialize theme on start
+        applyTheme(currentTheme);
+
         // Mobile Drawer Controller
         const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -513,10 +650,10 @@
 
         // Typewriter Effect
         const words = [
-            "Sentinel-X Pen-Testing Platform",
-            "Full-Stack Python & Streamlit Apps",
+            "Sentinel-X Pen-Testing Framework",
+            "Python Systems & Streamlit Apps",
             "Linux Architecture & Custom Tools",
-            "Clean Systems & Software Suites"
+            "Secure Enterprise Infrastructure"
         ];
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         const targetEl = document.getElementById("typewriter");
@@ -582,6 +719,7 @@
                     const opt = document.createElement('option');
                     opt.value = lang;
                     opt.textContent = lang;
+                    opt.className = "bg-slate-800 text-white";
                     langFilter.appendChild(opt);
                 });
 
@@ -590,9 +728,9 @@
             } catch (error) {
                 console.error("Error loading repositories:", error);
                 gridContainer.innerHTML = `
-                    <div class="monochrome-card p-6 rounded border border-zinc-800 text-center py-8 col-span-full">
-                        <p class="text-zinc-500 font-mono text-xs">Could not sync repositories right now.</p>
-                        <a href="https://github.com/sk4702684" target="_blank" class="touch-btn mt-3 px-4 py-2 bg-white text-black text-xs font-mono font-medium rounded">View GitHub Profile</a>
+                    <div class="glass-card p-6 rounded-xl border text-center py-8 col-span-full">
+                        <p class="font-mono text-xs opacity-70">Could not sync repositories right now.</p>
+                        <a href="https://github.com/sk4702684" target="_blank" class="touch-btn mt-3 px-4 py-2 border rounded-lg text-xs font-mono">View GitHub Profile</a>
                     </div>
                 `;
                 countBadge.innerText = 'Offline';
@@ -605,7 +743,7 @@
 
             if (reposToDisplay.length === 0) {
                 gridContainer.innerHTML = `
-                    <div class="monochrome-card p-8 rounded border border-zinc-900 text-center col-span-full font-mono text-xs text-zinc-600">
+                    <div class="glass-card p-8 rounded-xl border text-center col-span-full font-mono text-xs opacity-60">
                         No repositories matching current query.
                     </div>
                 `;
@@ -614,7 +752,7 @@
 
             reposToDisplay.forEach(repo => {
                 const card = document.createElement('div');
-                card.className = 'monochrome-card p-5 rounded border border-zinc-800/80 flex flex-col justify-between space-y-4';
+                card.className = 'glass-card p-5 rounded-xl border flex flex-col justify-between space-y-4';
 
                 const updatedDate = new Date(repo.updated_at).toLocaleDateString('en-US', {
                     month: 'short',
@@ -624,29 +762,29 @@
                 card.innerHTML = `
                     <div class="space-y-2.5">
                         <div class="flex items-center justify-between">
-                            <i class="fa-regular fa-folder text-zinc-400 text-sm"></i>
-                            <div class="flex items-center space-x-2.5 text-xs text-zinc-500 font-mono">
-                                <span class="flex items-center gap-1"><i class="fa-regular fa-star text-zinc-400"></i> ${repo.stargazers_count}</span>
-                                <span class="flex items-center gap-1"><i class="fa-solid fa-code-fork text-zinc-500"></i> ${repo.forks_count}</span>
+                            <i class="fa-regular fa-folder text-sm opacity-80"></i>
+                            <div class="flex items-center space-x-2.5 text-xs font-mono opacity-70">
+                                <span class="flex items-center gap-1"><i class="fa-regular fa-star text-amber-400"></i> ${repo.stargazers_count}</span>
+                                <span class="flex items-center gap-1"><i class="fa-solid fa-code-fork"></i> ${repo.forks_count}</span>
                             </div>
                         </div>
 
                         <div>
-                            <h4 class="text-sm font-semibold text-white hover:underline transition truncate" title="${repo.name}">
+                            <h4 class="text-sm font-semibold hover:underline transition truncate" title="${repo.name}">
                                 <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
                             </h4>
-                            <p class="text-xs text-zinc-400 mt-1 leading-relaxed line-clamp-2">
+                            <p class="text-xs opacity-75 mt-1 leading-relaxed line-clamp-2">
                                 ${repo.description ? repo.description : "No description provided."}
                             </p>
                         </div>
                     </div>
 
-                    <div class="pt-3 border-t border-zinc-900 flex items-center justify-between text-[11px] font-mono">
-                        <span class="flex items-center gap-1.5 text-zinc-400">
-                            <span class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    <div class="pt-3 border-t border-current border-opacity-10 flex items-center justify-between text-[11px] font-mono">
+                        <span class="flex items-center gap-1.5 opacity-85">
+                            <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
                             ${repo.language ? repo.language : "Code"}
                         </span>
-                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="text-zinc-300 hover:text-white underline flex items-center gap-1 touch-btn min-h-0 py-1">
+                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="opacity-80 hover:opacity-100 underline flex items-center gap-1 touch-btn min-h-0 py-1">
                             Source <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
                         </a>
                     </div>
@@ -685,10 +823,11 @@
         const termInput = document.getElementById('terminal-input');
         const termOutput = document.getElementById('terminal-output');
         const commands = {
-            'help': 'Commands:\n • whoami    - Profile summary\n • skills    - Technical capabilities\n • projects  - Featured repositories\n • contact   - Direct reach-outs\n • clear     - Clear terminal buffer',
+            'help': 'Commands:\n • whoami    - Profile summary\n • skills    - Technical capabilities\n • projects  - Featured repositories\n • theme     - Switch light/dark mode\n • contact   - Direct reach-outs\n • clear     - Clear terminal buffer',
             'whoami': 'Satyam Raj | Cybersecurity & Software Developer\nShivalik College of Engineering, Dehradun.',
             'skills': 'Languages: Python, Bash, C/C++, TypeScript\nTools: Streamlit, Supabase, Nmap, Linux GNOME',
-            'projects': '1. Sentinel-X: Pen-Testing Framework (Python + Streamlit + Supabase)\n2. rento-marketplace: Hyperlocal Real-Estate Engine (TypeScript)',
+            'projects': '1. Sentinel-X: Pen-Testing Framework (Python + Streamlit + Supabase)\n2. rento-marketplace: Hyperlocal Real-Estate Platform (TypeScript)',
+            'theme': 'Toggled theme via CLI.',
             'contact': 'Phone: +91 7260865157[cite: 1]\nEmail: sk4702684@gmail.com\nLocation: Dehradun, Uttarakhand[cite: 1]'
         };
 
@@ -697,21 +836,28 @@
                 const input = termInput.value.trim().toLowerCase();
                 termInput.value = '';
                 const cmdLine = document.createElement('p');
-                cmdLine.className = 'text-white font-medium';
-                cmdLine.innerHTML = `<span class="text-zinc-500">satyam@box:~$</span> ${input}`;
+                cmdLine.className = 'font-semibold';
+                cmdLine.innerHTML = `<span class="opacity-60">satyam@box:~$</span> ${input}`;
                 termOutput.appendChild(cmdLine);
 
                 if (input === 'clear') { 
                     termOutput.innerHTML = ''; 
+                } else if (input === 'theme') {
+                    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    applyTheme(currentTheme);
+                    const resLine = document.createElement('p');
+                    resLine.className = 'opacity-85';
+                    resLine.textContent = `Theme switched to: ${currentTheme.toUpperCase()}`;
+                    termOutput.appendChild(resLine);
                 } else if (commands[input]) {
                     const resLine = document.createElement('p');
-                    resLine.className = 'text-zinc-400 whitespace-pre-line';
+                    resLine.className = 'opacity-85 whitespace-pre-line';
                     resLine.textContent = commands[input];
                     termOutput.appendChild(resLine);
                 } else if (input !== '') {
                     const errLine = document.createElement('p');
                     errLine.className = 'text-red-400';
-                    errLine.textContent = `command not found: ${input}. Enter 'help' for commands.`;
+                    errLine.textContent = `command not found: ${input}. Type 'help' for commands.`;
                     termOutput.appendChild(errLine);
                 }
                 termOutput.scrollTop = termOutput.scrollHeight;
