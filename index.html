@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Satyam Raj | Cybersecurity & Data-Driven Systems Developer</title>
+    <title>Satyam Raj | Cybersecurity & Software Developer</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -16,7 +16,7 @@
     <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Three.js CDN for 3D Background -->
+    <!-- Three.js CDN for 3D Animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
@@ -39,13 +39,13 @@
             height: 100vh;
             pointer-events: none;
             z-index: 1;
-            opacity: 0.45;
+            opacity: 0.55;
         }
 
         .reveal-on-scroll {
             opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(28px);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
         .reveal-on-scroll.active {
@@ -63,8 +63,8 @@
             border-bottom: 1px solid rgba(228, 225, 208, 0.15);
         }
         body.theme-dark .pro-card {
-            background: rgba(23, 41, 59, 0.78);
-            border: 1px solid rgba(228, 225, 208, 0.16);
+            background: rgba(23, 41, 59, 0.75);
+            border: 1px solid rgba(228, 225, 208, 0.15);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
             color: #e4e1d0;
@@ -79,7 +79,7 @@
         body.theme-dark .btn-primary {
             background-color: #e4e1d0 !important;
             color: #203850 !important;
-            box-shadow: 0 4px 18px rgba(228, 225, 208, 0.25);
+            box-shadow: 0 4px 15px rgba(228, 225, 208, 0.2);
         }
         body.theme-dark .btn-secondary {
             border: 1px solid rgba(228, 225, 208, 0.35);
@@ -95,9 +95,9 @@
             border: 1px solid rgba(228, 225, 208, 0.2);
             color: #e4e1d0;
         }
-        body.theme-dark .field-input::placeholder { color: rgba(228, 225, 208, 0.4); }
-        body.theme-dark .chart-fill { fill: url(#darkGradient); }
-        body.theme-dark .chart-stroke { stroke: #e4e1d0; }
+        body.theme-dark .field-input::placeholder {
+            color: rgba(228, 225, 208, 0.4);
+        }
 
         /* 2. LIGHT MODE: Albescent White (#f6e8d0) & Aqua Blue (#6ba9a7) */
         body.theme-light {
@@ -109,7 +109,7 @@
             border-bottom: 1px solid rgba(107, 169, 167, 0.4);
         }
         body.theme-light .pro-card {
-            background: rgba(238, 224, 201, 0.88);
+            background: rgba(238, 224, 201, 0.85);
             border: 1px solid rgba(107, 169, 167, 0.45);
             backdrop-filter: blur(14px);
             -webkit-backdrop-filter: blur(14px);
@@ -125,7 +125,7 @@
         body.theme-light .btn-primary {
             background-color: #559492 !important;
             color: #ffffff !important;
-            box-shadow: 0 4px 18px rgba(85, 148, 146, 0.35);
+            box-shadow: 0 4px 15px rgba(85, 148, 146, 0.35);
         }
         body.theme-light .btn-secondary {
             border: 1px solid #559492;
@@ -141,11 +141,11 @@
             border: 1px solid rgba(107, 169, 167, 0.5);
             color: #1a3038;
         }
-        body.theme-light .field-input::placeholder { color: #5d757d; }
-        body.theme-light .chart-fill { fill: url(#lightGradient); }
-        body.theme-light .chart-stroke { stroke: #559492; }
+        body.theme-light .field-input::placeholder {
+            color: #5d757d;
+        }
 
-        /* Dedicated Frosted Glass Toggle Switch */
+        /* Glass Toggle Switch */
         .glass-switch {
             width: 64px;
             height: 32px;
@@ -193,7 +193,6 @@
             color: #ffffff;
         }
 
-        /* 3D Global Perspective */
         .perspective-container { perspective: 1200px; }
 
         .pro-card {
@@ -208,9 +207,12 @@
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-4px); }
         }
-        .floating-badge { animation: subtleFloat 3.5s ease-in-out infinite; }
+        .floating-badge {
+            animation: subtleFloat 3.5s ease-in-out infinite;
+        }
         .floating-badge:nth-child(2) { animation-delay: 0.8s; }
         .floating-badge:nth-child(3) { animation-delay: 1.6s; }
+        .floating-badge:nth-child(4) { animation-delay: 2.4s; }
 
         .touch-btn {
             min-height: 44px;
@@ -257,7 +259,7 @@
 
     <!-- Header / Navbar -->
     <header class="fixed top-0 w-full z-50 nav-bg backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center relative z-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex justify-between items-center relative z-20">
             <a href="#" class="flex items-center space-x-2.5 text-sm font-bold tracking-tight touch-btn">
                 <span class="w-8 h-8 rounded-lg flex items-center justify-center font-mono text-xs font-bold border border-current shadow-sm">
                     SR
@@ -266,13 +268,12 @@
             </a>
 
             <!-- Desktop Nav -->
-            <nav class="hidden md:flex items-center space-x-7 text-xs font-mono opacity-85">
-                <a href="#about" class="hover:opacity-100 transition-opacity touch-pill py-1">/platform</a>
-                <a href="#analytics" class="hover:opacity-100 transition-opacity touch-pill py-1">/telemetry</a>
-                <a href="#skills" class="hover:opacity-100 transition-opacity touch-pill py-1">/bento-stack</a>
-                <a href="#projects" class="hover:opacity-100 transition-opacity touch-pill py-1">/solutions</a>
-                <a href="#terminal-section" class="hover:opacity-100 transition-opacity touch-pill py-1">/cli</a>
-                <a href="#contact" class="hover:opacity-100 transition-opacity touch-pill py-1">/connect</a>
+            <nav class="hidden md:flex items-center space-x-7 text-xs font-mono opacity-90">
+                <a href="#about" class="hover:opacity-100 transition-opacity touch-pill py-1">/about</a>
+                <a href="#skills" class="hover:opacity-100 transition-opacity touch-pill py-1">/stack</a>
+                <a href="#projects" class="hover:opacity-100 transition-opacity touch-pill py-1">/projects</a>
+                <a href="#terminal-section" class="hover:opacity-100 transition-opacity touch-pill py-1">/terminal</a>
+                <a href="#contact" class="hover:opacity-100 transition-opacity touch-pill py-1">/contact</a>
             </nav>
 
             <div class="flex items-center space-x-3">
@@ -295,12 +296,11 @@
 
         <!-- Mobile Drawer -->
         <div id="mobile-menu" class="menu-closed transition-all duration-300 absolute top-full left-0 w-full pro-card px-6 py-5 flex flex-col space-y-4 text-xs font-mono shadow-2xl">
-            <a href="#about" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/platform <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-            <a href="#analytics" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/telemetry <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-            <a href="#skills" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/bento-stack <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-            <a href="#projects" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/solutions <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-            <a href="#terminal-section" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/cli <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
-            <a href="#contact" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/connect <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#about" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/about <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#skills" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/stack <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#projects" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/projects <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#terminal-section" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/terminal <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
+            <a href="#contact" onclick="closeMenu()" class="py-2 opacity-90 flex items-center justify-between touch-pill">/contact <i class="fa-solid fa-chevron-right text-[10px]"></i></a>
             <div class="flex items-center space-x-3 pt-3 border-t border-current border-opacity-15">
                 <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="touch-btn flex-1 py-2.5 rounded-lg border border-current text-xs font-mono"><i class="fa-brands fa-github mr-2"></i>GitHub</a>
                 <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="touch-btn flex-1 py-2.5 rounded-lg border border-current text-xs font-mono"><i class="fa-brands fa-linkedin mr-2"></i>LinkedIn</a>
@@ -310,209 +310,132 @@
 
     <main class="relative z-10 pt-20">
 
-        <!-- Hero Section: Data-Driven Analytics Platform Look -->
-        <section id="about" class="min-h-[92vh] flex flex-col items-center justify-center py-16 px-4 sm:px-6 relative text-center">
-            
-            <div class="max-w-4xl mx-auto space-y-6 z-10">
-                <!-- Top Telemetry Pill -->
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono border border-current touch-pill floating-badge shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span class="tracking-wide">Telemetry Online • Node v2.6.4 Connected</span>
+        <!-- Hero Section with Central 3D Cyber Core -->
+        <section id="about" class="min-h-[85vh] flex items-center justify-center py-12 px-4 sm:px-6 relative overflow-hidden">
+            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center w-full relative z-10">
+                
+                <div class="lg:col-span-7 space-y-6">
+                    <div class="flex items-center gap-3.5 flex-wrap">
+                        <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-16 h-16 sm:w-20 sm:h-20 rounded-full object-cover border-2 border-current p-0.5 touch-pill shadow-lg">
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full text-xs font-mono border border-current touch-pill floating-badge shadow-sm">
+                            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+                            <span>Cybersecurity & Software Developer</span>
+                        </div>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight leading-tight">
+                            Satyam Raj
+                        </h1>
+                        <p class="text-base sm:text-lg font-mono opacity-85 flex flex-wrap items-center gap-2">
+                            <span>Building</span>
+                            <span id="typewriter" class="border-b-2 font-semibold"></span>
+                        </p>
+                    </div>
+
+                    <p class="text-sm sm:text-base leading-relaxed max-w-2xl font-normal opacity-90">
+                        Engineering student at <span class="font-semibold">Shivalik College of Engineering, Dehradun</span>[cite: 1]. Focused on full-stack Python development, Linux systems customization, and cybersecurity frameworks[cite: 1]. Architecting automated pentesting solutions like Sentinel-X and modular software[cite: 1].
+                    </p>
+
+                    <div class="flex flex-wrap gap-2 pt-1 text-xs font-mono">
+                        <span class="px-2.5 py-1 rounded-md border border-current opacity-90 touch-pill floating-badge"><i class="fa-brands fa-python mr-1.5"></i>Python & Bash</span>
+                        <span class="px-2.5 py-1 rounded-md border border-current opacity-90 touch-pill floating-badge"><i class="fa-solid fa-terminal mr-1.5"></i>Nmap & Pentesting</span>
+                        <span class="px-2.5 py-1 rounded-md border border-current opacity-90 touch-pill floating-badge"><i class="fa-brands fa-linux mr-1.5"></i>Linux Customization</span>
+                        <span class="px-2.5 py-1 rounded-md border border-current opacity-90 touch-pill floating-badge"><i class="fa-solid fa-database mr-1.5"></i>Supabase & REST APIs</span>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3 pt-3">
+                        <a href="#projects" class="btn-primary touch-btn w-full sm:w-auto px-5 py-2.5 font-semibold rounded-lg transition gap-2 text-xs font-mono shadow-md">
+                            <i class="fa-solid fa-arrow-down text-xs"></i> View Projects
+                        </a>
+                        <a href="mailto:sk4702684@gmail.com" class="btn-secondary touch-btn w-full sm:w-auto px-5 py-2.5 rounded-lg transition gap-2 text-xs font-mono">
+                            <i class="fa-solid fa-envelope text-xs"></i> Get In Touch
+                        </a>
+                        <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="btn-secondary touch-btn w-full sm:w-auto px-4 py-2.5 rounded-lg transition gap-2 text-xs font-mono">
+                            <i class="fa-brands fa-github"></i> sk4702684
+                        </a>
+                    </div>
                 </div>
 
-                <!-- Main High-Impact Headline -->
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight">
-                    Transforming Data Into Intelligent Security Action.
-                </h1>
+                <!-- Right 3D Interactive Cyber Core & Profile Card -->
+                <div class="lg:col-span-5 relative perspective-container">
+                    <div id="threejs-hero-container" class="absolute -top-12 -left-8 sm:-left-12 w-[340px] sm:w-[420px] h-[340px] sm:h-[420px] pointer-events-none opacity-55 sm:opacity-80 -z-0"></div>
 
-                <!-- Subtitle -->
-                <p class="text-sm sm:text-lg max-w-2xl mx-auto leading-relaxed opacity-85 font-normal">
-                    Engineering student at <span class="font-semibold">Shivalik College of Engineering, Dehradun</span>[cite: 1]. Specializing in real-time cybersecurity telemetry, automated recon frameworks like <span class="font-semibold underline">Sentinel-X</span>, and full-stack software architectures[cite: 1].
-                </p>
-
-                <!-- Action CTAs -->
-                <div class="flex flex-wrap items-center justify-center gap-3 pt-3">
-                    <a href="#analytics" class="btn-primary touch-btn px-6 py-3 font-semibold rounded-xl transition gap-2 text-xs font-mono shadow-lg">
-                        <i class="fa-solid fa-chart-line text-xs"></i> View Live Telemetry
-                    </a>
-                    <a href="#projects" class="btn-secondary touch-btn px-6 py-3 rounded-xl transition gap-2 text-xs font-mono">
-                        <i class="fa-solid fa-shield-halved text-xs"></i> Explore Sentinel-X
-                    </a>
-                    <a href="mailto:sk4702684@gmail.com" class="btn-secondary touch-btn px-5 py-3 rounded-xl transition gap-2 text-xs font-mono">
-                        <i class="fa-solid fa-envelope text-xs"></i> Contact
-                    </a>
+                    <div class="pro-card rounded-xl p-5 font-mono shadow-2xl relative z-10 backdrop-blur-md">
+                        <div class="flex items-center justify-between pb-3 opacity-70 text-xs border-b border-current border-opacity-15">
+                            <div class="flex items-center space-x-1.5">
+                                <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
+                                <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
+                            </div>
+                            <span class="text-[11px]">3d_manifest.json</span>
+                        </div>
+                        <div class="pt-3.5 text-xs space-y-1.5 leading-relaxed overflow-x-auto opacity-95">
+                            <p><span class="opacity-60">const</span> <span class="font-bold">developer</span> = {</p>
+                            <p class="pl-4"><span class="opacity-60">name</span>: <span>"Satyam Raj"</span>,</p>
+                            <p class="pl-4"><span class="opacity-60">focus</span>: <span>"Cybersecurity & Software"</span>,</p>
+                            <p class="pl-4"><span class="opacity-60">college</span>: <span>"Shivalik College of Eng."</span>,</p>
+                            <p class="pl-4"><span class="opacity-60">core_mesh</span>: <span class="font-semibold">"Interactive Three.js Core"</span>,</p>
+                            <p class="pl-4"><span class="opacity-60">active_mode</span>: <span id="json-theme-text" class="font-bold">"Dark Blue (#203850)"</span></p>
+                            <p>};</p>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Central Analytics Dashboard Mockup (Dribbble Signature Widget) -->
-            <div id="analytics" class="w-full max-w-5xl mx-auto mt-12 perspective-container z-10">
-                <div class="pro-card rounded-2xl p-5 sm:p-7 shadow-2xl border border-current border-opacity-20 text-left space-y-6">
-                    
-                    <!-- Dashboard Top Bar -->
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-current border-opacity-15">
-                        <div class="flex items-center space-x-3">
-                            <div class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></div>
-                            <div>
-                                <h3 class="text-sm font-bold tracking-tight">Sentinel-X Telemetry Engine</h3>
-                                <p class="text-[11px] font-mono opacity-70">Active Network Stream • Session #4702684</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center space-x-2 font-mono text-[11px]">
-                            <span class="px-2.5 py-1 rounded-md border border-current opacity-80"><i class="fa-solid fa-clock mr-1"></i>Latency: 18ms</span>
-                            <span class="px-2.5 py-1 rounded-md border border-current opacity-80" id="json-theme-text">Mode: Dark Blue</span>
-                        </div>
-                    </div>
-
-                    <!-- Metric KPI Cards Row -->
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                        <div class="p-4 rounded-xl border border-current border-opacity-15 space-y-1.5 pro-card">
-                            <div class="flex items-center justify-between opacity-75 text-xs font-mono">
-                                <span>Total Endpoints Scanned</span>
-                                <i class="fa-solid fa-network-wired"></i>
-                            </div>
-                            <div class="text-2xl font-bold font-mono">18,420+</div>
-                            <p class="text-[11px] font-mono text-emerald-500 flex items-center gap-1">
-                                <i class="fa-solid fa-arrow-trend-up text-[9px]"></i> +24.6% this week
-                            </p>
-                        </div>
-
-                        <div class="p-4 rounded-xl border border-current border-opacity-15 space-y-1.5 pro-card">
-                            <div class="flex items-center justify-between opacity-75 text-xs font-mono">
-                                <span>Recon Accuracy</span>
-                                <i class="fa-solid fa-bullseye"></i>
-                            </div>
-                            <div class="text-2xl font-bold font-mono">99.8%</div>
-                            <p class="text-[11px] font-mono opacity-75">Nmap & Subdomain Engine</p>
-                        </div>
-
-                        <div class="p-4 rounded-xl border border-current border-opacity-15 space-y-1.5 pro-card">
-                            <div class="flex items-center justify-between opacity-75 text-xs font-mono">
-                                <span>System Health & Guard</span>
-                                <i class="fa-solid fa-shield-check"></i>
-                            </div>
-                            <div class="text-2xl font-bold font-mono text-emerald-400">Guarded</div>
-                            <p class="text-[11px] font-mono opacity-75">0 Threat Breaches Logged</p>
-                        </div>
-                    </div>
-
-                    <!-- Dynamic SVG Area Chart (Data-Driven Analytics Stream) -->
-                    <div class="p-4 sm:p-5 rounded-xl border border-current border-opacity-15 space-y-3">
-                        <div class="flex items-center justify-between text-xs font-mono opacity-80">
-                            <span class="flex items-center gap-2 font-bold"><i class="fa-solid fa-wave-square"></i> Real-time Network Traffic & Vulnerability Probing</span>
-                            <span>Live Graph (Last 7 Cycles)</span>
-                        </div>
-                        
-                        <div class="w-full h-44 sm:h-52">
-                            <svg class="w-full h-full" viewBox="0 0 600 200" preserveAspectRatio="none">
-                                <defs>
-                                    <linearGradient id="darkGradient" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#e4e1d0" stop-opacity="0.35" />
-                                        <stop offset="100%" stop-color="#203850" stop-opacity="0.0" />
-                                    </linearGradient>
-                                    <linearGradient id="lightGradient" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#559492" stop-opacity="0.4" />
-                                        <stop offset="100%" stop-color="#f6e8d0" stop-opacity="0.0" />
-                                    </linearGradient>
-                                </defs>
-                                <path class="chart-fill" d="M 0 160 Q 90 40, 180 110 T 360 70 T 540 120 L 600 50 L 600 200 L 0 200 Z" />
-                                <path class="chart-stroke" fill="none" stroke-width="3" stroke-linecap="round" d="M 0 160 Q 90 40, 180 110 T 360 70 T 540 120 L 600 50" />
-                                <circle cx="180" cy="110" r="4" class="chart-stroke" fill="currentColor" />
-                                <circle cx="360" cy="70" r="4" class="chart-stroke" fill="currentColor" />
-                                <circle cx="600" cy="50" r="4" class="chart-stroke" fill="currentColor" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <!-- Live Log Activity Stream -->
-                    <div class="p-3.5 rounded-xl border border-current border-opacity-15 font-mono text-xs space-y-1.5 opacity-85">
-                        <p class="text-[11px] font-bold opacity-60 uppercase">// Real-Time Log Dispatch</p>
-                        <p><span class="text-emerald-500 font-bold">[OK 200]</span> SSL/TLS handshake & port audits parsed for Sentinel-X framework.</p>
-                        <p><span class="text-sky-400 font-bold">[INFO]</span> Cloud Supabase session synchronized with 12 active listener threads.</p>
-                        <p><span class="text-amber-400 font-bold">[TELEMETRY]</span> Subdomain enumeration completed • Target responses logged.</p>
-                    </div>
-
-                </div>
             </div>
         </section>
 
-        <!-- BENTO GRID SECTION: Skills & Systems Architecture -->
+        <!-- SKILLS SECTION -->
         <section id="skills" class="py-16 px-4 sm:px-6">
             <div class="max-w-6xl mx-auto space-y-10">
                 <div class="space-y-1">
-                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Bento Architecture</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Full-Stack Intelligence Stack</h2>
+                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Technical Capabilities</span>
+                    <h2 class="text-2xl font-bold tracking-tight">Stack & Competencies</h2>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-12 gap-5 perspective-container">
-                    
-                    <!-- Bento Box 1: Core Languages -->
-                    <div class="md:col-span-8 pro-card p-6 sm:p-7 rounded-2xl space-y-4 flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-mono opacity-70">// 01. High & Low-Level Languages</span>
-                                <i class="fa-solid fa-code text-base opacity-75"></i>
-                            </div>
-                            <h3 class="text-xl font-bold">Languages & Core Scripting</h3>
-                            <p class="text-xs sm:text-sm opacity-80 leading-relaxed">
-                                Writing high-performance multithreaded tools in Python, low-level architecture in C/C++, and building dynamic frontends with TypeScript and TailwindCSS.
-                            </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5 perspective-container">
+                    <div class="pro-card p-6 rounded-xl space-y-4">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-mono border border-current touch-pill shadow-sm">
+                            <i class="fa-solid fa-code"></i>
                         </div>
-                        <div class="flex flex-wrap gap-2 font-mono text-xs pt-3 border-t border-current border-opacity-15">
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">Python 3</span>
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">Bash</span>
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">C / C++</span>
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">TypeScript</span>
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">TailwindCSS</span>
+                        <h3 class="text-base font-semibold">Languages & Scripting</h3>
+                        <p class="text-xs opacity-80 leading-relaxed">System-level execution, automation utilities, and backend programming.</p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] pt-1">
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Python 3</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Bash</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">C / C++</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">TypeScript</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">TailwindCSS</span>
                         </div>
                     </div>
 
-                    <!-- Bento Box 2: Automated Recon Gauge -->
-                    <div class="md:col-span-4 pro-card p-6 rounded-2xl space-y-4 flex flex-col justify-between text-center sm:text-left">
-                        <div class="space-y-2">
-                            <span class="text-xs font-mono opacity-70">// 02. Network Recon</span>
-                            <h3 class="text-lg font-bold">Reconnaissance</h3>
-                            <p class="text-xs opacity-80">Nmap API, Masscan, Dirsearch, and vulnerability probing workflows[cite: 1].</p>
+                    <div class="pro-card p-6 rounded-xl space-y-4">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-mono border border-current touch-pill shadow-sm">
+                            <i class="fa-solid fa-shield-halved"></i>
                         </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 font-mono text-xs space-y-1">
-                            <div class="flex justify-between"><span>Audit Engine</span><span class="text-emerald-500">Active</span></div>
-                            <div class="flex justify-between"><span>Sockets</span><span>Low-Latency</span></div>
-                        </div>
-                    </div>
-
-                    <!-- Bento Box 3: Cloud & Backend Telemetry -->
-                    <div class="md:col-span-4 pro-card p-6 rounded-2xl space-y-4 flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <span class="text-xs font-mono opacity-70">// 03. Cloud Database</span>
-                            <h3 class="text-lg font-bold">Cloud & Dashboards</h3>
-                            <p class="text-xs opacity-80">Real-time authentication, PostgreSQL sync, and interactive analytics interfaces via Streamlit[cite: 1].</p>
-                        </div>
-                        <div class="flex flex-wrap gap-1.5 font-mono text-xs">
-                            <span class="px-2.5 py-0.5 rounded border border-current touch-pill">Supabase</span>
-                            <span class="px-2.5 py-0.5 rounded border border-current touch-pill">Streamlit</span>
-                            <span class="px-2.5 py-0.5 rounded border border-current touch-pill">REST APIs</span>
+                        <h3 class="text-base font-semibold">Security & Pentesting</h3>
+                        <p class="text-xs opacity-80 leading-relaxed">Automated vulnerability discovery, port auditing, and network reconnaissance[cite: 1].</p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] pt-1">
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Nmap</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Dirsearch</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Recon Workflows</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Vulnerability Scans</span>
                         </div>
                     </div>
 
-                    <!-- Bento Box 4: Linux Systems & Customization -->
-                    <div class="md:col-span-8 pro-card p-6 sm:p-7 rounded-2xl space-y-4 flex flex-col justify-between">
-                        <div class="space-y-2">
-                            <div class="flex items-center justify-between">
-                                <span class="text-xs font-mono opacity-70">// 04. Kernel & OS Customization</span>
-                                <i class="fa-brands fa-linux text-base opacity-75"></i>
-                            </div>
-                            <h3 class="text-xl font-bold">Linux Architecture & System Hardening</h3>
-                            <p class="text-xs sm:text-sm opacity-80 leading-relaxed">
-                                Deep customization of Linux desktop environments (GNOME), Bash CLI tooling, kernel process monitoring, and defensive configurations[cite: 1].
-                            </p>
+                    <div class="pro-card p-6 rounded-xl space-y-4">
+                        <div class="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-mono border border-current touch-pill shadow-sm">
+                            <i class="fa-solid fa-layer-group"></i>
                         </div>
-                        <div class="flex flex-wrap gap-2 font-mono text-xs pt-3 border-t border-current border-opacity-15">
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">Linux Arch</span>
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">GNOME Tweaks</span>
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">Bash Daemons</span>
-                            <span class="px-3 py-1 rounded-lg border border-current touch-pill">Git Workflows</span>
+                        <h3 class="text-base font-semibold">Architecture & Tools</h3>
+                        <p class="text-xs opacity-80 leading-relaxed">Interactive GUI creation, managed databases, and Linux customizations[cite: 1].</p>
+                        <div class="flex flex-wrap gap-1.5 font-mono text-[11px] pt-1">
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Streamlit</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Supabase</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Linux & GNOME</span>
+                            <span class="px-2 py-0.5 rounded border border-current touch-pill">Git & GitHub</span>
                         </div>
                     </div>
-
                 </div>
             </div>
         </section>
@@ -521,74 +444,74 @@
         <section id="projects" class="py-16 px-4 sm:px-6">
             <div class="max-w-6xl mx-auto space-y-10">
                 <div class="space-y-1">
-                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Production Solutions</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Featured Engineering Deliverables</h2>
+                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Engineering Deployments</span>
+                    <h2 class="text-2xl font-bold tracking-tight">Featured Projects</h2>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 perspective-container">
                     
                     <!-- 1. Sentinel-X -->
-                    <div class="pro-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-5">
+                    <div class="pro-card rounded-xl p-6 sm:p-7 flex flex-col justify-between space-y-5">
                         <div class="space-y-3.5">
                             <div class="flex items-center justify-between">
-                                <span class="px-3 py-1 text-xs font-mono rounded-lg border border-current font-semibold">
-                                    Flagship • Automated Pentesting Platform[cite: 1]
+                                <span class="px-2.5 py-0.5 text-[11px] font-mono rounded border border-current font-semibold">
+                                    Flagship • Pentesting Platform[cite: 1]
                                 </span>
-                                <span class="text-xs font-mono opacity-70"><i class="fa-solid fa-scale-balanced mr-1"></i>MIT</span>
+                                <span class="text-xs font-mono opacity-70">MIT License</span>
                             </div>
 
-                            <h3 class="text-2xl font-bold">Sentinel-X</h3>
+                            <h3 class="text-xl font-bold">Sentinel-X</h3>
                             
                             <p class="text-xs sm:text-sm leading-relaxed opacity-90">
                                 Automated multi-tool penetration testing framework featuring an interactive GUI built with Streamlit[cite: 1]. Integrated Supabase for secure backend database management, user authentication, and activity logging[cite: 1]. Streamlines network mapping and vulnerability assessment workflows into a unified dashboard[cite: 1].
                             </p>
 
                             <div class="flex flex-wrap gap-1.5 font-mono text-xs">
-                                <span class="px-2.5 py-1 rounded border border-current">Python 3</span>
-                                <span class="px-2.5 py-1 rounded border border-current">Streamlit GUI</span>
-                                <span class="px-2.5 py-1 rounded border border-current">Supabase DB</span>
-                                <span class="px-2.5 py-1 rounded border border-current">Nmap API</span>
+                                <span class="px-2 py-0.5 rounded border border-current">Python</span>
+                                <span class="px-2 py-0.5 rounded border border-current">Streamlit</span>
+                                <span class="px-2 py-0.5 rounded border border-current">Supabase</span>
+                                <span class="px-2 py-0.5 rounded border border-current">Nmap</span>
                             </div>
                         </div>
 
                         <div class="pt-4 border-t border-current border-opacity-15 flex items-center justify-between">
-                            <a href="https://github.com/sk4702684/Sentinel-X" target="_blank" rel="noopener noreferrer" class="btn-primary touch-btn px-5 py-2.5 text-xs font-mono font-semibold rounded-xl transition gap-2 shadow-sm">
-                                <i class="fa-brands fa-github"></i> View Repository
+                            <a href="https://github.com/sk4702684/Sentinel-X" target="_blank" rel="noopener noreferrer" class="btn-primary touch-btn px-4 py-2 text-xs font-mono font-semibold rounded-lg transition gap-2 shadow-sm">
+                                <i class="fa-brands fa-github"></i> Repository
                             </a>
-                            <span class="font-mono text-xs flex items-center gap-1.5 opacity-85">
-                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Public Solution
+                            <span class="font-mono text-xs flex items-center gap-1.5 opacity-80">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> Public
                             </span>
                         </div>
                     </div>
 
                     <!-- 2. rento-marketplace -->
-                    <div class="pro-card rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-5">
+                    <div class="pro-card rounded-xl p-6 sm:p-7 flex flex-col justify-between space-y-5">
                         <div class="space-y-3.5">
                             <div class="flex items-center justify-between">
-                                <span class="px-3 py-1 text-xs font-mono rounded-lg border border-current font-semibold">
-                                    Full-Stack • Marketplace Engine
+                                <span class="px-2.5 py-0.5 text-[11px] font-mono rounded border border-current font-semibold">
+                                    Full-Stack • Marketplace
                                 </span>
-                                <span class="text-xs font-mono opacity-80 border border-current px-2 py-0.5 rounded"><i class="fa-solid fa-lock mr-1 text-[10px]"></i>Private</span>
+                                <span class="text-[11px] font-mono opacity-80 border border-current px-2 py-0.5 rounded"><i class="fa-solid fa-lock mr-1 text-[10px]"></i>Private</span>
                             </div>
 
-                            <h3 class="text-2xl font-bold">rento-marketplace</h3>
+                            <h3 class="text-xl font-bold">rento-marketplace</h3>
                             
                             <p class="text-xs sm:text-sm leading-relaxed opacity-90">
                                 A hyperlocal real-estate and to-let marketplace tailored for Patna and Bihar. Enables brokers and landlords to publish listings while allowing prospective tenants and buyers to discover properties with paid detail unlocks and contact gateways.
                             </p>
 
                             <div class="flex flex-wrap gap-1.5 font-mono text-xs">
-                                <span class="px-2.5 py-1 rounded border border-current">TypeScript</span>
-                                <span class="px-2.5 py-1 rounded border border-current">Marketplace Logic</span>
-                                <span class="px-2.5 py-1 rounded border border-current">Manus Built</span>
+                                <span class="px-2 py-0.5 rounded border border-current">TypeScript</span>
+                                <span class="px-2 py-0.5 rounded border border-current">Web Marketplace</span>
+                                <span class="px-2 py-0.5 rounded border border-current">Manus Built</span>
                             </div>
                         </div>
 
                         <div class="pt-4 border-t border-current border-opacity-15 flex items-center justify-between">
-                            <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="btn-secondary touch-btn px-5 py-2.5 text-xs font-mono rounded-xl transition gap-2">
+                            <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="btn-secondary touch-btn px-4 py-2 text-xs font-mono rounded-lg transition gap-2">
                                 <i class="fa-brands fa-github"></i> GitHub Profile
                             </a>
-                            <span class="font-mono text-xs opacity-75">Production System</span>
+                            <span class="font-mono text-xs opacity-70">Production Project</span>
                         </div>
                     </div>
 
@@ -598,13 +521,13 @@
                 <div class="space-y-6 pt-6">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2">
                         <div>
-                            <h3 class="text-xl font-bold flex items-center gap-2">
-                                <i class="fa-brands fa-github"></i> All Dynamic Repositories
+                            <h3 class="text-lg font-bold flex items-center gap-2">
+                                <i class="fa-brands fa-github"></i> All Repositories
                             </h3>
                             <p class="text-xs opacity-70 mt-0.5">Live fetched from GitHub API (@sk4702684)</p>
                         </div>
                         <div>
-                            <span id="repo-count" class="px-3 py-1 rounded-full border border-current text-xs font-mono">Syncing...</span>
+                            <span id="repo-count" class="px-2.5 py-1 rounded border border-current text-xs font-mono">Syncing...</span>
                         </div>
                     </div>
 
@@ -612,10 +535,10 @@
                     <div class="flex flex-col sm:flex-row gap-3">
                         <div class="relative flex-1">
                             <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 opacity-60 text-xs"></i>
-                            <input id="repo-search" type="text" placeholder="Filter repositories by name or tech..." class="field-input w-full pl-9 pr-4 py-3 rounded-xl text-xs sm:text-sm focus:outline-none font-mono">
+                            <input id="repo-search" type="text" placeholder="Search repository by name..." class="field-input w-full pl-9 pr-4 py-2.5 rounded-lg text-xs sm:text-sm focus:outline-none font-mono">
                         </div>
-                        <select id="repo-lang-filter" class="field-input touch-btn rounded-xl px-4 py-3 text-xs focus:outline-none font-mono">
-                            <option value="ALL">All Technologies</option>
+                        <select id="repo-lang-filter" class="field-input touch-btn rounded-lg px-4 py-2.5 text-xs focus:outline-none font-mono">
+                            <option value="ALL">All Languages</option>
                         </select>
                     </div>
 
@@ -623,7 +546,7 @@
                     <div id="github-repos-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 perspective-container">
                         <div class="pro-card p-6 rounded-xl text-center py-10 col-span-full font-mono text-xs opacity-70">
                             <i class="fa-solid fa-circle-notch fa-spin text-base mb-2"></i>
-                            <p>Querying GitHub repositories...</p>
+                            <p>Loading repositories...</p>
                         </div>
                     </div>
                 </div>
@@ -631,30 +554,30 @@
             </div>
         </section>
 
-        <!-- TERMINAL INTERACTIVE SECTION -->
+        <!-- TERMINAL SECTION -->
         <section id="terminal-section" class="py-16 px-4 sm:px-6">
             <div class="max-w-3xl mx-auto space-y-6">
                 <div class="space-y-1 text-center">
-                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Command Console</span>
-                    <h2 class="text-2xl font-bold">Interactive Telemetry Terminal</h2>
-                    <p class="text-xs opacity-75">Type <code class="px-1.5 py-0.5 rounded border border-current font-mono">help</code> to list commands</p>
+                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Command Shell</span>
+                    <h2 class="text-2xl font-bold">Terminal CLI</h2>
+                    <p class="text-xs opacity-75">Type <code class="px-1.5 py-0.5 rounded border border-current font-mono">help</code> to run commands</p>
                 </div>
 
-                <div class="terminal-bg rounded-2xl overflow-hidden font-mono text-xs shadow-2xl">
-                    <div class="px-4 py-2.5 flex items-center justify-between border-b border-current border-opacity-15 opacity-85">
+                <div class="terminal-bg rounded-xl overflow-hidden font-mono text-xs shadow-2xl">
+                    <div class="px-4 py-2.5 flex items-center justify-between border-b border-current border-opacity-15 opacity-80">
                         <div class="flex items-center space-x-1.5">
                             <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
                             <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
                             <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
                         </div>
-                        <span class="text-[11px]">satyam@analytics-node:~</span>
+                        <span class="text-[11px]">satyam@box:~</span>
                     </div>
                     <div id="terminal-output" class="p-4 h-56 overflow-y-auto space-y-2 opacity-95">
-                        <p class="font-semibold">Satyam Raj Analytics Shell [Telemetry Engine Ready]</p>
+                        <p class="font-semibold">Satyam Raj System Shell [Dual Theme Engine Active]</p>
                         <p class="opacity-60">Enter 'help' to see commands.</p>
                     </div>
                     <div class="p-3 border-t border-current border-opacity-15 flex items-center space-x-2">
-                        <span class="font-semibold text-xs opacity-85">satyam@analytics:~$</span>
+                        <span class="font-semibold text-xs opacity-85">satyam@box:~$</span>
                         <input id="terminal-input" type="text" class="flex-1 bg-transparent focus:outline-none font-mono text-xs py-1" placeholder="enter command..." autocomplete="off">
                     </div>
                 </div>
@@ -665,9 +588,9 @@
         <section id="contact" class="py-16 px-4 sm:px-6">
             <div class="max-w-4xl mx-auto text-center space-y-8">
                 <div class="space-y-2">
-                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Open Comms</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Let's Connect & Collaborate</h2>
-                    <p class="text-xs sm:text-sm max-w-md mx-auto opacity-80">Open for data-driven software engineering roles, security research, and pentesting projects.</p>
+                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Communication</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Let's Connect</h2>
+                    <p class="text-xs sm:text-sm max-w-md mx-auto opacity-80">Open for technical engineering roles, pentesting research, and system projects.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-4 gap-4 perspective-container">
@@ -701,7 +624,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-6 text-center font-mono text-xs opacity-70 border-t border-current border-opacity-10">
+    <footer class="py-6 text-center font-mono text-xs opacity-70">
         © 2026 Satyam Raj • Dehradun, Uttarakhand[cite: 1]
     </footer>
 
@@ -718,13 +641,13 @@
                 document.body.classList.remove('theme-dark');
                 document.body.classList.add('theme-light');
                 themeIcon.className = "fa-solid fa-sun";
-                jsonThemeText.textContent = 'Mode: Light Aqua (#f6e8d0 / #559492)';
+                jsonThemeText.textContent = '"Light Aqua (#f6e8d0 / #559492)"';
                 updateThreeJsTheme('#559492');
             } else {
                 document.body.classList.remove('theme-light');
                 document.body.classList.add('theme-dark');
                 themeIcon.className = "fa-solid fa-moon";
-                jsonThemeText.textContent = 'Mode: Dark Blue (#203850 / #e4e1d0)';
+                jsonThemeText.textContent = '"Dark Blue (#203850 / #e4e1d0)"';
                 updateThreeJsTheme('#e4e1d0');
             }
             localStorage.setItem('portfolio-theme', theme);
@@ -762,10 +685,10 @@
 
         // Typewriter Effect
         const words = [
-            "Sentinel-X Pen-Testing Platform",
-            "Real-Time Telemetry & Data Streams",
-            "Python Systems & Streamlit Apps",
-            "Linux Architecture & Custom Tools"
+            "Sentinel-X Pen-Testing Suite",
+            "Python Systems & Streamlit Tools",
+            "Linux Architecture & Custom Tools",
+            "Secure Enterprise Infrastructure"
         ];
         let wordIdx = 0, charIdx = 0, isDeleting = false;
         const targetEl = document.getElementById("typewriter");
@@ -792,7 +715,104 @@
         }
         document.addEventListener("DOMContentLoaded", type);
 
-        // THREE.JS GLOBAL 3D BACKGROUND PARTICLE FIELD
+        // 1. THREE.JS 3D CYBER CORE (Hero Section)
+        let heroScene, heroCamera, heroRenderer, coreMesh, outerRing, pointsMesh;
+        let targetRotationX = 0, targetRotationY = 0;
+
+        function initThreeJsHeroCore() {
+            const container = document.getElementById('threejs-hero-container');
+            if (!container) return;
+
+            heroScene = new THREE.Scene();
+            heroCamera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+            heroCamera.position.z = 5.5;
+
+            heroRenderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            heroRenderer.setSize(container.clientWidth, container.clientHeight);
+            heroRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(heroRenderer.domElement);
+
+            const initialColor = currentTheme === 'light' ? 0x559492 : 0xe4e1d0;
+
+            const geometry = new THREE.IcosahedronGeometry(1.6, 1);
+            const material = new THREE.MeshBasicMaterial({
+                color: initialColor,
+                wireframe: true,
+                transparent: true,
+                opacity: 0.85
+            });
+            coreMesh = new THREE.Mesh(geometry, material);
+            heroScene.add(coreMesh);
+
+            const ringGeo = new THREE.TorusGeometry(2.3, 0.02, 16, 100);
+            const ringMat = new THREE.MeshBasicMaterial({
+                color: initialColor,
+                transparent: true,
+                opacity: 0.5
+            });
+            outerRing = new THREE.Mesh(ringGeo, ringMat);
+            outerRing.rotation.x = Math.PI / 3;
+            heroScene.add(outerRing);
+
+            const particleCount = 70;
+            const particleGeo = new THREE.BufferGeometry();
+            const positions = new Float32Array(particleCount * 3);
+
+            for (let i = 0; i < particleCount * 3; i += 3) {
+                const radius = 2.4 + Math.random() * 0.8;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = (Math.random() - 0.5) * Math.PI;
+
+                positions[i] = radius * Math.cos(phi) * Math.cos(theta);
+                positions[i + 1] = radius * Math.sin(phi);
+                positions[i + 2] = radius * Math.cos(phi) * Math.sin(theta);
+            }
+
+            particleGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            const particleMat = new THREE.PointsMaterial({
+                color: initialColor,
+                size: 0.05,
+                transparent: true,
+                opacity: 0.7
+            });
+            pointsMesh = new THREE.Points(particleGeo, particleMat);
+            heroScene.add(pointsMesh);
+
+            window.addEventListener('mousemove', (e) => {
+                const mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                const mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+                targetRotationY = mouseX * 1.2;
+                targetRotationX = -mouseY * 1.2;
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (e.touches.length > 0) {
+                    const touch = e.touches[0];
+                    const mouseX = (touch.clientX / window.innerWidth) * 2 - 1;
+                    const mouseY = -(touch.clientY / window.innerHeight) * 2 + 1;
+                    targetRotationY = mouseX * 1.5;
+                    targetRotationX = -mouseY * 1.5;
+                }
+            }, { passive: true });
+
+            function animate() {
+                requestAnimationFrame(animate);
+
+                coreMesh.rotation.y += 0.005;
+                coreMesh.rotation.x += 0.003;
+                outerRing.rotation.z += 0.008;
+                pointsMesh.rotation.y -= 0.003;
+
+                coreMesh.rotation.y += (targetRotationY - coreMesh.rotation.y) * 0.05;
+                coreMesh.rotation.x += (targetRotationX - coreMesh.rotation.x) * 0.05;
+                outerRing.rotation.y += (targetRotationY - outerRing.rotation.y) * 0.05;
+
+                heroRenderer.render(heroScene, heroCamera);
+            }
+            animate();
+        }
+
+        // 2. THREE.JS GLOBAL 3D BACKGROUND PARTICLE FIELD
         let globalScene, globalCamera, globalRenderer, globalStarField;
 
         function initThreeJsGlobalBackground() {
@@ -852,12 +872,17 @@
 
         function updateThreeJsTheme(colorHex) {
             const newColor = new THREE.Color(colorHex);
+            if (coreMesh && outerRing && pointsMesh) {
+                coreMesh.material.color = newColor;
+                outerRing.material.color = newColor;
+                pointsMesh.material.color = newColor;
+            }
             if (globalStarField) {
                 globalStarField.material.color = newColor;
             }
         }
 
-        // GLOBAL 3D CARD TILT ON HOVER / TOUCH
+        // 3. GLOBAL 3D CARD TILT ON HOVER / TOUCH
         function initGlobal3dCardTilt() {
             const cards = document.querySelectorAll('.pro-card');
 
@@ -870,8 +895,8 @@
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
 
-                    const rotateX = ((y - centerY) / centerY) * -5;
-                    const rotateY = ((x - centerX) / centerX) * 5;
+                    const rotateX = ((y - centerY) / centerY) * -6;
+                    const rotateY = ((x - centerX) / centerX) * 6;
 
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
                 });
@@ -883,6 +908,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", () => {
+            initThreeJsHeroCore();
             initThreeJsGlobalBackground();
             updateThemeDisplay(currentTheme);
             initGlobal3dCardTilt();
@@ -916,7 +942,7 @@
                 }
 
                 allUserRepos = fetchedRepos.filter(repo => repo.name.toLowerCase() !== `${username.toLowerCase()}.github.io`);
-                countBadge.innerText = `${allUserRepos.length} Repositories Live`;
+                countBadge.innerText = `${allUserRepos.length} Repositories`;
 
                 const languages = new Set();
                 allUserRepos.forEach(repo => {
@@ -952,7 +978,7 @@
             if (reposToDisplay.length === 0) {
                 gridContainer.innerHTML = `
                     <div class="pro-card p-8 rounded-xl text-center col-span-full font-mono text-xs opacity-60">
-                        No repositories matching current query.
+                        No repositories matching current filter.
                     </div>
                 `;
                 return;
@@ -1071,7 +1097,7 @@
                 termInput.value = '';
                 const cmdLine = document.createElement('p');
                 cmdLine.className = 'font-semibold';
-                cmdLine.innerHTML = `<span class="opacity-60">satyam@analytics:~$</span> ${input}`;
+                cmdLine.innerHTML = `<span class="opacity-60">satyam@box:~$</span> ${input}`;
                 termOutput.appendChild(cmdLine);
 
                 if (input === 'clear') { 
