@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Satyam Raj | Cybersecurity & Software Developer</title>
+    <title>Satyam Raj | Cybersecurity & Systems Intelligence Platform</title>
     
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- FontAwesome Icons CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -44,7 +44,7 @@
 
         .reveal-on-scroll {
             opacity: 0;
-            transform: translateY(24px);
+            transform: translateY(28px);
             transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
@@ -64,7 +64,7 @@
             box-shadow: 0 10px 30px -10px rgba(10, 20, 30, 0.5);
         }
         body.theme-dark .spark-card {
-            background: rgba(23, 41, 59, 0.82);
+            background: rgba(23, 41, 59, 0.85);
             border: 1px solid rgba(228, 225, 208, 0.16);
             color: #e4e1d0;
             box-shadow: 0 14px 34px -10px rgba(10, 20, 30, 0.6);
@@ -88,7 +88,7 @@
             border: 1px solid rgba(228, 225, 208, 0.25);
         }
         body.theme-dark .tree-line {
-            border-color: rgba(228, 225, 208, 0.25);
+            stroke: rgba(228, 225, 208, 0.3);
         }
         body.theme-dark .radar-ring {
             border-color: rgba(228, 225, 208, 0.2);
@@ -105,18 +105,18 @@
         }
         body.theme-dark .field-input::placeholder { color: rgba(228, 225, 208, 0.4); }
 
-        /* 2. LIGHT MODE: Albescent White (#f6e8d0) & Aqua Blue (#6ba9a7) */
+        /* 2. LIGHT MODE: Albescent White (#f6e8d0) & Aqua Blue (#559492) */
         body.theme-light {
             background-color: #f6e8d0;
             color: #1a3038;
         }
         body.theme-light .nav-floating {
             background: rgba(246, 232, 208, 0.95);
-            border: 1px solid rgba(107, 169, 167, 0.4);
+            border: 1px solid rgba(107, 169, 167, 0.45);
             box-shadow: 0 10px 30px -10px rgba(107, 169, 167, 0.25);
         }
         body.theme-light .spark-card {
-            background: rgba(238, 224, 201, 0.88);
+            background: rgba(238, 224, 201, 0.9);
             border: 1px solid rgba(107, 169, 167, 0.45);
             color: #1a3038;
             box-shadow: 0 14px 34px -10px rgba(107, 169, 167, 0.25);
@@ -125,8 +125,8 @@
             border-color: #559492;
         }
         body.theme-light .spark-tile {
-            background: rgba(107, 169, 167, 0.15);
-            border: 1px solid rgba(107, 169, 167, 0.35);
+            background: rgba(107, 169, 167, 0.18);
+            border: 1px solid rgba(107, 169, 167, 0.4);
             color: #1a3038;
         }
         body.theme-light .btn-spark {
@@ -136,11 +136,11 @@
         }
         body.theme-light .badge-spark {
             background: rgba(107, 169, 167, 0.25);
-            color: #2b5558;
-            border: 1px solid rgba(107, 169, 167, 0.45);
+            color: #1a3038;
+            border: 1px solid rgba(107, 169, 167, 0.5);
         }
         body.theme-light .tree-line {
-            border-color: rgba(107, 169, 167, 0.4);
+            stroke: #559492;
         }
         body.theme-light .radar-ring {
             border-color: rgba(107, 169, 167, 0.35);
@@ -157,7 +157,7 @@
         }
         body.theme-light .field-input::placeholder { color: #5d757d; }
 
-        /* Glass Switch */
+        /* Dedicated Glassmorphism Theme Switch */
         .glass-switch {
             width: 60px;
             height: 30px;
@@ -200,23 +200,62 @@
             color: #ffffff;
         }
 
-        /* Isometric floating tile style */
-        .isometric-tile {
-            transform: rotate(-15deg) skew(12deg, 0deg);
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        /* 3D Isometric App Tiles (Directly Matching 00:00 - 00:01 in Dribbble Video) */
+        .isometric-viewport {
+            perspective: 1000px;
         }
-        .isometric-tile:hover {
-            transform: rotate(-15deg) skew(12deg, 0deg) translateY(-8px);
+        .isometric-canvas {
+            transform: rotateX(55deg) rotateZ(-45deg);
+            transform-style: preserve-3d;
+        }
+        .isometric-card {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
+            box-shadow: 12px 16px 28px rgba(0, 0, 0, 0.25);
+        }
+        .isometric-card:hover {
+            transform: translateZ(28px) scale(1.05);
+            box-shadow: 20px 28px 40px rgba(0, 0, 0, 0.35);
         }
 
-        /* Radar Scanner Animation */
+        /* Radar Scanner Animation (00:02 - 00:03 in Video) */
         @keyframes radarSweep {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
         .radar-sweep {
             transform-origin: 100px 100px;
-            animation: radarSweep 6s linear infinite;
+            animation: radarSweep 5s linear infinite;
+        }
+
+        /* Interactive Pipeline Toggle Switch Button */
+        .pipeline-toggle {
+            width: 48px;
+            height: 26px;
+            border-radius: 9999px;
+            padding: 3px;
+            cursor: pointer;
+            position: relative;
+            transition: background-color 0.25s ease;
+        }
+        .pipeline-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 9999px;
+            background: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.25);
+            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .pipeline-toggle.active {
+            background-color: #10b981 !important;
+        }
+        .pipeline-toggle.active .pipeline-thumb {
+            transform: translateX(22px);
+        }
+        .pipeline-toggle.inactive {
+            background-color: rgba(120, 120, 120, 0.4) !important;
+        }
+        .pipeline-toggle.inactive .pipeline-thumb {
+            transform: translateX(0px);
         }
 
         .touch-btn {
@@ -242,7 +281,7 @@
     <!-- Global Three.js 3D Background Canvas -->
     <canvas id="global-three-canvas"></canvas>
 
-    <!-- Floating Top Navigation (Pill Layout) -->
+    <!-- Floating Top Navigation Pill (00:00 - 00:01 in Video) -->
     <header class="fixed top-5 w-full z-50 px-4 sm:px-6">
         <div class="max-w-5xl mx-auto nav-floating rounded-full px-5 py-3 flex justify-between items-center backdrop-blur-md">
             <a href="#" class="flex items-center space-x-2 text-sm font-extrabold tracking-tight">
@@ -254,8 +293,9 @@
 
             <nav class="hidden md:flex items-center space-x-6 text-xs font-mono opacity-85">
                 <a href="#about" class="hover:opacity-100 transition-opacity">/profile</a>
-                <a href="#skills" class="hover:opacity-100 transition-opacity">/stack</a>
-                <a href="#pipelines" class="hover:opacity-100 transition-opacity">/architecture</a>
+                <a href="#radar" class="hover:opacity-100 transition-opacity">/intel</a>
+                <a href="#pipelines" class="hover:opacity-100 transition-opacity">/pipelines</a>
+                <a href="#workflow" class="hover:opacity-100 transition-opacity">/workflow</a>
                 <a href="#projects" class="hover:opacity-100 transition-opacity">/solutions</a>
                 <a href="#terminal-section" class="hover:opacity-100 transition-opacity">/cli</a>
                 <a href="#contact" class="hover:opacity-100 transition-opacity">/contact</a>
@@ -276,102 +316,129 @@
 
     <main class="relative z-10 pt-28">
 
-        <!-- 1. HERO SECTION (Satyam Raj Identity + Floating 3D Isometric Tiles) -->
-        <section id="about" class="min-h-[85vh] flex flex-col items-center justify-center py-12 px-4 sm:px-6 text-center">
+        <!-- 1. HERO SECTION: Video Aesthetic + Real 3D Isometric Tiles Grid (00:00 - 00:01) -->
+        <section id="about" class="min-h-[88vh] flex flex-col items-center justify-center py-12 px-4 sm:px-6 text-center">
             <div class="max-w-4xl mx-auto space-y-6">
                 
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono border border-current opacity-85">
                     <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>Cybersecurity & Software Developer[cite: 1] • B.Tech Student[cite: 1]</span>
+                    <span>Cybersecurity & Software Developer • B.Tech Student[cite: 1]</span>
                 </div>
 
                 <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight">
-                    Hi, I'm Satyam Raj.<br>
-                    <span class="underline decoration-4">Engineering Secure Software.</span>
+                    Your code. Your systems. <br>
+                    <span class="underline decoration-4">Your Intelligence.</span>
                 </h1>
 
                 <p class="text-sm sm:text-base max-w-2xl mx-auto leading-relaxed opacity-85 font-normal">
-                    Driven and security-focused engineering student at <span class="font-semibold">Shivalik College of Engineering, Dehradun</span> (Class of 2029)[cite: 1]. Hands-on experience in full-stack Python development, Linux systems customization, automated penetration testing platforms, and secure software architectures[cite: 1].
+                    Driven and security-focused engineering student at <span class="font-semibold">Shivalik College of Engineering, Dehradun</span> (B.Tech, Class of 2029)[cite: 1]. Experienced in full-stack Python development, Linux systems customization, and automated penetration testing platforms[cite: 1].
                 </p>
 
                 <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
                     <a href="#projects" class="btn-spark touch-btn px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition shadow-md">
-                        View Projects <i class="fa-solid fa-arrow-down ml-1 text-[10px]"></i>
+                        Explore Deliverables <i class="fa-solid fa-arrow-down ml-1 text-[10px]"></i>
                     </a>
                     <a href="mailto:sk4702684@gmail.com" class="touch-btn px-6 py-3 rounded-full text-xs font-bold border border-current opacity-80 hover:opacity-100 transition">
                         <i class="fa-solid fa-envelope mr-1.5"></i> sk4702684@gmail.com[cite: 1]
                     </a>
                     <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="touch-btn px-5 py-3 rounded-full text-xs font-bold border border-current opacity-80 hover:opacity-100 transition">
-                        <i class="fa-brands fa-github mr-1"></i> GitHub
+                        <i class="fa-brands fa-github mr-1"></i> sk4702684
                     </a>
                 </div>
             </div>
 
-            <!-- Floating Isometric Application Tiles (4 Core Skillsets) -->
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-10 pt-16 max-w-4xl mx-auto px-4">
-                <div class="spark-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 isometric-tile shadow-lg">
-                    <i class="fa-brands fa-python text-3xl"></i>
-                    <span class="text-xs font-mono font-semibold">Python & Bash[cite: 1]</span>
-                </div>
-                <div class="spark-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 isometric-tile shadow-lg">
-                    <i class="fa-solid fa-shield-halved text-3xl"></i>
-                    <span class="text-xs font-mono font-semibold">Nmap & Pentesting[cite: 1]</span>
-                </div>
-                <div class="spark-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 isometric-tile shadow-lg">
-                    <i class="fa-brands fa-linux text-3xl"></i>
-                    <span class="text-xs font-mono font-semibold">Linux & GNOME[cite: 1]</span>
-                </div>
-                <div class="spark-card rounded-2xl p-6 flex flex-col items-center justify-center space-y-3 isometric-tile shadow-lg">
-                    <i class="fa-solid fa-database text-3xl"></i>
-                    <span class="text-xs font-mono font-semibold">Streamlit & Supabase[cite: 1]</span>
+            <!-- True 3D Isometric Application Grid Layout (Exact Match of 00:00 - 00:01 Video Clip) -->
+            <div class="isometric-viewport w-full max-w-5xl mx-auto pt-16 pb-8">
+                <div class="isometric-canvas grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mx-auto w-fit">
+                    
+                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
+                            <i class="fa-brands fa-python"></i>
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold font-mono block">Python & Bash[cite: 1]</span>
+                            <span class="text-[10px] opacity-70">Automation Logic[cite: 1]</span>
+                        </div>
+                    </div>
+
+                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl text-emerald-400">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold font-mono block">Sentinel-X[cite: 1]</span>
+                            <span class="text-[10px] opacity-70">Pen-Testing Hub[cite: 1]</span>
+                        </div>
+                    </div>
+
+                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
+                            <i class="fa-brands fa-linux"></i>
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold font-mono block">Linux / GNOME[cite: 1]</span>
+                            <span class="text-[10px] opacity-70">Kernel Tweaks[cite: 1]</span>
+                        </div>
+                    </div>
+
+                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
+                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <div class="text-center">
+                            <span class="text-xs font-bold font-mono block">Supabase & APIs[cite: 1]</span>
+                            <span class="text-[10px] opacity-70">Cloud Telemetry[cite: 1]</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
 
-        <!-- 2. RADAR PLATFORM SECTION: Developer Capabilities Showcase -->
-        <section id="skills" class="py-20 px-4 sm:px-6">
+        <!-- 2. RADAR PLATFORM INTELLIGENCE (Replicating 00:02 - 00:03 in Video) -->
+        <section id="radar" class="py-20 px-4 sm:px-6">
             <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
                 
                 <div class="lg:col-span-6 space-y-5">
                     <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Technical Arsenal[cite: 1]
+                        Reconnaissance Intelligence
                     </div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                        Expert skills & academic foundation.
+                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                        Satyam Raj systems & security hub.
                     </h2>
                     <p class="text-sm leading-relaxed opacity-85">
-                        Architecting custom software tools from low-level systems programming to web applications. Bridging electronics communication concepts, networking protocols, and modern full-stack workflows[cite: 1].
+                        Architecting custom software tools from low-level systems programming to web applications. Bridging communication protocols, socket diagnostics, and modern development workflows[cite: 1].
                     </p>
 
                     <div class="space-y-3 font-mono text-xs pt-2">
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center">
-                            <span><i class="fa-solid fa-code mr-2"></i>Languages:</span>
+                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
+                            <span><i class="fa-solid fa-code mr-2"></i>Primary Languages:</span>
                             <span class="font-bold">Python, Bash, C/C++, TypeScript[cite: 1]</span>
                         </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center">
-                            <span><i class="fa-solid fa-shield-virus mr-2"></i>Security Tools:</span>
-                            <span class="font-bold">Nmap, Dirsearch, Reconnaissance[cite: 1]</span>
+                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
+                            <span><i class="fa-solid fa-shield-virus mr-2"></i>Security Suite:</span>
+                            <span class="font-bold">Nmap, Dirsearch, Penetration Audits[cite: 1]</span>
                         </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center">
-                            <span><i class="fa-solid fa-graduation-cap mr-2"></i>Education:</span>
-                            <span class="font-bold">B.Tech (2025 - 2029) • SCE Dehradun[cite: 1]</span>
+                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
+                            <span><i class="fa-solid fa-graduation-cap mr-2"></i>Institution:</span>
+                            <span class="font-bold">Shivalik College of Eng., Dehradun[cite: 1]</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Radar Display Mockup for Diagnostics -->
+                <!-- Radar Display Graphic (Exact 00:02 - 00:03 Visual) -->
                 <div class="lg:col-span-6 flex justify-center">
                     <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full border-2 radar-ring flex items-center justify-center">
                         <div class="absolute w-52 h-52 sm:w-64 sm:h-64 rounded-full border radar-ring flex items-center justify-center">
                             <div class="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full border radar-ring"></div>
                         </div>
                         
-                        <!-- Radar Sweep Needle -->
+                        <!-- Real-time Rotating Sweep Line -->
                         <div class="absolute inset-0 rounded-full overflow-hidden flex items-center justify-center">
-                            <svg class="w-full h-full radar-sweep opacity-35" viewBox="0 0 200 200">
+                            <svg class="w-full h-full radar-sweep opacity-40" viewBox="0 0 200 200">
                                 <defs>
                                     <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="currentColor" stop-opacity="0.8" />
+                                        <stop offset="0%" stop-color="currentColor" stop-opacity="0.85" />
                                         <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
                                     </linearGradient>
                                 </defs>
@@ -379,14 +446,14 @@
                             </svg>
                         </div>
 
-                        <!-- Center Identity Hub -->
+                        <!-- Center Hub Identity -->
                         <div class="spark-card rounded-2xl p-4 flex flex-col items-center shadow-xl border border-current z-10 text-center">
                             <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-10 h-10 rounded-full object-cover mb-1 border border-current">
                             <span class="text-[10px] font-mono font-bold">Satyam Raj</span>
-                            <span class="text-[9px] font-mono opacity-70">Dehradun[cite: 1]</span>
+                            <span class="text-[9px] font-mono opacity-70">Dehradun, UK[cite: 1]</span>
                         </div>
 
-                        <!-- Orbital Skill Tags -->
+                        <!-- Orbiting Target Badges -->
                         <div class="absolute top-6 left-10 spark-tile px-3 py-1.5 rounded-full text-xs font-mono shadow-sm">
                             <i class="fa-brands fa-linux mr-1"></i> GNOME[cite: 1]
                         </div>
@@ -402,15 +469,15 @@
             </div>
         </section>
 
-        <!-- 3. PIPELINE CARDS & ARCHITECTURE CONTROLS -->
+        <!-- 3. PIPELINE TOGGLE SECTION (Matching 00:04 - 00:06 in Video with Clickable States) -->
         <section id="pipelines" class="py-20 px-4 sm:px-6">
             <div class="max-w-5xl mx-auto space-y-12">
                 <div class="text-center space-y-3">
                     <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        System Architecture[cite: 1]
+                        Features & Pipelines
                     </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
-                        Engineered for speed, modularity, and security.
+                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+                        Manage pipelines to security requirements.
                     </h2>
                 </div>
 
@@ -424,95 +491,113 @@
                             <span class="ml-2">developer_experience.sh[cite: 1]</span>
                         </div>
                         <div class="space-y-3 text-xs font-mono">
-                            <div class="p-3 rounded-xl spark-tile flex justify-between items-center">
-                                <span>Multi-Tool Framework Engineering</span>
+                            <div class="p-3.5 rounded-xl spark-tile flex justify-between items-center">
+                                <span>Multi-Tool Framework Architecture</span>
                                 <span class="text-emerald-500 font-bold">Deployed[cite: 1]</span>
                             </div>
-                            <div class="p-3 rounded-xl spark-tile flex justify-between items-center">
-                                <span>Linux Kernel & Desktop Customization</span>
-                                <span class="text-emerald-500 font-bold">Optimized[cite: 1]</span>
+                            <div class="p-3.5 rounded-xl spark-tile flex justify-between items-center">
+                                <span>Linux Kernel & Desktop Optimization</span>
+                                <span class="text-emerald-500 font-bold">Active[cite: 1]</span>
                             </div>
-                            <div class="p-3 rounded-xl spark-tile flex justify-between items-center">
-                                <span>Supabase Auth & Database Logging</span>
+                            <div class="p-3.5 rounded-xl spark-tile flex justify-between items-center">
+                                <span>Supabase Auth & Telemetry Logging</span>
                                 <span class="text-emerald-500 font-bold">Encrypted[cite: 1]</span>
                             </div>
                         </div>
                         <div class="pt-2">
                             <h3 class="text-lg font-bold">Cross-Functional Leadership[cite: 1]</h3>
-                            <p class="text-xs opacity-80 mt-1">Leading development teams on custom software engineering, open source projects, and modular tools[cite: 1].</p>
+                            <p class="text-xs opacity-80 mt-1">Leading development on custom software solutions, open source projects, and isolated environments[cite: 1].</p>
                         </div>
                     </div>
 
-                    <!-- Pipeline Right Card (Toolchain Toggles) -->
+                    <!-- Pipeline Right Card (Interactive Toggle Controls matching Video Clip) -->
                     <div class="spark-card rounded-3xl p-6 sm:p-8 space-y-5">
                         <div class="flex items-center justify-between pb-2 border-b border-current border-opacity-10 text-xs font-mono">
-                            <span class="font-bold">+ Active Developer Toolchain</span>
+                            <span class="font-bold">+ Active Toolchain Toggles</span>
                             <span class="opacity-60">Status</span>
                         </div>
                         <div class="space-y-3 text-xs font-mono">
-                            <div class="p-3 rounded-xl spark-tile flex justify-between items-center">
-                                <span class="flex items-center gap-2"><i class="fa-solid fa-terminal"></i> Nmap & Dirsearch[cite: 1]</span>
-                                <span class="text-emerald-500 font-bold"><i class="fa-solid fa-toggle-on text-lg"></i></span>
+                            <div class="p-3.5 rounded-xl spark-tile flex justify-between items-center">
+                                <span class="flex items-center gap-2"><i class="fa-solid fa-terminal"></i> Nmap & Dirsearch Probing[cite: 1]</span>
+                                <div class="pipeline-toggle active" onclick="toggleSwitch(this)">
+                                    <div class="pipeline-thumb"></div>
+                                </div>
                             </div>
-                            <div class="p-3 rounded-xl spark-tile flex justify-between items-center">
+                            <div class="p-3.5 rounded-xl spark-tile flex justify-between items-center">
                                 <span class="flex items-center gap-2"><i class="fa-solid fa-cubes"></i> Streamlit GUI Dashboard[cite: 1]</span>
-                                <span class="text-emerald-500 font-bold"><i class="fa-solid fa-toggle-on text-lg"></i></span>
+                                <div class="pipeline-toggle active" onclick="toggleSwitch(this)">
+                                    <div class="pipeline-thumb"></div>
+                                </div>
                             </div>
-                            <div class="p-3 rounded-xl spark-tile flex justify-between items-center">
-                                <span class="flex items-center gap-2"><i class="fa-brands fa-git-alt"></i> Git & GitHub Versioning[cite: 1]</span>
-                                <span class="text-emerald-500 font-bold"><i class="fa-solid fa-toggle-on text-lg"></i></span>
+                            <div class="p-3.5 rounded-xl spark-tile flex justify-between items-center">
+                                <span class="flex items-center gap-2"><i class="fa-brands fa-git-alt"></i> GitHub CI/CD Sync[cite: 1]</span>
+                                <div class="pipeline-toggle active" onclick="toggleSwitch(this)">
+                                    <div class="pipeline-thumb"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="pt-2">
-                            <h3 class="text-lg font-bold">Modular Software Integration</h3>
-                            <p class="text-xs opacity-80 mt-1">Connecting terminal diagnostics, cloud backends, and responsive UIs into singular workflows.</p>
+                            <h3 class="text-lg font-bold">Unlock Modular Tooling</h3>
+                            <p class="text-xs opacity-80 mt-1">Click switches above to test interactive toggle mechanics in real-time.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 4. WORKFLOW TREE BRANCHING (Methodology from Video) -->
+        <!-- 4. WORKFLOW TREE-BRANCH STRUCTURE (Matching 00:07 - 00:10 in Video with Orthogonal Tree Branches) -->
         <section id="workflow" class="py-20 px-4 sm:px-6">
-            <div class="max-w-4xl mx-auto text-center space-y-10">
+            <div class="max-w-5xl mx-auto text-center space-y-10">
                 <div class="space-y-3">
                     <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Engineering Workflow
+                        Workflow Architecture
                     </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight">
-                        Structured software with a data-centric approach.
+                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
+                        Build better software with a security-centric workflow.
                     </h2>
                     <p class="text-xs sm:text-sm max-w-md mx-auto opacity-80">
-                        From architecture to testing, quality and system security are maintained across all builds[cite: 1].
+                        Code precision, reliability, and security are maintained across the entire development lifecycle[cite: 1].
                     </p>
                 </div>
 
-                <div class="space-y-6 pt-4">
-                    <div class="inline-block btn-spark px-8 py-3.5 rounded-2xl text-xs font-bold font-mono shadow-md">
-                        Satyam Raj System Engineering Core
+                <!-- Structured Orthogonal Branch Diagram -->
+                <div class="w-full flex flex-col items-center pt-4">
+                    <div class="btn-spark touch-btn px-8 py-3.5 rounded-2xl font-bold font-mono text-sm shadow-xl z-10">
+                        Satyam Raj System Engineering Platform
                     </div>
 
-                    <div class="w-0.5 h-8 mx-auto border-l-2 tree-line"></div>
+                    <!-- Orthogonal Line Trunk Connectors -->
+                    <div class="w-full max-w-4xl h-14 relative">
+                        <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 60">
+                            <line x1="400" y1="0" x2="400" y2="30" class="tree-line" stroke-width="2" />
+                            <line x1="100" y1="30" x2="700" y2="30" class="tree-line" stroke-width="2" />
+                            <line x1="100" y1="30" x2="100" y2="60" class="tree-line" stroke-width="2" />
+                            <line x1="300" y1="30" x2="300" y2="60" class="tree-line" stroke-width="2" />
+                            <line x1="500" y1="30" x2="500" y2="60" class="tree-line" stroke-width="2" />
+                            <line x1="700" y1="30" x2="700" y2="60" class="tree-line" stroke-width="2" />
+                        </svg>
+                    </div>
 
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium">
-                            Architect Custom Platforms[cite: 1]
+                    <!-- Leaves Nodes (00:09 in Video) -->
+                    <div class="w-full max-w-5xl grid grid-cols-2 sm:grid-cols-4 gap-4">
+                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
+                            Refine Tool Precision[cite: 1]
                         </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium">
-                            Ensure Database Reliability[cite: 1]
+                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
+                            Ensure DB Reliability[cite: 1]
                         </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium">
-                            Enhance Linux Performance[cite: 1]
+                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
+                            Enhance Kernel Speed[cite: 1]
                         </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium">
-                            Deploy Modular Web Tools[cite: 1]
+                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
+                            Deploy Web Solutions[cite: 1]
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 5. FEATURED PROJECTS SECTION (Both Sentinel-X and rento-marketplace) -->
+        <!-- 5. DELIVERABLES SECTION (Sentinel-X & rento-marketplace) -->
         <section id="projects" class="py-20 px-4 sm:px-6">
             <div class="max-w-6xl mx-auto space-y-12">
                 <div class="space-y-2 text-center sm:text-left border-b border-current border-opacity-15 pb-6">
@@ -638,7 +723,7 @@
             </div>
         </section>
 
-        <!-- 7. CONTACT FOOTER SECTION (Video Style Card Layout) -->
+        <!-- 7. CONTACT SECTION (Matching Video Footer Card at 00:19 - 00:20) -->
         <section id="contact" class="py-20 px-4 sm:px-6">
             <div class="max-w-4xl mx-auto spark-card rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-2xl">
                 <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
@@ -705,6 +790,17 @@
             currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
             updateTheme(currentTheme);
         });
+
+        // Pipeline Toggle Click Switch Functionality
+        function toggleSwitch(el) {
+            if (el.classList.contains('active')) {
+                el.classList.remove('active');
+                el.classList.add('inactive');
+            } else {
+                el.classList.remove('inactive');
+                el.classList.add('active');
+            }
+        }
 
         // Three.js Ambient Particle Background
         let globalScene, globalCamera, globalRenderer, globalStarField;
