@@ -1,6 +1,4 @@
-from pathlib import Path
-
-html = r'''<!doctype html>
+<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -459,7 +457,4 @@ body.hovering .cursor{width:45px;height:45px}
 </html>
 '''
 
-path = Path("/mnt/data/satyam_portfolio_reference_redesign.html")
-path.write_text(html, encoding="utf-8")
-print(f"Created: {path}")
-print(f"Size: {path.stat().st_size/1024:.1f} KB")
+
