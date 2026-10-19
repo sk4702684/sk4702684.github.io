@@ -1,1087 +1,465 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+from pathlib import Path
+
+html = r'''<!doctype html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    
-    <!-- SEO & Open Graph Meta Tags -->
-    <title>Satyam Raj | Cybersecurity & Software Developer</title>
-    <meta name="description" content="Satyam Raj - Cybersecurity & Software Developer. B.Tech ECE at Shivalik College. Creator of Sentinel-X.">
-    <meta name="author" content="Satyam Raj">
-    <meta property="og:title" content="Satyam Raj | Cybersecurity & Software Developer">
-    <meta property="og:description" content="Expertise in Python, Linux, automated reconnaissance, and Pen-Testing frameworks.">
-    <meta property="og:image" content="https://github.com/sk4702684.png">
-    <meta property="og:type" content="website">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Satyam Raj — Cybersecurity × Electronics</title>
+<meta name="description" content="Satyam Raj — B.Tech ECE student building cybersecurity, software, systems and electronics projects.">
+<meta name="theme-color" content="#0a0a0a">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://sk4702684.github.io/">
+<meta property="og:title" content="Satyam Raj — Cybersecurity × Electronics">
+<meta property="og:description" content="Cybersecurity, software, systems and ECE projects by Satyam Raj.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://sk4702684.github.io/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <!-- Three.js CDN (Deferred for performance) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<style>
+:root{
+  --bg:#090909;--fg:#f4f1ea;--muted:#989898;--line:#252525;--panel:#111;
+  --accent:#b7ff45;--accent2:#8eea1f;--white:#fff;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:var(--bg)}
+body{background:var(--bg);color:var(--fg);font-family:"DM Sans",sans-serif;overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.045;z-index:20;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{color:inherit}
+::selection{background:var(--accent);color:#050505}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.65}
+.wrap{width:min(1240px,calc(100% - 40px));margin:auto;position:relative;z-index:2}
+.mono{font-family:"IBM Plex Mono",monospace}
+.green{color:var(--accent)}
+.muted{color:var(--muted)}
+.section{padding:150px 0}
+.reveal{opacity:0;transform:translateY(35px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
+.reveal.visible{opacity:1;transform:none}
 
-    <style>
-        * {
-            -webkit-tap-highlight-color: transparent;
-            transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
-        }
+/* NAV */
+.nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);width:min(920px,calc(100% - 28px));height:62px;border:1px solid rgba(255,255,255,.12);background:rgba(9,9,9,.72);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-radius:100px;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 9px 0 20px}
+.logo{font-family:"Space Grotesk";font-weight:700;letter-spacing:-.03em}
+.logo span{color:var(--accent)}
+.navlinks{display:flex;gap:26px;font:12px "IBM Plex Mono";color:#aaa}
+.navlinks a{transition:color .25s}
+.navlinks a:hover{color:var(--accent)}
+.nav-cta{height:44px;padding:0 18px;border-radius:100px;background:var(--fg);color:#080808;display:grid;place-items:center;font-size:12px;font-weight:700;transition:transform .3s var(--ease),background .3s}
+.nav-cta:hover{transform:scale(1.04);background:var(--accent)}
+.menu{display:none;background:none;border:0;width:44px;height:44px;border-radius:50%;border:1px solid var(--line)}
 
-        body {
-            touch-action: manipulation;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
-        }
+/* HERO */
+.hero{min-height:100svh;display:flex;align-items:flex-end;padding:150px 0 72px}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:45px}
+.eyebrow{font:11px "IBM Plex Mono";color:var(--muted);letter-spacing:.08em;text-transform:uppercase}
+.status{display:flex;align-items:center;gap:8px}
+.dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 18px var(--accent);animation:pulse 1.8s infinite}
+@keyframes pulse{50%{opacity:.3;transform:scale(.7)}}
+.hero h1{font-family:"Space Grotesk";font-size:clamp(4rem,11vw,10.5rem);line-height:.82;letter-spacing:-.075em;font-weight:600;max-width:1200px}
+.hero h1 .outline{-webkit-text-stroke:1px #777;color:transparent}
+.hero-bottom{margin-top:55px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end}
+.hero-copy{max-width:520px;font-size:16px;line-height:1.7;color:#aaa}
+.hero-copy strong{color:var(--fg);font-weight:500}
+.hero-actions{display:flex;gap:10px}
+.btn{height:50px;padding:0 21px;border-radius:100px;border:1px solid #333;display:inline-flex;align-items:center;gap:10px;font-size:13px;font-weight:600;transition:.35s var(--ease)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#080808}
+.btn:hover{transform:translateY(-4px);border-color:#666}
+.btn.primary:hover{box-shadow:0 15px 40px rgba(183,255,69,.16)}
 
-        #global-three-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.45;
-        }
+/* MARQUEE */
+.marquee{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;white-space:nowrap;padding:17px 0;background:#0b0b0b}
+.marquee-track{display:inline-flex;animation:marquee 25s linear infinite}
+.marquee span{font:12px "IBM Plex Mono";color:#777;text-transform:uppercase;padding:0 28px}
+.marquee b{color:var(--accent);font-weight:400}
+@keyframes marquee{to{transform:translateX(-50%)}}
 
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .reveal-on-scroll.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
+/* ABOUT */
+.grid2{display:grid;grid-template-columns:1fr 1.25fr;gap:90px}
+.kicker{font:11px "IBM Plex Mono";color:var(--accent);text-transform:uppercase;letter-spacing:.12em;margin-bottom:22px}
+.display{font-family:"Space Grotesk";font-size:clamp(2.5rem,5vw,5.4rem);line-height:.96;letter-spacing:-.06em;font-weight:600}
+.about-text{font-size:18px;line-height:1.75;color:#aaa;max-width:680px}
+.about-text p+p{margin-top:20px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:45px}
+.stat{border-top:1px solid var(--line);padding-top:17px}
+.stat strong{font:32px "Space Grotesk";display:block}
+.stat span{font:11px "IBM Plex Mono";color:#777;text-transform:uppercase}
 
-        /* 1. DARK MODE: Dark Blue (#203850) & Ivory (#e4e1d0) */
-        body.theme-dark {
-            background-color: #203850;
-            color: #e4e1d0;
-        }
-        body.theme-dark .nav-floating {
-            background: rgba(32, 56, 80, 0.92);
-            border: 1px solid rgba(228, 225, 208, 0.18);
-            box-shadow: 0 10px 30px -10px rgba(10, 20, 30, 0.5);
-        }
-        body.theme-dark .spark-card {
-            background: rgba(23, 41, 59, 0.85);
-            border: 1px solid rgba(228, 225, 208, 0.16);
-            color: #e4e1d0;
-            box-shadow: 0 14px 34px -10px rgba(10, 20, 30, 0.6);
-        }
-        body.theme-dark .spark-card:hover {
-            border-color: rgba(228, 225, 208, 0.45);
-        }
-        body.theme-dark .spark-tile {
-            background: rgba(228, 225, 208, 0.08);
-            border: 1px solid rgba(228, 225, 208, 0.18);
-            color: #e4e1d0;
-        }
-        body.theme-dark .btn-spark {
-            background: #e4e1d0 !important;
-            color: #203850 !important;
-            box-shadow: 0 4px 18px rgba(228, 225, 208, 0.25);
-        }
-        body.theme-dark .badge-spark {
-            background: rgba(228, 225, 208, 0.12);
-            color: #e4e1d0;
-            border: 1px solid rgba(228, 225, 208, 0.25);
-        }
-        body.theme-dark .tree-line {
-            stroke: rgba(228, 225, 208, 0.3);
-        }
-        body.theme-dark .radar-ring {
-            border-color: rgba(228, 225, 208, 0.2);
-        }
-        body.theme-dark .terminal-bg {
-            background: #152536;
-            border: 1px solid rgba(228, 225, 208, 0.2);
-            color: #e4e1d0;
-        }
-        body.theme-dark .field-input {
-            background: rgba(23, 41, 59, 0.6);
-            border: 1px solid rgba(228, 225, 208, 0.2);
-            color: #e4e1d0;
-        }
-        body.theme-dark .field-input::placeholder { color: rgba(228, 225, 208, 0.4); }
+/* STACK */
+.stack{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.stack-item{background:var(--bg);padding:32px 24px;min-height:170px;transition:background .35s,transform .35s}
+.stack-item:hover{background:#111;transform:translateY(-4px)}
+.stack-icon{font-size:22px;margin-bottom:42px;color:#888}
+.stack-item h3{font:17px "Space Grotesk";margin-bottom:8px}
+.stack-item p{font-size:12px;line-height:1.6;color:#666}
 
-        /* 2. LIGHT MODE: Albescent White (#f6e8d0) & Aqua Blue (#559492) */
-        body.theme-light {
-            background-color: #f6e8d0;
-            color: #1a3038;
-        }
-        body.theme-light .nav-floating {
-            background: rgba(246, 232, 208, 0.95);
-            border: 1px solid rgba(107, 169, 167, 0.45);
-            box-shadow: 0 10px 30px -10px rgba(107, 169, 167, 0.25);
-        }
-        body.theme-light .spark-card {
-            background: rgba(238, 224, 201, 0.9);
-            border: 1px solid rgba(107, 169, 167, 0.45);
-            color: #1a3038;
-            box-shadow: 0 14px 34px -10px rgba(107, 169, 167, 0.25);
-        }
-        body.theme-light .spark-card:hover {
-            border-color: #559492;
-        }
-        body.theme-light .spark-tile {
-            background: rgba(107, 169, 167, 0.18);
-            border: 1px solid rgba(107, 169, 167, 0.4);
-            color: #1a3038;
-        }
-        body.theme-light .btn-spark {
-            background: #559492 !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 18px rgba(85, 148, 146, 0.35);
-        }
-        body.theme-light .badge-spark {
-            background: rgba(107, 169, 167, 0.25);
-            color: #1a3038;
-            border: 1px solid rgba(107, 169, 167, 0.5);
-        }
-        body.theme-light .tree-line {
-            stroke: #559492;
-        }
-        body.theme-light .radar-ring {
-            border-color: rgba(107, 169, 167, 0.35);
-        }
-        body.theme-light .terminal-bg {
-            background: #ede0c7;
-            border: 1px solid rgba(107, 169, 167, 0.5);
-            color: #1a3038;
-        }
-        body.theme-light .field-input {
-            background: rgba(246, 232, 208, 0.85);
-            border: 1px solid rgba(107, 169, 167, 0.5);
-            color: #1a3038;
-        }
-        body.theme-light .field-input::placeholder { color: #5d757d; }
+/* FEATURE */
+.feature{border:1px solid #303030;border-radius:4px;overflow:hidden;background:#0d0d0d}
+.feature-head{padding:22px 26px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.feature-label{font:11px "IBM Plex Mono";color:var(--accent);text-transform:uppercase}
+.feature-no{font:11px "IBM Plex Mono";color:#555}
+.feature-main{display:grid;grid-template-columns:1.2fr .8fr;min-height:560px}
+.feature-visual{position:relative;overflow:hidden;background:radial-gradient(circle at 65% 45%,#26351a 0,#121612 22%,#0b0b0b 58%);display:flex;align-items:center;justify-content:center}
+.visual-grid{position:absolute;inset:0;opacity:.3;background-image:linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:55px 55px;transform:perspective(500px) rotateX(55deg) scale(1.5);transform-origin:center bottom}
+.shield{width:210px;height:245px;border:1px solid rgba(183,255,69,.7);clip-path:polygon(50% 0,92% 15%,84% 65%,50% 100%,16% 65%,8% 15%);background:rgba(183,255,69,.035);display:grid;place-items:center;position:relative;box-shadow:0 0 80px rgba(183,255,69,.08)}
+.shield:before{content:"";position:absolute;inset:25px;border:1px solid rgba(183,255,69,.3);clip-path:inherit}
+.shield i{font-size:55px;color:var(--accent);filter:drop-shadow(0 0 18px rgba(183,255,69,.3))}
+.feature-info{padding:48px;display:flex;flex-direction:column;justify-content:space-between;border-left:1px solid var(--line)}
+.feature-info h3{font:clamp(3rem,6vw,6rem) "Space Grotesk";letter-spacing:-.07em;line-height:.85}
+.feature-info p{color:#999;line-height:1.7;font-size:14px;margin-top:25px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:25px}
+.tag{border:1px solid #292929;padding:8px 10px;font:10px "IBM Plex Mono";color:#aaa}
+.feature-foot{display:flex;justify-content:space-between;align-items:center;padding-top:25px;border-top:1px solid var(--line);font:11px "IBM Plex Mono";color:#666}
+.arrow{font-size:18px;color:var(--fg)}
 
-        /* Dedicated Glassmorphism Theme Switch */
-        .glass-switch {
-            width: 60px;
-            height: 30px;
-            border-radius: 9999px;
-            padding: 3px;
-            cursor: pointer;
-            position: relative;
-            user-select: none;
-            display: flex;
-            align-items: center;
-        }
-        body.theme-dark .glass-switch {
-            background: rgba(228, 225, 208, 0.15);
-            border: 1px solid rgba(228, 225, 208, 0.3);
-        }
-        body.theme-light .glass-switch {
-            background: rgba(107, 169, 167, 0.3);
-            border: 1px solid rgba(107, 169, 167, 0.6);
-        }
+/* PROJECTS */
+.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.project{border:1px solid var(--line);padding:30px;min-height:390px;display:flex;flex-direction:column;justify-content:space-between;transition:transform .5s var(--ease),border-color .3s,background .3s}
+.project:hover{transform:translateY(-8px);border-color:#444;background:#0e0e0e}
+.project-top{display:flex;justify-content:space-between;font:10px "IBM Plex Mono";color:#666}
+.project h3{font:clamp(2.5rem,5vw,5rem) "Space Grotesk";letter-spacing:-.07em;margin-top:55px}
+.project p{font-size:14px;line-height:1.7;color:#888;max-width:500px;margin-top:18px}
+.project-bottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:18px;margin-top:30px}
+.project-link{font:11px "IBM Plex Mono";color:var(--fg)}
+.project-link:hover{color:var(--accent)}
+.project-num{font:10px "IBM Plex Mono";color:#555}
 
-        .switch-circle {
-            width: 22px;
-            height: 22px;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            position: absolute;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        body.theme-dark .switch-circle {
-            transform: translateX(2px);
-            background: #e4e1d0;
-            color: #203850;
-        }
-        body.theme-light .switch-circle {
-            transform: translateX(32px);
-            background: #559492;
-            color: #ffffff;
-        }
+/* TIMELINE */
+.timeline{border-left:1px solid #333;margin-left:10px}
+.timeline-item{position:relative;padding:0 0 55px 42px}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-item:before{content:"";position:absolute;width:9px;height:9px;border:1px solid var(--accent);background:var(--bg);border-radius:50%;left:-5px;top:4px;box-shadow:0 0 15px rgba(183,255,69,.3)}
+.timeline-meta{font:10px "IBM Plex Mono";color:var(--accent);text-transform:uppercase;margin-bottom:13px}
+.timeline h3{font:25px "Space Grotesk";margin-bottom:10px}
+.timeline p{color:#777;line-height:1.7;max-width:720px;font-size:14px}
 
-        /* 3D Isometric App Tiles */
-        .isometric-viewport {
-            perspective: 1000px;
-        }
-        .isometric-canvas {
-            transform: rotateX(55deg) rotateZ(-45deg);
-            transform-style: preserve-3d;
-        }
-        .isometric-card {
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
-            box-shadow: 12px 16px 28px rgba(0, 0, 0, 0.25);
-        }
-        .isometric-card:hover {
-            transform: translateZ(28px) scale(1.05);
-            box-shadow: 20px 28px 40px rgba(0, 0, 0, 0.35);
-        }
+/* GITHUB */
+.github-box{border:1px solid var(--line);padding:30px}
+.github-head{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:25px}
+.github-head h3{font:35px "Space Grotesk";letter-spacing:-.05em}
+.repo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.repo{border:1px solid var(--line);padding:20px;min-height:180px;transition:.3s}
+.repo:hover{border-color:#555;transform:translateY(-3px)}
+.repo h4{font:15px "Space Grotesk";margin-bottom:10px}
+.repo p{font-size:11px;line-height:1.6;color:#666;min-height:54px}
+.repo-meta{font:9px "IBM Plex Mono";color:#555;margin-top:20px;display:flex;justify-content:space-between}
+.repo.loading{color:#666;font:11px "IBM Plex Mono"}
 
-        /* Radar Scanner Animation */
-        @keyframes radarSweep {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .radar-sweep {
-            transform-origin: 100px 100px;
-            animation: radarSweep 5s linear infinite;
-        }
+/* TERMINAL */
+.terminal{background:#050505;border:1px solid #292929;box-shadow:0 30px 100px rgba(0,0,0,.35)}
+.term-bar{height:42px;border-bottom:1px solid #222;display:flex;align-items:center;padding:0 15px;gap:7px}
+.term-dot{width:9px;height:9px;border-radius:50%;background:#333}
+.term-title{margin-left:auto;margin-right:auto;font:10px "IBM Plex Mono";color:#555}
+.term-body{padding:28px;font:12px/1.9 "IBM Plex Mono";min-height:290px;color:#aaa}
+.term-line{white-space:pre-wrap}
+.term-prompt{color:var(--accent)}
+.term-input{width:100%;border:0;outline:0;background:none;color:#ddd;font:12px "IBM Plex Mono";margin-top:7px}
 
-        /* Interactive Pipeline Toggle Switch */
-        .pipeline-toggle {
-            width: 48px;
-            height: 26px;
-            border-radius: 9999px;
-            padding: 3px;
-            cursor: pointer;
-            position: relative;
-            transition: background-color 0.25s ease;
-        }
-        .pipeline-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 9999px;
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.25);
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .pipeline-toggle.active {
-            background-color: #10b981 !important;
-        }
-        .pipeline-toggle.active .pipeline-thumb {
-            transform: translateX(22px);
-        }
-        .pipeline-toggle.inactive {
-            background-color: rgba(120, 120, 120, 0.4) !important;
-        }
-        .pipeline-toggle.inactive .pipeline-thumb {
-            transform: translateX(0px);
-        }
+/* CONTACT */
+.contact{padding:160px 0 100px}
+.contact h2{font:clamp(4rem,10vw,10rem) "Space Grotesk";letter-spacing:-.08em;line-height:.8}
+.contact h2 span{color:var(--accent)}
+.contact-row{margin-top:65px;padding-top:25px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:30px;align-items:center}
+.contact-links{display:flex;gap:24px;flex-wrap:wrap}
+.contact-links a{font:11px "IBM Plex Mono";color:#888}
+.contact-links a:hover{color:var(--accent)}
+footer{border-top:1px solid var(--line);padding:25px 0 45px;display:flex;justify-content:space-between;color:#555;font:10px "IBM Plex Mono"}
 
-        .touch-btn {
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            user-select: none;
-            transition: transform 0.18s ease;
-        }
-        .touch-btn:active { transform: scale(0.95); }
+.cursor{position:fixed;width:18px;height:18px;border:1px solid var(--accent);border-radius:50%;pointer-events:none;z-index:100;transform:translate(-50%,-50%);mix-blend-mode:difference;transition:width .2s,height .2s;display:none}
+@media (pointer:fine){.cursor{display:block}}
+body.hovering .cursor{width:45px;height:45px}
 
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-    </style>
+@media(max-width:900px){
+  .navlinks{display:none}.menu{display:block}.nav-cta{display:none}
+  .hero{padding-top:135px}.hero-bottom,.grid2,.feature-main{grid-template-columns:1fr}
+  .hero-bottom{gap:28px}.hero-actions{justify-content:flex-start}
+  .feature-info{border-left:0;border-top:1px solid var(--line);min-height:520px}
+  .stack{grid-template-columns:repeat(2,1fr)}.repo-grid{grid-template-columns:1fr 1fr}
+  .section{padding:110px 0}
+}
+@media(max-width:600px){
+  .wrap{width:min(100% - 26px,1240px)}
+  .hero h1{font-size:clamp(3.6rem,18vw,6rem)}
+  .hero-top{margin-bottom:35px}.hero-bottom{margin-top:40px}
+  .hero-actions{flex-direction:column}.btn{justify-content:center}
+  .stat-row{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:span 2}
+  .stack,.project-grid,.repo-grid{grid-template-columns:1fr}
+  .stack-item{min-height:145px}
+  .feature-info{padding:30px}.feature-visual{min-height:390px}
+  .github-head{display:block}.github-head h3{margin-bottom:10px}
+  .term-body{padding:20px}
+  .contact{padding-top:110px}.contact-row,footer{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
-<body class="theme-dark relative min-h-screen">
 
-    <!-- Global Three.js 3D Background Canvas -->
-    <canvas id="global-three-canvas"></canvas>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="cursor" aria-hidden="true"></div>
 
-    <!-- Floating Top Navigation Pill -->
-    <header class="fixed top-5 w-full z-50 px-4 sm:px-6">
-        <div class="max-w-5xl mx-auto nav-floating rounded-full px-5 py-3 flex justify-between items-center backdrop-blur-md">
-            <a href="#" class="flex items-center space-x-2 text-sm font-extrabold tracking-tight" aria-label="Home">
-                <span class="w-7 h-7 rounded-full flex items-center justify-center font-mono text-xs font-bold border border-current">
-                    S
-                </span>
-                <span>Satyam Raj</span>
-            </a>
+<header class="nav">
+  <a class="logo" href="#top">S<span>.</span>RAJ</a>
+  <nav class="navlinks" aria-label="Primary">
+    <a href="#about">/profile</a><a href="#work">/work</a><a href="#projects">/projects</a><a href="#github">/github</a><a href="#contact">/contact</a>
+  </nav>
+  <a class="nav-cta" href="mailto:sk4702684@gmail.com">Let's talk ↗</a>
+  <button class="menu" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+</header>
 
-            <nav class="hidden md:flex items-center space-x-6 text-xs font-mono opacity-85" aria-label="Main Navigation">
-                <a href="#about" class="hover:opacity-100 transition-opacity">/profile</a>
-                <a href="#radar" class="hover:opacity-100 transition-opacity">/skills</a>
-                <a href="#experience" class="hover:opacity-100 transition-opacity">/experience</a>
-                <a href="#projects" class="hover:opacity-100 transition-opacity">/projects</a>
-                <a href="#terminal-section" class="hover:opacity-100 transition-opacity">/cli</a>
-                <a href="#contact" class="hover:opacity-100 transition-opacity">/contact</a>
-            </nav>
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <div class="eyebrow">Dehradun, India · 2026</div>
+      <div class="status eyebrow"><span class="dot"></span> available for collaboration</div>
+    </div>
+    <h1 class="reveal">BUILDING<br><span class="outline">SECURE</span><br>SYSTEMS<span class="green">.</span></h1>
+    <div class="hero-bottom reveal">
+      <p class="hero-copy">I'm <strong>Satyam Raj</strong> — a B.Tech ECE student building at the intersection of <strong>cybersecurity, software, Linux and electronics</strong>.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#projects">Explore work <span>↓</span></a>
+        <a class="btn" href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
 
-            <div class="flex items-center space-x-3">
-                <div id="theme-switch-btn" class="glass-switch" role="button" aria-label="Toggle theme">
-                    <div class="switch-circle shadow-md">
-                        <i id="theme-icon" class="fa-solid fa-moon"></i>
-                    </div>
-                </div>
-                <a href="#contact" class="btn-spark px-4 py-1.5 rounded-full text-xs font-bold transition shadow-sm hidden sm:inline-block">
-                    Get in Touch
-                </a>
-            </div>
+<div class="marquee" aria-hidden="true"><div class="marquee-track">
+  <span>CYBERSECURITY <b>✦</b></span><span>SOFTWARE <b>✦</b></span><span>ECE <b>✦</b></span><span>LINUX <b>✦</b></span><span>VLSI / SEMICONDUCTORS <b>✦</b></span><span>ROBOTICS <b>✦</b></span>
+  <span>CYBERSECURITY <b>✦</b></span><span>SOFTWARE <b>✦</b></span><span>ECE <b>✦</b></span><span>LINUX <b>✦</b></span><span>VLSI / SEMICONDUCTORS <b>✦</b></span><span>ROBOTICS <b>✦</b></span>
+</div></div>
+
+<section id="about" class="section">
+  <div class="wrap grid2 reveal">
+    <div>
+      <div class="kicker">01 — Profile</div>
+      <h2 class="display">Curious by default.<br>Technical by choice.</h2>
+    </div>
+    <div>
+      <div class="about-text">
+        <p>I like understanding how things work below the surface — from networks and Linux systems to software architecture and electronics.</p>
+        <p>My current focus is building practical security tooling while developing a stronger foundation in electronics, semiconductors, VLSI and robotics through my ECE degree.</p>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><strong>ECE</strong><span>B.Tech · 2029</span></div>
+        <div class="stat"><strong>04+</strong><span>core project directions</span></div>
+        <div class="stat"><strong>∞</strong><span>things to learn</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="kicker">02 — Toolkit</div>
+    <div class="stack">
+      <article class="stack-item"><div class="stack-icon"><i class="fa-brands fa-python"></i></div><h3>Python / Bash</h3><p>Automation, tooling, scripting and security workflows.</p></article>
+      <article class="stack-item"><div class="stack-icon"><i class="fa-solid fa-shield-halved"></i></div><h3>Security</h3><p>Nmap, reconnaissance, web security concepts and vulnerability assessment.</p></article>
+      <article class="stack-item"><div class="stack-icon"><i class="fa-brands fa-linux"></i></div><h3>Linux Systems</h3><p>Kali, system configuration, terminal workflows and experimentation.</p></article>
+      <article class="stack-item"><div class="stack-icon"><i class="fa-solid fa-microchip"></i></div><h3>ECE / VLSI</h3><p>Electronics fundamentals with a growing semiconductor and VLSI focus.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="work" class="section">
+  <div class="wrap reveal">
+    <div class="kicker">03 — Selected build</div>
+    <div class="feature">
+      <div class="feature-head"><span class="feature-label">Flagship project · 01</span><span class="feature-no">SENTINEL-X / 2026</span></div>
+      <div class="feature-main">
+        <div class="feature-visual">
+          <div class="visual-grid"></div>
+          <div class="shield"><i class="fa-solid fa-shield-halved"></i></div>
         </div>
-    </header>
-
-    <main class="relative z-10 pt-28">
-
-        <!-- 1. HERO SECTION -->
-        <section id="about" class="min-h-[88vh] flex flex-col items-center justify-center py-12 px-4 sm:px-6 text-center">
-            <div class="max-w-4xl mx-auto space-y-6">
-                
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono border border-current opacity-85">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>Cybersecurity & Software Developer • B.Tech ECE (Class of 2029)</span>
-                </div>
-
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight">
-                    Your code. Your systems. <br>
-                    <span class="underline decoration-4">Your Intelligence.</span>
-                </h1>
-
-                <p class="text-sm sm:text-base max-w-2xl mx-auto leading-relaxed opacity-85 font-normal">
-                    Driven and security-focused student at <span class="font-semibold">Shivalik College of Engineering, Dehradun</span>. Hands-on experience in full-stack Python development, Linux system customization, and cybersecurity frameworks. Expert at architecting custom software solutions like automated penetration testing platforms and isolated operating system environments.
-                </p>
-
-                <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-                    <a href="#projects" class="btn-spark touch-btn px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition shadow-md">
-                        Explore Projects <i class="fa-solid fa-arrow-down ml-1 text-[10px]"></i>
-                    </a>
-                    <a href="mailto:sk4702684@gmail.com" class="touch-btn px-6 py-3 rounded-full text-xs font-bold border border-current opacity-80 hover:opacity-100 transition">
-                        <i class="fa-solid fa-envelope mr-1.5"></i> sk4702684@gmail.com
-                    </a>
-                    <a href="tel:+917260865157" class="touch-btn px-6 py-3 rounded-full text-xs font-bold border border-current opacity-80 hover:opacity-100 transition">
-                        <i class="fa-solid fa-phone mr-1.5"></i> +91 7260865157
-                    </a>
-                </div>
-            </div>
-
-            <!-- True 3D Isometric Tiles Grid -->
-            <div class="isometric-viewport w-full max-w-5xl mx-auto pt-16 pb-8">
-                <div class="isometric-canvas grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mx-auto w-fit">
-                    
-                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
-                            <i class="fa-brands fa-python"></i>
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold font-mono block">Python & Bash</span>
-                            <span class="text-[10px] opacity-70">Core Automation</span>
-                        </div>
-                    </div>
-
-                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl text-emerald-400">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold font-mono block">Sentinel-X</span>
-                            <span class="text-[10px] opacity-70">Pen-Test Framework</span>
-                        </div>
-                    </div>
-
-                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
-                            <i class="fa-brands fa-linux"></i>
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold font-mono block">Linux Architecture</span>
-                            <span class="text-[10px] opacity-70">GNOME Customization</span>
-                        </div>
-                    </div>
-
-                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
-                            <i class="fa-solid fa-terminal"></i>
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold font-mono block">Nmap & Dirsearch</span>
-                            <span class="text-[10px] opacity-70">Pen-Testing Tools</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. RADAR PLATFORM: Expert Skills & Education -->
-        <section id="radar" class="py-20 px-4 sm:px-6">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-6 space-y-5">
-                    <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Technical Foundation & Skills
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                        Expert technical capabilities.
-                    </h2>
-                    <p class="text-sm leading-relaxed opacity-85">
-                        Practicing systems programming, automated reconnaissance tooling, and modern full-stack integrations. Balancing academic curriculum with open-source systems deployment.
-                    </p>
-
-                    <div class="space-y-3 font-mono text-xs pt-2">
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
-                            <span><i class="fa-solid fa-code mr-2"></i>Programming:</span>
-                            <span class="font-bold">Python, Bash Scripting, C/C++</span>
-                        </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
-                            <span><i class="fa-solid fa-shield-virus mr-2"></i>Pen-Testing & Tools:</span>
-                            <span class="font-bold">Nmap, Dirsearch, Git & GitHub</span>
-                        </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
-                            <span><i class="fa-solid fa-cubes mr-2"></i>Frameworks & OS:</span>
-                            <span class="font-bold">Streamlit, REST APIs, Linux & GNOME</span>
-                        </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
-                            <span><i class="fa-solid fa-graduation-cap mr-2"></i>Education:</span>
-                            <span class="font-bold">B.Tech (ECE) • Shivalik College (2029)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Radar Display Graphic -->
-                <div class="lg:col-span-6 flex justify-center">
-                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full border-2 radar-ring flex items-center justify-center">
-                        <div class="absolute w-52 h-52 sm:w-64 sm:h-64 rounded-full border radar-ring flex items-center justify-center">
-                            <div class="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full border radar-ring"></div>
-                        </div>
-                        
-                        <div class="absolute inset-0 rounded-full overflow-hidden flex items-center justify-center">
-                            <svg class="w-full h-full radar-sweep opacity-40" viewBox="0 0 200 200">
-                                <defs>
-                                    <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="currentColor" stop-opacity="0.85" />
-                                        <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
-                                    </linearGradient>
-                                </defs>
-                                <path d="M 100 100 L 200 100 A 100 100 0 0 0 170 30 Z" fill="url(#radarGrad)" />
-                            </svg>
-                        </div>
-
-                        <!-- Center Identity Hub -->
-                        <div class="spark-card rounded-2xl p-4 flex flex-col items-center shadow-xl border border-current z-10 text-center">
-                            <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-10 h-10 rounded-full object-cover mb-1 border border-current">
-                            <span class="text-[10px] font-mono font-bold">Satyam Raj</span>
-                            <span class="text-[9px] font-mono opacity-70">Dehradun, UK</span>
-                        </div>
-
-                        <!-- Orbital Badges -->
-                        <div class="absolute top-6 left-10 spark-tile px-3 py-1.5 rounded-full text-xs font-mono shadow-sm">
-                            <i class="fa-brands fa-linux mr-1"></i> GNOME
-                        </div>
-                        <div class="absolute bottom-8 right-10 spark-tile px-3 py-1.5 rounded-full text-xs font-mono shadow-sm">
-                            <i class="fa-solid fa-database mr-1"></i> Supabase
-                        </div>
-                        <div class="absolute bottom-10 left-6 spark-tile px-3 py-1.5 rounded-full text-xs font-mono shadow-sm">
-                            <i class="fa-solid fa-terminal mr-1"></i> REST APIs
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 3. WORK EXPERIENCE & LEADERSHIP PIPELINE -->
-        <section id="experience" class="py-20 px-4 sm:px-6">
-            <div class="max-w-5xl mx-auto space-y-12">
-                <div class="text-center space-y-3">
-                    <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Experience & Leadership
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                        Work Experience & Deployments.
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Experience 1: Lead Developer (Sentinel-X) -->
-                    <div class="spark-card rounded-3xl p-6 sm:p-8 space-y-5">
-                        <div class="flex items-center justify-between pb-2 border-b border-current border-opacity-10 text-xs font-mono">
-                            <span class="font-bold">Lead Developer</span>
-                            <span class="text-emerald-500 font-bold">Sentinel-X</span>
-                        </div>
-                        <ul class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Designed and engineered an automated multi-tool penetration testing framework featuring an interactive GUI built with Streamlit.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Integrated Supabase for secure backend database management, user authentication, and activity logging.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Streamlined network mapping and vulnerability assessment workflows into a single unified dashboard.</span>
-                            </li>
-                        </ul>
-                        <div class="pt-2">
-                            <span class="text-xs font-mono opacity-70">Architecture: Python • Streamlit • Supabase • Nmap</span>
-                        </div>
-                    </div>
-
-                    <!-- Experience 2: Project Lead & Open Source Contributor -->
-                    <div class="spark-card rounded-3xl p-6 sm:p-8 space-y-5">
-                        <div class="flex items-center justify-between pb-2 border-b border-current border-opacity-10 text-xs font-mono">
-                            <span class="font-bold">Project Lead & Contributor</span>
-                            <span class="opacity-70">System Customization</span>
-                        </div>
-                        <ul class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Led cross-functional teams of developers on custom software engineering and security tool deployments.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Actively experimenting with Linux desktop environment tweaks, system architecture, and modular developer tools.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Architecting isolated operating system environments and custom app-locking utilities.</span>
-                            </li>
-                        </ul>
-                        <div class="pt-2">
-                            <div class="space-y-2">
-                                <div class="p-2.5 rounded-xl spark-tile flex justify-between items-center text-xs font-mono">
-                                    <span>Nmap & Dirsearch Probing</span>
-                                    <div class="pipeline-toggle active" onclick="toggleSwitch(this)" role="switch" aria-checked="true">
-                                        <div class="pipeline-thumb"></div>
-                                    </div>
-                                </div>
-                                <div class="p-2.5 rounded-xl spark-tile flex justify-between items-center text-xs font-mono">
-                                    <span>Linux GNOME Tweaks</span>
-                                    <div class="pipeline-toggle active" onclick="toggleSwitch(this)" role="switch" aria-checked="true">
-                                        <div class="pipeline-thumb"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. WORKFLOW TREE (Methodology from Video) -->
-        <section id="workflow" class="py-20 px-4 sm:px-6">
-            <div class="max-w-5xl mx-auto text-center space-y-10">
-                <div class="space-y-3">
-                    <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Workflow Architecture
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                        Data-centric security & software lifecycle.
-                    </h2>
-                    <p class="text-xs sm:text-sm max-w-md mx-auto opacity-80">
-                        Code precision, reliability, and security are maintained across all custom builds.
-                    </p>
-                </div>
-
-                <div class="w-full flex flex-col items-center pt-4">
-                    <div class="btn-spark touch-btn px-8 py-3.5 rounded-2xl font-bold font-mono text-sm shadow-xl z-10">
-                        Satyam Raj System Engineering Platform
-                    </div>
-
-                    <div class="w-full max-w-4xl h-14 relative">
-                        <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 60">
-                            <line x1="400" y1="0" x2="400" y2="30" class="tree-line" stroke-width="2" />
-                            <line x1="100" y1="30" x2="700" y2="30" class="tree-line" stroke-width="2" />
-                            <line x1="100" y1="30" x2="100" y2="60" class="tree-line" stroke-width="2" />
-                            <line x1="300" y1="30" x2="300" y2="60" class="tree-line" stroke-width="2" />
-                            <line x1="500" y1="30" x2="500" y2="60" class="tree-line" stroke-width="2" />
-                            <line x1="700" y1="30" x2="700" y2="60" class="tree-line" stroke-width="2" />
-                        </svg>
-                    </div>
-
-                    <div class="w-full max-w-5xl grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
-                            Refine Tool Precision
-                        </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
-                            Ensure DB Reliability
-                        </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
-                            Enhance Kernel Speed
-                        </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
-                            Deploy Web Solutions
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. DELIVERABLES & LIVE GITHUB SYNC -->
-        <section id="projects" class="py-20 px-4 sm:px-6">
-            <div class="max-w-6xl mx-auto space-y-12">
-                <div class="space-y-2 text-center sm:text-left border-b border-current border-opacity-15 pb-6">
-                    <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Featured Projects
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-1">Featured Deliverables</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Project 1: Sentinel-X -->
-                    <div class="spark-card rounded-3xl p-7 flex flex-col justify-between space-y-5">
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between text-xs font-mono opacity-80">
-                                <span class="font-semibold">Lead Developer • Pentesting Platform</span>
-                                <span>MIT License</span>
-                            </div>
-                            <h3 class="text-2xl font-bold">Sentinel-X</h3>
-                            <p class="text-xs sm:text-sm leading-relaxed opacity-90">
-                                Automated multi-tool penetration testing framework featuring an interactive GUI built with Streamlit. Integrated Supabase for secure backend database management, user authentication, and activity logging.
-                            </p>
-                            <div class="flex flex-wrap gap-1.5 font-mono text-xs pt-1">
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Python 3</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Streamlit GUI</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Supabase DB</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Nmap API</span>
-                            </div>
-                        </div>
-                        <div class="pt-4 border-t border-current border-opacity-10 flex items-center justify-between">
-                            <a href="https://github.com/sk4702684/Sentinel-X" target="_blank" rel="noopener noreferrer" class="btn-spark px-5 py-2.5 rounded-full text-xs font-bold shadow-sm">
-                                View Source <i class="fa-brands fa-github ml-1"></i>
-                            </a>
-                            <span class="text-xs font-mono text-emerald-500">Public Solution</span>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: rento-marketplace -->
-                    <div class="spark-card rounded-3xl p-7 flex flex-col justify-between space-y-5">
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between text-xs font-mono opacity-80">
-                                <span class="font-semibold">Full-Stack Solution • Marketplace</span>
-                                <span>Production</span>
-                            </div>
-                            <h3 class="text-2xl font-bold">rento-marketplace</h3>
-                            <p class="text-xs sm:text-sm leading-relaxed opacity-90">
-                                Hyperlocal real-estate and property directory engine built for Patna and Bihar. Provides listing monetization and gatekept broker communication portals.
-                            </p>
-                            <div class="flex flex-wrap gap-1.5 font-mono text-xs pt-1">
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">TypeScript</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Web Stack</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Manus Built</span>
-                            </div>
-                        </div>
-                        <div class="pt-4 border-t border-current border-opacity-10 flex items-center justify-between">
-                            <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full text-xs font-bold border border-current opacity-80 hover:opacity-100 transition">
-                                Profile Repos
-                            </a>
-                            <span class="text-xs font-mono opacity-70">Production</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Live Dynamic Repositories Feed -->
-                <div class="space-y-6 pt-8 border-t border-current border-opacity-10">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div>
-                            <h3 class="text-xl font-bold flex items-center gap-2">
-                                <i class="fa-brands fa-github"></i> All Dynamic Repositories
-                            </h3>
-                            <p class="text-xs opacity-70 mt-0.5">Live fetched via GitHub API (@sk4702684)</p>
-                        </div>
-                        <span id="repo-count" class="badge-spark px-3.5 py-1 rounded-full text-xs font-mono">Syncing...</span>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <div class="relative flex-1">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 opacity-60 text-xs"></i>
-                            <input id="repo-search" type="text" placeholder="Filter repositories by name or tech..." class="field-input w-full pl-9 pr-4 py-3 rounded-xl text-xs sm:text-sm focus:outline-none font-mono">
-                        </div>
-                        <select id="repo-lang-filter" class="field-input touch-btn rounded-xl px-4 py-3 text-xs focus:outline-none font-mono">
-                            <option value="ALL">All Technologies</option>
-                        </select>
-                    </div>
-
-                    <div id="github-repos-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div class="spark-card p-6 rounded-2xl text-center py-10 col-span-full font-mono text-xs opacity-70">
-                            <i class="fa-solid fa-circle-notch fa-spin text-base mb-2"></i>
-                            <p>Querying GitHub repositories...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. TERMINAL CLI SECTION -->
-        <section id="terminal-section" class="py-20 px-4 sm:px-6">
-            <div class="max-w-3xl mx-auto space-y-6">
-                <div class="space-y-1 text-center">
-                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Command Line Console</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold">Terminal CLI</h2>
-                    <p class="text-xs opacity-75">Type <code class="px-1.5 py-0.5 rounded border border-current font-mono">help</code> to list available commands</p>
-                </div>
-
-                <div class="terminal-bg rounded-2xl overflow-hidden font-mono text-xs shadow-2xl">
-                    <div class="px-4 py-2.5 flex items-center justify-between border-b border-current border-opacity-15 opacity-85">
-                        <div class="flex items-center space-x-1.5">
-                            <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-                        </div>
-                        <span class="text-[11px]">satyam@workstation:~</span>
-                    </div>
-                    <div id="terminal-output" class="p-4 h-56 overflow-y-auto space-y-2 opacity-95">
-                        <p class="font-semibold">Satyam Raj System Shell [Shivalik Engineering Station]</p>
-                        <p class="opacity-60">Connected. Enter 'help' to see system commands.</p>
-                    </div>
-                    <div class="p-3 border-t border-current border-opacity-15 flex items-center space-x-2">
-                        <label for="terminal-input" class="font-semibold text-xs opacity-85">satyam@shivalik:~$</label>
-                        <input id="terminal-input" type="text" class="flex-1 bg-transparent focus:outline-none font-mono text-xs py-1" placeholder="enter command..." autocomplete="off">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. CONTACT FOOTER SECTION -->
-        <section id="contact" class="py-20 px-4 sm:px-6">
-            <div class="max-w-4xl mx-auto spark-card rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-2xl">
-                <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                    Let's Connect
-                </div>
-                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                    Get in touch with Satyam.
-                </h2>
-                <p class="text-xs sm:text-sm max-w-md mx-auto opacity-85">
-                    Open for cybersecurity research, full-stack software development, and technical collaboration.
-                </p>
-
-                <div class="flex flex-wrap justify-center gap-3 pt-2">
-                    <a href="mailto:sk4702684@gmail.com" class="btn-spark px-6 py-3 rounded-full text-xs font-bold shadow-md">
-                        <i class="fa-solid fa-envelope mr-1.5"></i> sk4702684@gmail.com
-                    </a>
-                    <a href="tel:+917260865157" class="px-6 py-3 rounded-full text-xs font-bold border border-current hover:bg-current hover:text-black transition">
-                        <i class="fa-solid fa-phone mr-1.5"></i> +91 7260865157
-                    </a>
-                </div>
-
-                <div class="pt-4 text-xs font-mono opacity-80">
-                    <span><i class="fa-solid fa-location-dot mr-1.5"></i>Dehradun, Uttarakhand</span>
-                </div>
-
-                <div class="flex justify-center space-x-5 pt-3 text-base opacity-80">
-                    <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="hover:opacity-100 transition" aria-label="GitHub Profile"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="hover:opacity-100 transition" aria-label="LinkedIn Profile"><i class="fa-brands fa-linkedin"></i></a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer Note -->
-    <footer class="py-8 text-center text-xs opacity-70 font-mono border-t border-current border-opacity-10">
-        © 2026 Satyam Raj • Shivalik College of Engineering, Dehradun
-    </footer>
-
-    <!-- SCRIPTS -->
-    <script>
-        // 1. Theme Logic
-        const themeBtn = document.getElementById('theme-switch-btn');
-        const themeIcon = document.getElementById('theme-icon');
-
-        let currentTheme = localStorage.getItem('spark-theme') || 'dark';
-
-        function updateTheme(theme) {
-            if (theme === 'light') {
-                document.body.classList.remove('theme-dark');
-                document.body.classList.add('theme-light');
-                themeIcon.className = "fa-solid fa-sun";
-                updateThreeJsTheme('#559492');
-            } else {
-                document.body.classList.remove('theme-light');
-                document.body.classList.add('theme-dark');
-                themeIcon.className = "fa-solid fa-moon";
-                updateThreeJsTheme('#e4e1d0');
-            }
-            localStorage.setItem('spark-theme', theme);
-        }
-
-        themeBtn.addEventListener('click', () => {
-            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            updateTheme(currentTheme);
-        });
-
-        function toggleSwitch(el) {
-            const isChecked = el.getAttribute('aria-checked') === 'true';
-            el.setAttribute('aria-checked', !isChecked);
-            if (el.classList.contains('active')) {
-                el.classList.remove('active');
-                el.classList.add('inactive');
-            } else {
-                el.classList.remove('inactive');
-                el.classList.add('active');
-            }
-        }
-
-        // 2. Three.js Background Logic (Optimized for battery saving)
-        let globalScene, globalCamera, globalRenderer, globalStarField;
-        let isTabActive = true; 
-
-        document.addEventListener("visibilitychange", () => {
-            isTabActive = !document.hidden;
-        });
-
-        function initThreeJsBackground() {
-            // Check if Three.js is loaded (since it's deferred)
-            if (typeof THREE === 'undefined') {
-                setTimeout(initThreeJsBackground, 100);
-                return;
-            }
-
-            const canvas = document.getElementById('global-three-canvas');
-            if (!canvas) return;
-
-            globalScene = new THREE.Scene();
-            globalCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            globalCamera.position.z = 20;
-
-            globalRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false });
-            globalRenderer.setSize(window.innerWidth, window.innerHeight);
-            globalRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-
-            const starCount = 140;
-            const starGeo = new THREE.BufferGeometry();
-            const starCoords = new Float32Array(starCount * 3);
-
-            for (let i = 0; i < starCount * 3; i += 3) {
-                starCoords[i] = (Math.random() - 0.5) * 50;
-                starCoords[i + 1] = (Math.random() - 0.5) * 50;
-                starCoords[i + 2] = (Math.random() - 0.5) * 30;
-            }
-
-            starGeo.setAttribute('position', new THREE.BufferAttribute(starCoords, 3));
-            const initialColor = currentTheme === 'light' ? 0x559492 : 0xe4e1d0;
-
-            const starMat = new THREE.PointsMaterial({
-                color: initialColor,
-                size: 0.18,
-                transparent: true,
-                opacity: 0.4
-            });
-
-            globalStarField = new THREE.Points(starGeo, starMat);
-            globalScene.add(globalStarField);
-
-            window.addEventListener('resize', () => {
-                globalCamera.aspect = window.innerWidth / window.innerHeight;
-                globalCamera.updateProjectionMatrix();
-                globalRenderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            let scrollOffset = 0;
-            window.addEventListener('scroll', () => {
-                scrollOffset = window.scrollY * 0.001;
-            }, { passive: true });
-
-            function animateGlobal() {
-                requestAnimationFrame(animateGlobal);
-                
-                // Save resources when tab is not active
-                if (!isTabActive) return; 
-
-                globalStarField.rotation.y += 0.0008;
-                globalStarField.rotation.x = scrollOffset;
-                globalRenderer.render(globalScene, globalCamera);
-            }
-            animateGlobal();
-        }
-
-        function updateThreeJsTheme(colorHex) {
-            if (globalStarField) {
-                globalStarField.material.color = new THREE.Color(colorHex);
-            }
-        }
-
-        // 3. GitHub API Sync Logic (With Rate Limiting Handled)
-        let allUserRepos = [];
-
-        async function fetchAllGitHubRepos() {
-            const username = 'sk4702684';
-            const gridContainer = document.getElementById('github-repos-grid');
-            const countBadge = document.getElementById('repo-count');
-            const langFilter = document.getElementById('repo-lang-filter');
-
-            try {
-                let page = 1;
-                let fetchedRepos = [];
-                let keepFetching = true;
-
-                while (keepFetching && page <= 3) {
-                    const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100&page=${page}`);
-                    
-                    // Handle API Rate Limiting or errors properly
-                    if (!response.ok) {
-                        if (response.status === 403 || response.status === 429) {
-                            throw new Error("GitHub API rate limit exceeded. Please wait a bit.");
-                        }
-                        break; 
-                    }
-                    
-                    const data = await response.json();
-                    if (data.length === 0) {
-                        keepFetching = false;
-                    } else {
-                        fetchedRepos = fetchedRepos.concat(data);
-                        if (data.length < 100) keepFetching = false;
-                        page++;
-                    }
-                }
-
-                allUserRepos = fetchedRepos.filter(repo => repo.name.toLowerCase() !== `${username.toLowerCase()}.github.io`);
-                countBadge.innerText = `${allUserRepos.length} Repositories Live`;
-
-                const languages = new Set();
-                allUserRepos.forEach(repo => {
-                    if (repo.language) languages.add(repo.language);
-                });
-
-                languages.forEach(lang => {
-                    const opt = document.createElement('option');
-                    opt.value = lang;
-                    opt.textContent = lang;
-                    opt.className = "bg-slate-800 text-white";
-                    langFilter.appendChild(opt);
-                });
-
-                renderRepos(allUserRepos);
-
-            } catch (error) {
-                console.error("Error loading repositories:", error);
-                gridContainer.innerHTML = `
-                    <div class="spark-card p-6 rounded-2xl text-center py-8 col-span-full border border-red-400 border-opacity-30">
-                        <p class="font-mono text-xs opacity-70">${error.message.includes("rate limit") ? "GitHub API limit reached. Try again later." : "Could not sync repositories right now."}</p>
-                        <a href="https://github.com/sk4702684" target="_blank" class="btn-spark touch-btn mt-3 px-4 py-2 rounded-full text-xs font-mono">View GitHub Profile Directly</a>
-                    </div>
-                `;
-                countBadge.innerText = 'Offline';
-                countBadge.classList.add('text-red-400');
-            }
-        }
-
-        function renderRepos(reposToDisplay) {
-            const gridContainer = document.getElementById('github-repos-grid');
-            gridContainer.innerHTML = '';
-
-            if (reposToDisplay.length === 0) {
-                gridContainer.innerHTML = `
-                    <div class="spark-card p-8 rounded-2xl text-center col-span-full font-mono text-xs opacity-60">
-                        No repositories matching current filter.
-                    </div>
-                `;
-                return;
-            }
-
-            reposToDisplay.forEach(repo => {
-                const card = document.createElement('div');
-                card.className = 'spark-card p-5 rounded-2xl flex flex-col justify-between space-y-4 reveal-on-scroll active';
-
-                card.innerHTML = `
-                    <div class="space-y-2.5">
-                        <div class="flex items-center justify-between">
-                            <i class="fa-regular fa-folder text-sm opacity-80"></i>
-                            <div class="flex items-center space-x-2.5 text-xs font-mono opacity-70">
-                                <span class="flex items-center gap-1"><i class="fa-regular fa-star text-amber-400"></i> ${repo.stargazers_count}</span>
-                                <span class="flex items-center gap-1"><i class="fa-solid fa-code-fork"></i> ${repo.forks_count}</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 class="text-sm font-semibold hover:underline transition truncate" title="${repo.name}">
-                                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
-                            </h4>
-                            <p class="text-xs opacity-80 mt-1 leading-relaxed line-clamp-2">
-                                ${repo.description ? repo.description : "No description provided."}
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="pt-3 flex items-center justify-between text-[11px] font-mono border-t border-current border-opacity-15">
-                        <span class="flex items-center gap-1.5 opacity-85">
-                            <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                            ${repo.language ? repo.language : "Code"}
-                        </span>
-                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="opacity-85 hover:opacity-100 underline flex items-center gap-1 touch-btn min-h-0 py-1">
-                            Source <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
-                        </a>
-                    </div>
-                `;
-
-                gridContainer.appendChild(card);
-            });
-        }
-
-        document.getElementById('repo-search').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            const lang = document.getElementById('repo-lang-filter').value;
-            applyFilters(query, lang);
-        });
-
-        document.getElementById('repo-lang-filter').addEventListener('change', (e) => {
-            const lang = e.target.value;
-            const query = document.getElementById('repo-search').value.toLowerCase();
-            applyFilters(query, lang);
-        });
-
-        function applyFilters(searchQuery, languageFilter) {
-            const filtered = allUserRepos.filter(repo => {
-                const matchesSearch = repo.name.toLowerCase().includes(searchQuery) || 
-                                     (repo.description && repo.description.toLowerCase().includes(searchQuery));
-                const matchesLang = languageFilter === 'ALL' || repo.language === languageFilter;
-                return matchesSearch && matchesLang;
-            });
-            renderRepos(filtered);
-        }
-
-        // 4. Terminal Logic
-        const termInput = document.getElementById('terminal-input');
-        const termOutput = document.getElementById('terminal-output');
-        const commands = {
-            'help': 'Commands:\n • whoami    - Satyam Raj identity & background\n • skills    - Core technical capabilities\n • projects  - Featured repositories\n • theme     - Toggle dark blue / light aqua mode\n • contact   - Phone & email channels\n • clear     - Clear terminal buffer',
-            'whoami': 'Satyam Raj | Cybersecurity & Software Developer\nStudent at Shivalik College of Engineering, Dehradun (B.Tech ECE, Class of 2029).',
-            'skills': 'Languages: Python, Bash Scripting, C/C++\nFrameworks: Streamlit, REST APIs\nSecurity: Nmap, Dirsearch, Reconnaissance, Pentesting\nOS: Linux Architecture & GNOME Customization',
-            'projects': '1. Sentinel-X: Automated Multi-Tool Pen-Testing Framework (Python + Streamlit + Supabase)\n2. rento-marketplace: Hyperlocal Real-Estate Platform (TypeScript + Manus)',
-            'theme': 'Toggled palette successfully.',
-            'contact': 'Phone: +91 7260865157\nEmail: sk4702684@gmail.com\nLocation: Dehradun, Uttarakhand'
-        };
-
-        termInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const input = termInput.value.trim().toLowerCase();
-                termInput.value = '';
-                const cmdLine = document.createElement('p');
-                cmdLine.className = 'font-semibold';
-                cmdLine.innerHTML = `<span class="opacity-60">satyam@shivalik:~$</span> ${input}`;
-                termOutput.appendChild(cmdLine);
-
-                if (input === 'clear') { 
-                    termOutput.innerHTML = ''; 
-                } else if (input === 'theme') {
-                    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                    updateTheme(currentTheme);
-                    const resLine = document.createElement('p');
-                    resLine.className = 'opacity-85';
-                    resLine.textContent = `Theme active: ${currentTheme.toUpperCase()}`;
-                    termOutput.appendChild(resLine);
-                } else if (commands[input]) {
-                    const resLine = document.createElement('p');
-                    resLine.className = 'opacity-85 whitespace-pre-line';
-                    resLine.textContent = commands[input];
-                    termOutput.appendChild(resLine);
-                } else if (input !== '') {
-                    const errLine = document.createElement('p');
-                    errLine.className = 'text-red-400';
-                    errLine.textContent = `command not found: ${input}. Enter 'help' for commands.`;
-                    termOutput.appendChild(errLine);
-                }
-                termOutput.scrollTop = termOutput.scrollHeight;
-            }
-        });
-
-        // Initialize App
-        document.addEventListener("DOMContentLoaded", () => {
-            updateTheme(currentTheme);
-            initThreeJsBackground();
-            fetchAllGitHubRepos();
-        });
-    </script>
+        <div class="feature-info">
+          <div>
+            <h3>Sentinel<span class="green">-X</span></h3>
+            <p>Automated multi-tool penetration testing framework with an interactive Streamlit interface. Integrates Supabase for backend data, authentication and activity logging, bringing network mapping and vulnerability assessment into one workflow.</p>
+            <div class="tags"><span class="tag">PYTHON</span><span class="tag">STREAMLIT</span><span class="tag">SUPABASE</span><span class="tag">NMAP</span></div>
+          </div>
+          <div class="feature-foot"><span>Lead developer · security tooling</span><a class="arrow" href="https://github.com/sk4702684/Sentinel-X" target="_blank" rel="noopener noreferrer">VIEW SOURCE ↗</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects" class="section" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="kicker">04 — Other projects</div>
+    <div class="project-grid">
+      <article class="project">
+        <div><div class="project-top"><span>02 / SYSTEMS</span><span>CONCEPT</span></div><h3>Cordon<br>VaultOS<span class="green">.</span></h3><p>Isolated OS architecture concept designed around strict application whitelisting, sandboxing and traceable application access.</p></div>
+        <div class="project-bottom"><span class="project-link">SYSTEM ARCHITECTURE</span><span class="project-num">02</span></div>
+      </article>
+      <article class="project">
+        <div><div class="project-top"><span>03 / WEB SECURITY</span><span>INTERNSHIP</span></div><h3>Secure<span class="green">Shield</span><span class="green">.</span></h3><p>Lightweight Python web application vulnerability scanner focused on security headers, configuration checks, ports, SSL/TLS and basic validation.</p></div>
+        <div class="project-bottom"><span class="project-link">PYTHON · REQUESTS · BS4 · NMAP</span><span class="project-num">03</span></div>
+      </article>
+      <article class="project">
+        <div><div class="project-top"><span>04 / FULL STACK</span><span>WEB</span></div><h3>rento<br>marketplace<span class="green">.</span></h3><p>Hyperlocal real-estate and property directory concept for Patna and Bihar, including listing monetization and broker communication workflows.</p></div>
+        <div class="project-bottom"><span class="project-link">TYPESCRIPT · WEB STACK</span><span class="project-num">04</span></div>
+      </article>
+      <article class="project">
+        <div><div class="project-top"><span>05 / DIRECTION</span><span>ONGOING</span></div><h3>ECE ×<br>Robotics<span class="green">.</span></h3><p>Exploring the intersection of embedded electronics, sensors, automation, robotics and future semiconductor-focused systems.</p></div>
+        <div class="project-bottom"><span class="project-link">ELECTRONICS · ROBOTICS · VLSI</span><span class="project-num">05</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap reveal">
+    <div class="kicker">05 — Timeline</div>
+    <div class="grid2">
+      <div><h2 class="display">Learning.<br>Building.<br>Shipping.</h2></div>
+      <div class="timeline">
+        <div class="timeline-item"><div class="timeline-meta">2026 · Current</div><h3>B.Tech — Electronics & Communication Engineering</h3><p>Shivalik College of Engineering, Dehradun. Building fundamentals while exploring cybersecurity, systems and semiconductor technology.</p></div>
+        <div class="timeline-item"><div class="timeline-meta">Project · Sentinel-X</div><h3>Security tooling & automation</h3><p>Designed a unified workflow for network mapping and vulnerability assessment using Python, Streamlit, Supabase and Nmap.</p></div>
+        <div class="timeline-item"><div class="timeline-meta">Internship · SecureShield</div><h3>Web application security</h3><p>Worked on a practical vulnerability scanner covering common web security weaknesses and report generation.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="github" class="section">
+  <div class="wrap reveal">
+    <div class="kicker">06 — Open source</div>
+    <div class="github-box">
+      <div class="github-head"><div><h3>Live repositories<span class="green">.</span></h3><p class="muted mono" style="font-size:10px;margin-top:7px">@sk4702684 · fetched from GitHub</p></div><a class="btn" href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer">Open profile ↗</a></div>
+      <div id="repo-grid" class="repo-grid"><div class="repo loading">SYNCING REPOSITORIES...</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0">
+  <div class="wrap reveal">
+    <div class="kicker">07 — CLI</div>
+    <div class="terminal" aria-label="Interactive terminal">
+      <div class="term-bar"><span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span><span class="term-title">satyam@shivalik — bash</span></div>
+      <div class="term-body" id="terminal-output">
+        <div class="term-line">Satyam Raj portfolio shell · type <span class="green">help</span></div>
+        <div class="term-line">────────────────────────────────────────</div>
+        <div class="term-line"><span class="term-prompt">satyam@shivalik:~$</span> <span id="typed"></span><span class="green">▋</span></div>
+        <input class="term-input" id="term-input" aria-label="Terminal command" autocomplete="off" placeholder="try: help">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap reveal">
+    <div class="kicker">08 — Contact</div>
+    <h2>LET'S BUILD<br>SOMETHING <span>REAL.</span></h2>
+    <div class="contact-row">
+      <div class="contact-links">
+        <a href="mailto:sk4702684@gmail.com">EMAIL ↗</a>
+        <a href="tel:+917260865157">PHONE ↗</a>
+        <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer">GITHUB ↗</a>
+        <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer">LINKEDIN ↗</a>
+      </div>
+      <span class="mono muted" style="font-size:10px">DEHRADUN · INDIA</span>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="wrap"><span>© 2026 SATYAM RAJ</span><span>B.TECH ECE · SHIVALIK COLLEGE</span></footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Reveal-on-scroll
+  const reveals = document.querySelectorAll('.reveal');
+  if (!reduce && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target)}});
+    }, {threshold:.12});
+    reveals.forEach(el => io.observe(el));
+  } else reveals.forEach(el => el.classList.add('visible'));
+
+  // Cursor
+  const cursor = document.querySelector('.cursor');
+  if(cursor && matchMedia('(pointer:fine)').matches){
+    addEventListener('mousemove', e => {cursor.style.left=e.clientX+'px';cursor.style.top=e.clientY+'px'});
+    document.querySelectorAll('a,button,.project,.stack-item,.repo').forEach(el=>{
+      el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+      el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+    });
+  }
+
+  // Subtle canvas background
+  const canvas=document.getElementById('bg'),ctx=canvas.getContext('2d');
+  let w=0,h=0,dots=[];
+  function resize(){
+    w=innerWidth;h=innerHeight;canvas.width=Math.floor(w*devicePixelRatio);canvas.height=Math.floor(h*devicePixelRatio);
+    canvas.style.width=w+'px';canvas.style.height=h+'px';ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+    dots=Array.from({length:Math.min(70,Math.floor(w/18))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.3+.2,v:(Math.random()-.5)*.12}));
+  }
+  function draw(){
+    ctx.clearRect(0,0,w,h);
+    dots.forEach((p,i)=>{
+      p.y+=p.v;if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      ctx.fillStyle=i%9===0?'rgba(183,255,69,.35)':'rgba(255,255,255,.12)';
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill();
+    });
+    if(!reduce)requestAnimationFrame(draw);
+  }
+  resize();addEventListener('resize',resize);draw();
+
+  // GitHub safe DOM rendering
+  const grid=document.getElementById('repo-grid');
+  fetch('https://api.github.com/users/sk4702684/repos?sort=updated&per_page=12')
+    .then(r=>{if(!r.ok)throw new Error('GitHub unavailable');return r.json()})
+    .then(repos=>{
+      grid.replaceChildren();
+      repos.filter(r=>r.name!=='sk4702684.github.io').slice(0,9).forEach(repo=>{
+        const card=document.createElement('a');card.className='repo';card.href=repo.html_url;card.target='_blank';card.rel='noopener noreferrer';
+        const h=document.createElement('h4');h.textContent=repo.name;card.appendChild(h);
+        const p=document.createElement('p');p.textContent=repo.description||'No description provided.';card.appendChild(p);
+        const meta=document.createElement('div');meta.className='repo-meta';
+        const lang=document.createElement('span');lang.textContent=repo.language||'CODE';
+        const stars=document.createElement('span');stars.textContent='★ '+repo.stargazers_count;
+        meta.append(lang,stars);card.appendChild(meta);grid.appendChild(card);
+      });
+      if(!grid.children.length)grid.innerHTML='<div class="repo loading">NO PUBLIC REPOSITORIES FOUND.</div>';
+    })
+    .catch(()=>{grid.replaceChildren();const a=document.createElement('a');a.className='repo loading';a.href='https://github.com/sk4702684';a.target='_blank';a.rel='noopener noreferrer';a.textContent='GitHub feed unavailable — open profile ↗';grid.appendChild(a)});
+
+  // Terminal
+  const input=document.getElementById('term-input'),out=document.getElementById('terminal-output');
+  const commands={
+    help:'commands: help · whoami · projects · stack · contact · clear',
+    whoami:'Satyam Raj — B.Tech ECE student · cybersecurity & software',
+    projects:'Sentinel-X · SecureShield · CordonVaultOS · rento-marketplace',
+    stack:'Python · Bash · Linux · Nmap · Streamlit · Supabase · C/C++ · ECE',
+    contact:'sk4702684@gmail.com · github.com/sk4702684'
+  };
+  input.addEventListener('keydown',e=>{
+    if(e.key!=='Enter')return;
+    const cmd=input.value.trim().toLowerCase();input.value='';
+    if(cmd==='clear'){out.querySelectorAll('.generated').forEach(x=>x.remove());return}
+    const line=document.createElement('div');line.className='term-line generated';
+    const text=document.createElement('span');text.textContent=commands[cmd]||'command not found. type help';
+    line.appendChild(text);out.insertBefore(line,input);
+    out.scrollTop=out.scrollHeight;
+  });
+})();
+</script>
 </body>
 </html>
+'''
+
+path = Path("/mnt/data/satyam_portfolio_reference_redesign.html")
+path.write_text(html, encoding="utf-8")
+print(f"Created: {path}")
+print(f"Size: {path.stat().st_size/1024:.1f} KB")
