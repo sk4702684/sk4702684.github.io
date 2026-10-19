@@ -1,1054 +1,470 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <title>Satyam Raj | Cybersecurity & Software Developer</title>
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome Icons CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+from pathlib import Path
+import re
 
-    <!-- Three.js CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+src = Path("/mnt/data/Pasted text.txt").read_text(encoding="utf-8")
 
-    <style>
-        * {
+# --- Core cleanup / content corrections ---
+src = src.replace(
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">',
+    '<meta name="viewport" content="width=device-width, initial-scale=1.0">'
+)
+
+# Better production metadata / SEO / accessibility.
+head_inject = """
+    <meta name="description" content="Satyam Raj — B.Tech ECE student focused on cybersecurity, Python automation, Linux systems, and security engineering.">
+    <meta name="theme-color" content="#203850">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://sk4702684.github.io/">
+    <meta property="og:title" content="Satyam Raj | Cybersecurity & Software Developer">
+    <meta property="og:description" content="Cybersecurity, Python automation, Linux systems, and software projects by Satyam Raj.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sk4702684.github.io/">
+    <meta name="twitter:card" content="summary">
+"""
+src = src.replace(
+    '    <title>Satyam Raj | Cybersecurity & Software Developer</title>',
+    '    <title>Satyam Raj | Cybersecurity & Software Developer</title>\n' + head_inject
+)
+
+# Avoid claiming expertise that the current source does not substantiate.
+src = src.replace("Expert technical capabilities.", "Security-focused technical capabilities.")
+src = src.replace(
+    "Expert at architecting custom software solutions like automated penetration testing platforms and isolated operating system environments.",
+    "Building practical software solutions including automated security tooling, Linux system customizations, and isolated OS concepts."
+)
+src = src.replace(
+    "Led cross-functional teams of developers on custom software engineering and security tool deployments.",
+    "Built and experimented with custom software engineering and security-tool deployments."
+)
+
+# Improve semantic/accessibility attributes.
+src = src.replace(
+    '<div id="theme-switch-btn" class="glass-switch" role="button" aria-label="Toggle theme">',
+    '<button id="theme-switch-btn" class="glass-switch" type="button" aria-label="Toggle theme" aria-pressed="false">'
+)
+src = src.replace(
+    '                </div>\n                <a href="#contact" class="btn-spark px-4 py-1.5',
+    '                </button>\n                <a href="#contact" class="btn-spark px-4 py-1.5',
+    1
+)
+src = src.replace(
+    '<img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-10 h-10 rounded-full object-cover mb-1 border border-current">',
+    '<img src="https://github.com/sk4702684.png" alt="Portrait of Satyam Raj" width="40" height="40" loading="lazy" class="w-10 h-10 rounded-full object-cover mb-1 border border-current">'
+)
+
+# Add accessible labels to social icon-only links.
+src = src.replace(
+    'class="hover:opacity-100 transition"><i class="fa-brands fa-github"></i></a>',
+    'class="hover:opacity-100 transition" aria-label="GitHub profile"><i class="fa-brands fa-github" aria-hidden="true"></i></a>',
+    1
+)
+src = src.replace(
+    'class="hover:opacity-100 transition"><i class="fa-brands fa-linkedin"></i></a>',
+    'class="hover:opacity-100 transition" aria-label="LinkedIn profile"><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a>',
+    1
+)
+
+# Fix all external new-tab GitHub links with missing rel.
+src = src.replace(
+    'href="https://github.com/sk4702684" target="_blank" class="btn-spark',
+    'href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="btn-spark'
+)
+
+# Add reduced-motion support and safer global transition scope.
+src = src.replace(
+    """        * {
             -webkit-tap-highlight-color: transparent;
             transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+        }""",
+    """        *, *::before, *::after {
+            -webkit-tap-highlight-color: transparent;
         }
 
-        body {
-            touch-action: manipulation;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            overflow-x: hidden;
+        a, button, input, select, .spark-card, .spark-tile, .glass-switch,
+        .switch-circle, .pipeline-toggle, .pipeline-thumb {
+            transition: background-color 0.25s ease, color 0.25s ease,
+                        border-color 0.25s ease, opacity 0.25s ease,
+                        transform 0.25s ease, box-shadow 0.25s ease;
         }
 
-        #global-three-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.45;
-        }
-
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-        .reveal-on-scroll.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* 1. DARK MODE: Dark Blue (#203850) & Ivory (#e4e1d0) */
-        body.theme-dark {
-            background-color: #203850;
-            color: #e4e1d0;
-        }
-        body.theme-dark .nav-floating {
-            background: rgba(32, 56, 80, 0.92);
-            border: 1px solid rgba(228, 225, 208, 0.18);
-            box-shadow: 0 10px 30px -10px rgba(10, 20, 30, 0.5);
-        }
-        body.theme-dark .spark-card {
-            background: rgba(23, 41, 59, 0.85);
-            border: 1px solid rgba(228, 225, 208, 0.16);
-            color: #e4e1d0;
-            box-shadow: 0 14px 34px -10px rgba(10, 20, 30, 0.6);
-        }
-        body.theme-dark .spark-card:hover {
-            border-color: rgba(228, 225, 208, 0.45);
-        }
-        body.theme-dark .spark-tile {
-            background: rgba(228, 225, 208, 0.08);
-            border: 1px solid rgba(228, 225, 208, 0.18);
-            color: #e4e1d0;
-        }
-        body.theme-dark .btn-spark {
-            background: #e4e1d0 !important;
-            color: #203850 !important;
-            box-shadow: 0 4px 18px rgba(228, 225, 208, 0.25);
-        }
-        body.theme-dark .badge-spark {
-            background: rgba(228, 225, 208, 0.12);
-            color: #e4e1d0;
-            border: 1px solid rgba(228, 225, 208, 0.25);
-        }
-        body.theme-dark .tree-line {
-            stroke: rgba(228, 225, 208, 0.3);
-        }
-        body.theme-dark .radar-ring {
-            border-color: rgba(228, 225, 208, 0.2);
-        }
-        body.theme-dark .terminal-bg {
-            background: #152536;
-            border: 1px solid rgba(228, 225, 208, 0.2);
-            color: #e4e1d0;
-        }
-        body.theme-dark .field-input {
-            background: rgba(23, 41, 59, 0.6);
-            border: 1px solid rgba(228, 225, 208, 0.2);
-            color: #e4e1d0;
-        }
-        body.theme-dark .field-input::placeholder { color: rgba(228, 225, 208, 0.4); }
-
-        /* 2. LIGHT MODE: Albescent White (#f6e8d0) & Aqua Blue (#559492) */
-        body.theme-light {
-            background-color: #f6e8d0;
-            color: #1a3038;
-        }
-        body.theme-light .nav-floating {
-            background: rgba(246, 232, 208, 0.95);
-            border: 1px solid rgba(107, 169, 167, 0.45);
-            box-shadow: 0 10px 30px -10px rgba(107, 169, 167, 0.25);
-        }
-        body.theme-light .spark-card {
-            background: rgba(238, 224, 201, 0.9);
-            border: 1px solid rgba(107, 169, 167, 0.45);
-            color: #1a3038;
-            box-shadow: 0 14px 34px -10px rgba(107, 169, 167, 0.25);
-        }
-        body.theme-light .spark-card:hover {
-            border-color: #559492;
-        }
-        body.theme-light .spark-tile {
-            background: rgba(107, 169, 167, 0.18);
-            border: 1px solid rgba(107, 169, 167, 0.4);
-            color: #1a3038;
-        }
-        body.theme-light .btn-spark {
-            background: #559492 !important;
-            color: #ffffff !important;
-            box-shadow: 0 4px 18px rgba(85, 148, 146, 0.35);
-        }
-        body.theme-light .badge-spark {
-            background: rgba(107, 169, 167, 0.25);
-            color: #1a3038;
-            border: 1px solid rgba(107, 169, 167, 0.5);
-        }
-        body.theme-light .tree-line {
-            stroke: #559492;
-        }
-        body.theme-light .radar-ring {
-            border-color: rgba(107, 169, 167, 0.35);
-        }
-        body.theme-light .terminal-bg {
-            background: #ede0c7;
-            border: 1px solid rgba(107, 169, 167, 0.5);
-            color: #1a3038;
-        }
-        body.theme-light .field-input {
-            background: rgba(246, 232, 208, 0.85);
-            border: 1px solid rgba(107, 169, 167, 0.5);
-            color: #1a3038;
-        }
-        body.theme-light .field-input::placeholder { color: #5d757d; }
-
-        /* Dedicated Glassmorphism Theme Switch */
-        .glass-switch {
-            width: 60px;
-            height: 30px;
-            border-radius: 9999px;
-            padding: 3px;
-            cursor: pointer;
-            position: relative;
-            user-select: none;
-            display: flex;
-            align-items: center;
-        }
-        body.theme-dark .glass-switch {
-            background: rgba(228, 225, 208, 0.15);
-            border: 1px solid rgba(228, 225, 208, 0.3);
-        }
-        body.theme-light .glass-switch {
-            background: rgba(107, 169, 167, 0.3);
-            border: 1px solid rgba(107, 169, 167, 0.6);
-        }
-
-        .switch-circle {
-            width: 22px;
-            height: 22px;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 10px;
-            position: absolute;
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        body.theme-dark .switch-circle {
-            transform: translateX(2px);
-            background: #e4e1d0;
-            color: #203850;
-        }
-        body.theme-light .switch-circle {
-            transform: translateX(32px);
-            background: #559492;
-            color: #ffffff;
-        }
-
-        /* 3D Isometric App Tiles */
-        .isometric-viewport {
-            perspective: 1000px;
-        }
-        .isometric-canvas {
-            transform: rotateX(55deg) rotateZ(-45deg);
-            transform-style: preserve-3d;
-        }
-        .isometric-card {
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
-            box-shadow: 12px 16px 28px rgba(0, 0, 0, 0.25);
-        }
-        .isometric-card:hover {
-            transform: translateZ(28px) scale(1.05);
-            box-shadow: 20px 28px 40px rgba(0, 0, 0, 0.35);
-        }
-
-        /* Radar Scanner Animation */
-        @keyframes radarSweep {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .radar-sweep {
-            transform-origin: 100px 100px;
-            animation: radarSweep 5s linear infinite;
-        }
-
-        /* Interactive Pipeline Toggle Switch */
-        .pipeline-toggle {
-            width: 48px;
-            height: 26px;
-            border-radius: 9999px;
-            padding: 3px;
-            cursor: pointer;
-            position: relative;
-            transition: background-color 0.25s ease;
-        }
-        .pipeline-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 9999px;
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.25);
-            transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .pipeline-toggle.active {
-            background-color: #10b981 !important;
-        }
-        .pipeline-toggle.active .pipeline-thumb {
-            transform: translateX(22px);
-        }
-        .pipeline-toggle.inactive {
-            background-color: rgba(120, 120, 120, 0.4) !important;
-        }
-        .pipeline-toggle.inactive .pipeline-thumb {
-            transform: translateX(0px);
-        }
-
-        .touch-btn {
-            min-height: 44px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            user-select: none;
-            transition: transform 0.18s ease;
-        }
-        .touch-btn:active { transform: scale(0.95); }
-
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-    </style>
-</head>
-<body class="theme-dark relative min-h-screen">
-
-    <!-- Global Three.js 3D Background Canvas -->
-    <canvas id="global-three-canvas"></canvas>
-
-    <!-- Floating Top Navigation Pill -->
-    <header class="fixed top-5 w-full z-50 px-4 sm:px-6">
-        <div class="max-w-5xl mx-auto nav-floating rounded-full px-5 py-3 flex justify-between items-center backdrop-blur-md">
-            <a href="#" class="flex items-center space-x-2 text-sm font-extrabold tracking-tight">
-                <span class="w-7 h-7 rounded-full flex items-center justify-center font-mono text-xs font-bold border border-current">
-                    S
-                </span>
-                <span>Satyam Raj</span>
-            </a>
-
-            <nav class="hidden md:flex items-center space-x-6 text-xs font-mono opacity-85">
-                <a href="#about" class="hover:opacity-100 transition-opacity">/profile</a>
-                <a href="#radar" class="hover:opacity-100 transition-opacity">/skills</a>
-                <a href="#experience" class="hover:opacity-100 transition-opacity">/experience</a>
-                <a href="#projects" class="hover:opacity-100 transition-opacity">/projects</a>
-                <a href="#terminal-section" class="hover:opacity-100 transition-opacity">/cli</a>
-                <a href="#contact" class="hover:opacity-100 transition-opacity">/contact</a>
-            </nav>
-
-            <div class="flex items-center space-x-3">
-                <div id="theme-switch-btn" class="glass-switch" role="button" aria-label="Toggle theme">
-                    <div class="switch-circle shadow-md">
-                        <i id="theme-icon" class="fa-solid fa-moon"></i>
-                    </div>
-                </div>
-                <a href="#contact" class="btn-spark px-4 py-1.5 rounded-full text-xs font-bold transition shadow-sm hidden sm:inline-block">
-                    Get in Touch
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <main class="relative z-10 pt-28">
-
-        <!-- 1. HERO SECTION -->
-        <section id="about" class="min-h-[88vh] flex flex-col items-center justify-center py-12 px-4 sm:px-6 text-center">
-            <div class="max-w-4xl mx-auto space-y-6">
-                
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-mono border border-current opacity-85">
-                    <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
-                    <span>Cybersecurity & Software Developer • B.Tech ECE (Class of 2029)</span>
-                </div>
-
-                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-tight">
-                    Your code. Your systems. <br>
-                    <span class="underline decoration-4">Your Intelligence.</span>
-                </h1>
-
-                <p class="text-sm sm:text-base max-w-2xl mx-auto leading-relaxed opacity-85 font-normal">
-                    Driven and security-focused student at <span class="font-semibold">Shivalik College of Engineering, Dehradun</span>. Hands-on experience in full-stack Python development, Linux system customization, and cybersecurity frameworks. Expert at architecting custom software solutions like automated penetration testing platforms and isolated operating system environments.
-                </p>
-
-                <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
-                    <a href="#projects" class="btn-spark touch-btn px-6 py-3 rounded-full text-xs font-bold uppercase tracking-wider transition shadow-md">
-                        Explore Projects <i class="fa-solid fa-arrow-down ml-1 text-[10px]"></i>
-                    </a>
-                    <a href="mailto:sk4702684@gmail.com" class="touch-btn px-6 py-3 rounded-full text-xs font-bold border border-current opacity-80 hover:opacity-100 transition">
-                        <i class="fa-solid fa-envelope mr-1.5"></i> sk4702684@gmail.com
-                    </a>
-                    <a href="tel:+917260865157" class="touch-btn px-6 py-3 rounded-full text-xs font-bold border border-current opacity-80 hover:opacity-100 transition">
-                        <i class="fa-solid fa-phone mr-1.5"></i> +91 7260865157
-                    </a>
-                </div>
-            </div>
-
-            <!-- True 3D Isometric Tiles Grid -->
-            <div class="isometric-viewport w-full max-w-5xl mx-auto pt-16 pb-8">
-                <div class="isometric-canvas grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mx-auto w-fit">
-                    
-                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
-                            <i class="fa-brands fa-python"></i>
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold font-mono block">Python & Bash</span>
-                            <span class="text-[10px] opacity-70">Core Automation</span>
-                        </div>
-                    </div>
-
-                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl text-emerald-400">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold font-mono block">Sentinel-X</span>
-                            <span class="text-[10px] opacity-70">Pen-Test Framework</span>
-                        </div>
-                    </div>
-
-                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
-                            <i class="fa-brands fa-linux"></i>
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold font-mono block">Linux Architecture</span>
-                            <span class="text-[10px] opacity-70">GNOME Customization</span>
-                        </div>
-                    </div>
-
-                    <div class="spark-card isometric-card w-36 h-36 sm:w-44 sm:h-44 rounded-3xl p-5 flex flex-col items-center justify-center space-y-3 cursor-pointer">
-                        <div class="w-12 h-12 rounded-2xl flex items-center justify-center border border-current text-2xl">
-                            <i class="fa-solid fa-terminal"></i>
-                        </div>
-                        <div class="text-center">
-                            <span class="text-xs font-bold font-mono block">Nmap & Dirsearch</span>
-                            <span class="text-[10px] opacity-70">Pen-Testing Tools</span>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 2. RADAR PLATFORM: Expert Skills & Education -->
-        <section id="radar" class="py-20 px-4 sm:px-6">
-            <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                
-                <div class="lg:col-span-6 space-y-5">
-                    <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Technical Foundation & Skills
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
-                        Expert technical capabilities.
-                    </h2>
-                    <p class="text-sm leading-relaxed opacity-85">
-                        Practicing systems programming, automated reconnaissance tooling, and modern full-stack integrations. Balancing academic curriculum with open-source systems deployment.
-                    </p>
-
-                    <div class="space-y-3 font-mono text-xs pt-2">
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
-                            <span><i class="fa-solid fa-code mr-2"></i>Programming:</span>
-                            <span class="font-bold">Python, Bash Scripting, C/C++</span>
-                        </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
-                            <span><i class="fa-solid fa-shield-virus mr-2"></i>Pen-Testing & Tools:</span>
-                            <span class="font-bold">Nmap, Dirsearch, Git & GitHub</span>
-                        </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
-                            <span><i class="fa-solid fa-cubes mr-2"></i>Frameworks & OS:</span>
-                            <span class="font-bold">Streamlit, REST APIs, Linux & GNOME</span>
-                        </div>
-                        <div class="p-3.5 rounded-xl border border-current border-opacity-15 flex justify-between items-center spark-card">
-                            <span><i class="fa-solid fa-graduation-cap mr-2"></i>Education:</span>
-                            <span class="font-bold">B.Tech (ECE) • Shivalik College (2029)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Radar Display Graphic -->
-                <div class="lg:col-span-6 flex justify-center">
-                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full border-2 radar-ring flex items-center justify-center">
-                        <div class="absolute w-52 h-52 sm:w-64 sm:h-64 rounded-full border radar-ring flex items-center justify-center">
-                            <div class="absolute w-28 h-28 sm:w-36 sm:h-36 rounded-full border radar-ring"></div>
-                        </div>
-                        
-                        <div class="absolute inset-0 rounded-full overflow-hidden flex items-center justify-center">
-                            <svg class="w-full h-full radar-sweep opacity-40" viewBox="0 0 200 200">
-                                <defs>
-                                    <linearGradient id="radarGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="currentColor" stop-opacity="0.85" />
-                                        <stop offset="100%" stop-color="currentColor" stop-opacity="0" />
-                                    </linearGradient>
-                                </defs>
-                                <path d="M 100 100 L 200 100 A 100 100 0 0 0 170 30 Z" fill="url(#radarGrad)" />
-                            </svg>
-                        </div>
-
-                        <!-- Center Identity Hub -->
-                        <div class="spark-card rounded-2xl p-4 flex flex-col items-center shadow-xl border border-current z-10 text-center">
-                            <img src="https://github.com/sk4702684.png" alt="Satyam Raj" class="w-10 h-10 rounded-full object-cover mb-1 border border-current">
-                            <span class="text-[10px] font-mono font-bold">Satyam Raj</span>
-                            <span class="text-[9px] font-mono opacity-70">Dehradun, UK</span>
-                        </div>
-
-                        <!-- Orbital Badges -->
-                        <div class="absolute top-6 left-10 spark-tile px-3 py-1.5 rounded-full text-xs font-mono shadow-sm">
-                            <i class="fa-brands fa-linux mr-1"></i> GNOME
-                        </div>
-                        <div class="absolute bottom-8 right-10 spark-tile px-3 py-1.5 rounded-full text-xs font-mono shadow-sm">
-                            <i class="fa-solid fa-database mr-1"></i> Supabase
-                        </div>
-                        <div class="absolute bottom-10 left-6 spark-tile px-3 py-1.5 rounded-full text-xs font-mono shadow-sm">
-                            <i class="fa-solid fa-terminal mr-1"></i> REST APIs
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- 3. WORK EXPERIENCE & LEADERSHIP PIPELINE -->
-        <section id="experience" class="py-20 px-4 sm:px-6">
-            <div class="max-w-5xl mx-auto space-y-12">
-                <div class="text-center space-y-3">
-                    <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Experience & Leadership
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                        Work Experience & Deployments.
-                    </h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <!-- Experience 1: Lead Developer (Sentinel-X) -->
-                    <div class="spark-card rounded-3xl p-6 sm:p-8 space-y-5">
-                        <div class="flex items-center justify-between pb-2 border-b border-current border-opacity-10 text-xs font-mono">
-                            <span class="font-bold">Lead Developer</span>
-                            <span class="text-emerald-500 font-bold">Sentinel-X</span>
-                        </div>
-                        <ul class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Designed and engineered an automated multi-tool penetration testing framework featuring an interactive GUI built with Streamlit.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Integrated Supabase for secure backend database management, user authentication, and activity logging.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Streamlined network mapping and vulnerability assessment workflows into a single unified dashboard.</span>
-                            </li>
-                        </ul>
-                        <div class="pt-2">
-                            <span class="text-xs font-mono opacity-70">Architecture: Python • Streamlit • Supabase • Nmap</span>
-                        </div>
-                    </div>
-
-                    <!-- Experience 2: Project Lead & Open Source Contributor -->
-                    <div class="spark-card rounded-3xl p-6 sm:p-8 space-y-5">
-                        <div class="flex items-center justify-between pb-2 border-b border-current border-opacity-10 text-xs font-mono">
-                            <span class="font-bold">Project Lead & Contributor</span>
-                            <span class="opacity-70">System Customization</span>
-                        </div>
-                        <ul class="space-y-3 text-xs opacity-90 leading-relaxed font-mono">
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Led cross-functional teams of developers on custom software engineering and security tool deployments.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Actively experimenting with Linux desktop environment tweaks, system architecture, and modular developer tools.</span>
-                            </li>
-                            <li class="flex items-start gap-2">
-                                <i class="fa-solid fa-chevron-right text-[10px] mt-1 text-emerald-400"></i>
-                                <span>Architecting isolated operating system environments and custom app-locking utilities.</span>
-                            </li>
-                        </ul>
-                        <div class="pt-2">
-                            <div class="space-y-2">
-                                <div class="p-2.5 rounded-xl spark-tile flex justify-between items-center text-xs font-mono">
-                                    <span>Nmap & Dirsearch Probing</span>
-                                    <div class="pipeline-toggle active" onclick="toggleSwitch(this)">
-                                        <div class="pipeline-thumb"></div>
-                                    </div>
-                                </div>
-                                <div class="p-2.5 rounded-xl spark-tile flex justify-between items-center text-xs font-mono">
-                                    <span>Linux GNOME Tweaks</span>
-                                    <div class="pipeline-toggle active" onclick="toggleSwitch(this)">
-                                        <div class="pipeline-thumb"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. WORKFLOW TREE (Methodology from Video) -->
-        <section id="workflow" class="py-20 px-4 sm:px-6">
-            <div class="max-w-5xl mx-auto text-center space-y-10">
-                <div class="space-y-3">
-                    <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Workflow Architecture
-                    </div>
-                    <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                        Data-centric security & software lifecycle.
-                    </h2>
-                    <p class="text-xs sm:text-sm max-w-md mx-auto opacity-80">
-                        Code precision, reliability, and security are maintained across all custom builds.
-                    </p>
-                </div>
-
-                <div class="w-full flex flex-col items-center pt-4">
-                    <div class="btn-spark touch-btn px-8 py-3.5 rounded-2xl font-bold font-mono text-sm shadow-xl z-10">
-                        Satyam Raj System Engineering Platform
-                    </div>
-
-                    <div class="w-full max-w-4xl h-14 relative">
-                        <svg class="w-full h-full" preserveAspectRatio="none" viewBox="0 0 800 60">
-                            <line x1="400" y1="0" x2="400" y2="30" class="tree-line" stroke-width="2" />
-                            <line x1="100" y1="30" x2="700" y2="30" class="tree-line" stroke-width="2" />
-                            <line x1="100" y1="30" x2="100" y2="60" class="tree-line" stroke-width="2" />
-                            <line x1="300" y1="30" x2="300" y2="60" class="tree-line" stroke-width="2" />
-                            <line x1="500" y1="30" x2="500" y2="60" class="tree-line" stroke-width="2" />
-                            <line x1="700" y1="30" x2="700" y2="60" class="tree-line" stroke-width="2" />
-                        </svg>
-                    </div>
-
-                    <div class="w-full max-w-5xl grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
-                            Refine Tool Precision
-                        </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
-                            Ensure DB Reliability
-                        </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
-                            Enhance Kernel Speed
-                        </div>
-                        <div class="spark-card rounded-2xl p-4 text-xs font-mono font-medium shadow-md">
-                            Deploy Web Solutions
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. DELIVERABLES & LIVE GITHUB SYNC -->
-        <section id="projects" class="py-20 px-4 sm:px-6">
-            <div class="max-w-6xl mx-auto space-y-12">
-                <div class="space-y-2 text-center sm:text-left border-b border-current border-opacity-15 pb-6">
-                    <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                        Featured Projects
-                    </div>
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mt-1">Featured Deliverables</h2>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <!-- Project 1: Sentinel-X -->
-                    <div class="spark-card rounded-3xl p-7 flex flex-col justify-between space-y-5">
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between text-xs font-mono opacity-80">
-                                <span class="font-semibold">Lead Developer • Pentesting Platform</span>
-                                <span>MIT License</span>
-                            </div>
-                            <h3 class="text-2xl font-bold">Sentinel-X</h3>
-                            <p class="text-xs sm:text-sm leading-relaxed opacity-90">
-                                Automated multi-tool penetration testing framework featuring an interactive GUI built with Streamlit. Integrated Supabase for secure backend database management, user authentication, and activity logging.
-                            </p>
-                            <div class="flex flex-wrap gap-1.5 font-mono text-xs pt-1">
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Python 3</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Streamlit GUI</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Supabase DB</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Nmap API</span>
-                            </div>
-                        </div>
-                        <div class="pt-4 border-t border-current border-opacity-10 flex items-center justify-between">
-                            <a href="https://github.com/sk4702684/Sentinel-X" target="_blank" rel="noopener noreferrer" class="btn-spark px-5 py-2.5 rounded-full text-xs font-bold shadow-sm">
-                                View Source <i class="fa-brands fa-github ml-1"></i>
-                            </a>
-                            <span class="text-xs font-mono text-emerald-500">Public Solution</span>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: rento-marketplace -->
-                    <div class="spark-card rounded-3xl p-7 flex flex-col justify-between space-y-5">
-                        <div class="space-y-3">
-                            <div class="flex items-center justify-between text-xs font-mono opacity-80">
-                                <span class="font-semibold">Full-Stack Solution • Marketplace</span>
-                                <span>Production</span>
-                            </div>
-                            <h3 class="text-2xl font-bold">rento-marketplace</h3>
-                            <p class="text-xs sm:text-sm leading-relaxed opacity-90">
-                                Hyperlocal real-estate and property directory engine built for Patna and Bihar. Provides listing monetization and gatekept broker communication portals.
-                            </p>
-                            <div class="flex flex-wrap gap-1.5 font-mono text-xs pt-1">
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">TypeScript</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Web Stack</span>
-                                <span class="px-2.5 py-1 rounded-lg spark-tile">Manus Built</span>
-                            </div>
-                        </div>
-                        <div class="pt-4 border-t border-current border-opacity-10 flex items-center justify-between">
-                            <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="px-5 py-2.5 rounded-full text-xs font-bold border border-current opacity-80 hover:opacity-100 transition">
-                                Profile Repos
-                            </a>
-                            <span class="text-xs font-mono opacity-70">Production</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Live Dynamic Repositories Feed -->
-                <div class="space-y-6 pt-8 border-t border-current border-opacity-10">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                        <div>
-                            <h3 class="text-xl font-bold flex items-center gap-2">
-                                <i class="fa-brands fa-github"></i> All Dynamic Repositories
-                            </h3>
-                            <p class="text-xs opacity-70 mt-0.5">Live fetched via GitHub API (@sk4702684)</p>
-                        </div>
-                        <span id="repo-count" class="badge-spark px-3.5 py-1 rounded-full text-xs font-mono">Syncing...</span>
-                    </div>
-
-                    <div class="flex flex-col sm:flex-row gap-3">
-                        <div class="relative flex-1">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 opacity-60 text-xs"></i>
-                            <input id="repo-search" type="text" placeholder="Filter repositories by name or tech..." class="field-input w-full pl-9 pr-4 py-3 rounded-xl text-xs sm:text-sm focus:outline-none font-mono">
-                        </div>
-                        <select id="repo-lang-filter" class="field-input touch-btn rounded-xl px-4 py-3 text-xs focus:outline-none font-mono">
-                            <option value="ALL">All Technologies</option>
-                        </select>
-                    </div>
-
-                    <div id="github-repos-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        <div class="spark-card p-6 rounded-2xl text-center py-10 col-span-full font-mono text-xs opacity-70">
-                            <i class="fa-solid fa-circle-notch fa-spin text-base mb-2"></i>
-                            <p>Querying GitHub repositories...</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. TERMINAL CLI SECTION -->
-        <section id="terminal-section" class="py-20 px-4 sm:px-6">
-            <div class="max-w-3xl mx-auto space-y-6">
-                <div class="space-y-1 text-center">
-                    <span class="font-mono text-xs uppercase tracking-wider opacity-70">// Command Line Console</span>
-                    <h2 class="text-2xl sm:text-3xl font-bold">Terminal CLI</h2>
-                    <p class="text-xs opacity-75">Type <code class="px-1.5 py-0.5 rounded border border-current font-mono">help</code> to list available commands</p>
-                </div>
-
-                <div class="terminal-bg rounded-2xl overflow-hidden font-mono text-xs shadow-2xl">
-                    <div class="px-4 py-2.5 flex items-center justify-between border-b border-current border-opacity-15 opacity-85">
-                        <div class="flex items-center space-x-1.5">
-                            <span class="w-2.5 h-2.5 rounded-full bg-red-400"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-yellow-400"></span>
-                            <span class="w-2.5 h-2.5 rounded-full bg-green-400"></span>
-                        </div>
-                        <span class="text-[11px]">satyam@workstation:~</span>
-                    </div>
-                    <div id="terminal-output" class="p-4 h-56 overflow-y-auto space-y-2 opacity-95">
-                        <p class="font-semibold">Satyam Raj System Shell [Shivalik Engineering Station]</p>
-                        <p class="opacity-60">Connected. Enter 'help' to see system commands.</p>
-                    </div>
-                    <div class="p-3 border-t border-current border-opacity-15 flex items-center space-x-2">
-                        <span class="font-semibold text-xs opacity-85">satyam@shivalik:~$</span>
-                        <input id="terminal-input" type="text" class="flex-1 bg-transparent focus:outline-none font-mono text-xs py-1" placeholder="enter command..." autocomplete="off">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 7. CONTACT FOOTER SECTION -->
-        <section id="contact" class="py-20 px-4 sm:px-6">
-            <div class="max-w-4xl mx-auto spark-card rounded-3xl p-8 sm:p-14 text-center space-y-6 shadow-2xl">
-                <div class="badge-spark inline-block px-3.5 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
-                    Let's Connect
-                </div>
-                <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight">
-                    Get in touch with Satyam.
-                </h2>
-                <p class="text-xs sm:text-sm max-w-md mx-auto opacity-85">
-                    Open for cybersecurity research, full-stack software development, and technical collaboration.
-                </p>
-
-                <div class="flex flex-wrap justify-center gap-3 pt-2">
-                    <a href="mailto:sk4702684@gmail.com" class="btn-spark px-6 py-3 rounded-full text-xs font-bold shadow-md">
-                        <i class="fa-solid fa-envelope mr-1.5"></i> sk4702684@gmail.com
-                    </a>
-                    <a href="tel:+917260865157" class="px-6 py-3 rounded-full text-xs font-bold border border-current">
-                        <i class="fa-solid fa-phone mr-1.5"></i> +91 7260865157
-                    </a>
-                </div>
-
-                <div class="pt-4 text-xs font-mono opacity-80">
-                    <span><i class="fa-solid fa-location-dot mr-1.5"></i>Dehradun, Uttarakhand</span>
-                </div>
-
-                <div class="flex justify-center space-x-5 pt-3 text-base opacity-80">
-                    <a href="https://github.com/sk4702684" target="_blank" rel="noopener noreferrer" class="hover:opacity-100 transition"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/satyam-raj-24908a388" target="_blank" rel="noopener noreferrer" class="hover:opacity-100 transition"><i class="fa-brands fa-linkedin"></i></a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer Note -->
-    <footer class="py-8 text-center text-xs opacity-70 font-mono border-t border-current border-opacity-10">
-        © 2026 Satyam Raj • Shivalik College of Engineering, Dehradun
-    </footer>
-
-    <!-- SCRIPTS -->
-    <script>
-        const themeBtn = document.getElementById('theme-switch-btn');
-        const themeIcon = document.getElementById('theme-icon');
-
-        let currentTheme = localStorage.getItem('spark-theme') || 'dark';
-
-        function updateTheme(theme) {
-            if (theme === 'light') {
-                document.body.classList.remove('theme-dark');
-                document.body.classList.add('theme-light');
-                themeIcon.className = "fa-solid fa-sun";
-                updateThreeJsTheme('#559492');
-            } else {
-                document.body.classList.remove('theme-light');
-                document.body.classList.add('theme-dark');
-                themeIcon.className = "fa-solid fa-moon";
-                updateThreeJsTheme('#e4e1d0');
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto !important; }
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
-            localStorage.setItem('spark-theme', theme);
-        }
+            .reveal-on-scroll {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }"""
+)
 
-        themeBtn.addEventListener('click', () => {
-            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            updateTheme(currentTheme);
+# Theme switch focus styling.
+src = src.replace(
+    '.switch-circle {',
+    '.glass-switch:focus-visible { outline: 2px solid currentColor; outline-offset: 3px; }\n\n        .switch-circle {'
+)
+
+# Replace inline onclick toggles with buttons.
+src = src.replace(
+    '<div class="pipeline-toggle active" onclick="toggleSwitch(this)"><div class="pipeline-thumb"></div></div>',
+    '<button class="pipeline-toggle active" type="button" aria-pressed="true" aria-label="Toggle Nmap and Dirsearch probing"><span class="pipeline-thumb"></span></button>'
+)
+src = src.replace(
+    '<div class="pipeline-toggle active" onclick="toggleSwitch(this)"><div class="pipeline-thumb"></div></div>',
+    '<button class="pipeline-toggle active" type="button" aria-pressed="true" aria-label="Toggle Linux GNOME tweaks"><span class="pipeline-thumb"></span></button>'
+)
+
+# Remove the now-unneeded inline-toggle function and add delegation.
+src = re.sub(
+    r'\n\s*function toggleSwitch\(el\) \{.*?\n\s*\}\n\n\s*let globalScene',
+    """
+        document.querySelectorAll('.pipeline-toggle').forEach((toggle) => {
+            toggle.addEventListener('click', () => {
+                const active = toggle.classList.toggle('active');
+                toggle.classList.toggle('inactive', !active);
+                toggle.setAttribute('aria-pressed', String(active));
+            });
         });
 
-        function toggleSwitch(el) {
-            if (el.classList.contains('active')) {
-                el.classList.remove('active');
-                el.classList.add('inactive');
-            } else {
-                el.classList.remove('inactive');
-                el.classList.add('active');
-            }
-        }
+        let globalScene""",
+    src,
+    flags=re.S
+)
 
-        let globalScene, globalCamera, globalRenderer, globalStarField;
-
-        function initThreeJsBackground() {
-            const canvas = document.getElementById('global-three-canvas');
-            if (!canvas) return;
-
-            globalScene = new THREE.Scene();
-            globalCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            globalCamera.position.z = 20;
-
-            globalRenderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: false });
-            globalRenderer.setSize(window.innerWidth, window.innerHeight);
-            globalRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));
-
-            const starCount = 140;
-            const starGeo = new THREE.BufferGeometry();
-            const starCoords = new Float32Array(starCount * 3);
-
-            for (let i = 0; i < starCount * 3; i += 3) {
-                starCoords[i] = (Math.random() - 0.5) * 50;
-                starCoords[i + 1] = (Math.random() - 0.5) * 50;
-                starCoords[i + 2] = (Math.random() - 0.5) * 30;
-            }
-
-            starGeo.setAttribute('position', new THREE.BufferAttribute(starCoords, 3));
-            const initialColor = currentTheme === 'light' ? 0x559492 : 0xe4e1d0;
-
-            const starMat = new THREE.PointsMaterial({
-                color: initialColor,
-                size: 0.18,
-                transparent: true,
-                opacity: 0.4
-            });
-
-            globalStarField = new THREE.Points(starGeo, starMat);
-            globalScene.add(globalStarField);
-
-            window.addEventListener('resize', () => {
-                globalCamera.aspect = window.innerWidth / window.innerHeight;
-                globalCamera.updateProjectionMatrix();
-                globalRenderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            let scrollOffset = 0;
-            window.addEventListener('scroll', () => {
-                scrollOffset = window.scrollY * 0.001;
-            }, { passive: true });
-
-            function animateGlobal() {
+# Better Three.js lifecycle / reduced motion / visibility pause.
+src = src.replace(
+    """            globalRenderer.setSize(window.innerWidth, window.innerHeight);
+            globalRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5));""",
+    """            globalRenderer.setSize(window.innerWidth, window.innerHeight);
+            globalRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.25));
+            globalRenderer.outputEncoding = THREE.sRGBEncoding;"""
+)
+src = src.replace(
+    """            function animateGlobal() {
                 requestAnimationFrame(animateGlobal);
                 globalStarField.rotation.y += 0.0008;
                 globalStarField.rotation.x = scrollOffset;
                 globalRenderer.render(globalScene, globalCamera);
             }
-            animateGlobal();
-        }
+            animateGlobal();""",
+    """            const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let animationFrameId = null;
 
-        function updateThreeJsTheme(colorHex) {
-            if (globalStarField) {
-                globalStarField.material.color = new THREE.Color(colorHex);
+            function animateGlobal() {
+                if (reducedMotion || document.hidden) {
+                    animationFrameId = null;
+                    if (!document.hidden) {
+                        globalRenderer.render(globalScene, globalCamera);
+                    }
+                    return;
+                }
+                globalStarField.rotation.y += 0.0008;
+                globalStarField.rotation.x = scrollOffset;
+                globalRenderer.render(globalScene, globalCamera);
+                animationFrameId = requestAnimationFrame(animateGlobal);
             }
+
+            function startAnimation() {
+                if (!reducedMotion && !document.hidden && animationFrameId === null) {
+                    animationFrameId = requestAnimationFrame(animateGlobal);
+                }
+            }
+
+            document.addEventListener('visibilitychange', startAnimation);
+            startAnimation();
+            if (reducedMotion) globalRenderer.render(globalScene, globalCamera);"""
+)
+
+# Fix theme initialization to avoid flash and improve button state.
+src = src.replace(
+    """            localStorage.setItem('spark-theme', theme);
         }
 
-        document.addEventListener("DOMContentLoaded", () => {
-            initThreeJsBackground();
-            updateTheme(currentTheme);
-        });
+        themeBtn.addEventListener('click', () => {""",
+    """            localStorage.setItem('spark-theme', theme);
+            themeBtn.setAttribute('aria-pressed', String(theme === 'light'));
+        }
 
-        let allUserRepos = [];
+        themeBtn.addEventListener('click', () => {"""
+)
+
+# Replace the entire GitHub data rendering section with DOM-safe rendering.
+start = src.index("        let allUserRepos = [];")
+end = src.index("        document.getElementById('repo-search').addEventListener('input'", start)
+
+new_github = r'''        let allUserRepos = [];
+
+        const githubConfig = {
+            username: 'sk4702684',
+            apiBase: 'https://api.github.com'
+        };
+
+        function createRepoCard(repo) {
+            const card = document.createElement('article');
+            card.className = 'spark-card p-5 rounded-2xl flex flex-col justify-between space-y-4 reveal-on-scroll';
+
+            const top = document.createElement('div');
+            top.className = 'space-y-2.5';
+
+            const meta = document.createElement('div');
+            meta.className = 'flex items-center justify-between';
+            meta.innerHTML = '<i class="fa-regular fa-folder text-sm opacity-80" aria-hidden="true"></i>';
+
+            const stats = document.createElement('div');
+            stats.className = 'flex items-center space-x-2.5 text-xs font-mono opacity-70';
+
+            const star = document.createElement('span');
+            star.className = 'flex items-center gap-1';
+            star.innerHTML = '<i class="fa-regular fa-star text-amber-400" aria-hidden="true"></i>';
+            star.append(document.createTextNode(` ${repo.stargazers_count ?? 0}`));
+
+            const fork = document.createElement('span');
+            fork.className = 'flex items-center gap-1';
+            fork.innerHTML = '<i class="fa-solid fa-code-fork" aria-hidden="true"></i>';
+            fork.append(document.createTextNode(` ${repo.forks_count ?? 0}`));
+
+            stats.append(star, fork);
+            meta.append(stats);
+
+            const info = document.createElement('div');
+
+            const title = document.createElement('h4');
+            title.className = 'text-sm font-semibold hover:underline transition truncate';
+            title.title = repo.name || 'Repository';
+
+            const repoLink = document.createElement('a');
+            repoLink.href = repo.html_url;
+            repoLink.target = '_blank';
+            repoLink.rel = 'noopener noreferrer';
+            repoLink.textContent = repo.name || 'Repository';
+            title.appendChild(repoLink);
+
+            const description = document.createElement('p');
+            description.className = 'text-xs opacity-80 mt-1 leading-relaxed line-clamp-2';
+            description.textContent = repo.description || 'No description provided.';
+
+            info.append(title, description);
+            top.append(meta, info);
+
+            const footer = document.createElement('div');
+            footer.className = 'pt-3 flex items-center justify-between text-[11px] font-mono border-t border-current border-opacity-15';
+
+            const language = document.createElement('span');
+            language.className = 'flex items-center gap-1.5 opacity-85';
+
+            const dot = document.createElement('span');
+            dot.className = 'w-1.5 h-1.5 rounded-full bg-current';
+            language.append(dot, document.createTextNode(repo.language || 'Code'));
+
+            const sourceLink = document.createElement('a');
+            sourceLink.href = repo.html_url;
+            sourceLink.target = '_blank';
+            sourceLink.rel = 'noopener noreferrer';
+            sourceLink.className = 'opacity-85 hover:opacity-100 underline flex items-center gap-1 touch-btn min-h-0 py-1';
+            sourceLink.append(document.createTextNode('Source '));
+            sourceLink.insertAdjacentHTML('beforeend', '<i class="fa-solid fa-arrow-up-right-from-square text-[8px]" aria-hidden="true"></i>');
+
+            footer.append(language, sourceLink);
+            card.append(top, footer);
+
+            return card;
+        }
+
+        function showRepoMessage(message, actionLabel = null, actionHref = null) {
+            const gridContainer = document.getElementById('github-repos-grid');
+            gridContainer.replaceChildren();
+
+            const wrapper = document.createElement('div');
+            wrapper.className = 'spark-card p-6 rounded-2xl text-center py-8 col-span-full';
+
+            const text = document.createElement('p');
+            text.className = 'font-mono text-xs opacity-70';
+            text.textContent = message;
+            wrapper.appendChild(text);
+
+            if (actionLabel && actionHref) {
+                const link = document.createElement('a');
+                link.href = actionHref;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+                link.className = 'btn-spark touch-btn mt-3 px-4 py-2 rounded-full text-xs font-mono';
+                link.textContent = actionLabel;
+                wrapper.appendChild(link);
+            }
+
+            gridContainer.appendChild(wrapper);
+        }
 
         async function fetchAllGitHubRepos() {
-            const username = 'sk4702684';
             const gridContainer = document.getElementById('github-repos-grid');
             const countBadge = document.getElementById('repo-count');
             const langFilter = document.getElementById('repo-lang-filter');
 
             try {
-                let page = 1;
-                let fetchedRepos = [];
-                let keepFetching = true;
-
-                while (keepFetching && page <= 3) {
-                    const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100&page=${page}`);
-                    if (!response.ok) break;
-                    const data = await response.json();
-                    if (data.length === 0) {
-                        keepFetching = false;
-                    } else {
-                        fetchedRepos = fetchedRepos.concat(data);
-                        if (data.length < 100) keepFetching = false;
-                        page++;
+                // One request is enough for the public profile's first 100 updated repos.
+                // Avoids unnecessary pagination and reduces rate-limit pressure.
+                const response = await fetch(
+                    `${githubConfig.apiBase}/users/${encodeURIComponent(githubConfig.username)}/repos?sort=updated&per_page=100&type=owner`,
+                    {
+                        headers: { 'Accept': 'application/vnd.github+json' },
+                        cache: 'no-store'
                     }
+                );
+
+                if (!response.ok) {
+                    throw new Error(`GitHub API returned ${response.status}`);
                 }
 
-                allUserRepos = fetchedRepos.filter(repo => repo.name.toLowerCase() !== `${username.toLowerCase()}.github.io`);
-                countBadge.innerText = `${allUserRepos.length} Repositories Live`;
+                const data = await response.json();
 
-                const languages = new Set();
-                allUserRepos.forEach(repo => {
-                    if (repo.language) languages.add(repo.language);
-                });
+                allUserRepos = data
+                    .filter(repo => repo && repo.name)
+                    .filter(repo => repo.name.toLowerCase() !== `${githubConfig.username.toLowerCase()}.github.io`);
 
-                languages.forEach(lang => {
-                    const opt = document.createElement('option');
-                    opt.value = lang;
-                    opt.textContent = lang;
-                    opt.className = "bg-slate-800 text-white";
-                    langFilter.appendChild(opt);
+                countBadge.textContent = `${allUserRepos.length} Repositories Live`;
+
+                const languages = [...new Set(
+                    allUserRepos.map(repo => repo.language).filter(Boolean)
+                )].sort((a, b) => a.localeCompare(b));
+
+                langFilter.replaceChildren();
+                const allOption = document.createElement('option');
+                allOption.value = 'ALL';
+                allOption.textContent = 'All Technologies';
+                langFilter.appendChild(allOption);
+
+                languages.forEach((lang) => {
+                    const option = document.createElement('option');
+                    option.value = lang;
+                    option.textContent = lang;
+                    langFilter.appendChild(option);
                 });
 
                 renderRepos(allUserRepos);
 
             } catch (error) {
-                console.error("Error loading repositories:", error);
-                gridContainer.innerHTML = `
-                    <div class="spark-card p-6 rounded-2xl text-center py-8 col-span-full">
-                        <p class="font-mono text-xs opacity-70">Could not sync repositories right now.</p>
-                        <a href="https://github.com/sk4702684" target="_blank" class="btn-spark touch-btn mt-3 px-4 py-2 rounded-full text-xs font-mono">View GitHub Profile</a>
-                    </div>
-                `;
-                countBadge.innerText = 'Offline';
+                console.error('Error loading repositories:', error);
+                showRepoMessage(
+                    'Could not sync repositories right now.',
+                    'View GitHub Profile',
+                    `https://github.com/${githubConfig.username}`
+                );
+                countBadge.textContent = 'Offline';
             }
         }
 
         function renderRepos(reposToDisplay) {
             const gridContainer = document.getElementById('github-repos-grid');
-            gridContainer.innerHTML = '';
+            gridContainer.replaceChildren();
 
             if (reposToDisplay.length === 0) {
-                gridContainer.innerHTML = `
-                    <div class="spark-card p-8 rounded-2xl text-center col-span-full font-mono text-xs opacity-60">
-                        No repositories matching current filter.
-                    </div>
-                `;
+                const empty = document.createElement('div');
+                empty.className = 'spark-card p-8 rounded-2xl text-center col-span-full font-mono text-xs opacity-60';
+                empty.textContent = 'No repositories matching current filter.';
+                gridContainer.appendChild(empty);
                 return;
             }
 
-            reposToDisplay.forEach(repo => {
-                const card = document.createElement('div');
-                card.className = 'spark-card p-5 rounded-2xl flex flex-col justify-between space-y-4 reveal-on-scroll';
+            const fragment = document.createDocumentFragment();
 
-                const updatedDate = new Date(repo.updated_at).toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric'
+            reposToDisplay.forEach((repo) => {
+                fragment.appendChild(createRepoCard(repo));
+            });
+
+            gridContainer.appendChild(fragment);
+        }
+
+'''
+src = src[:start] + new_github + src[end:]
+
+# Terminal command theme wording and DOM safety.
+src = src.replace(
+    "'theme     - Toggle dark blue / light aqua mode'",
+    "'theme     - Toggle dark / light mode'"
+)
+src = src.replace(
+    """                cmdLine.innerHTML = `<span class="opacity-60">satyam@shivalik:~$</span> ${input}`;""",
+    """                const prompt = document.createElement('span');
+                prompt.className = 'opacity-60';
+                prompt.textContent = 'satyam@shivalik:~$';
+                cmdLine.append(prompt, document.createTextNode(` ${input}`));"""
+)
+
+# Make contact info more accessible.
+src = src.replace(
+    '<i class="fa-solid fa-location-dot mr-1.5"></i>Dehradun, Uttarakhand',
+    '<i class="fa-solid fa-location-dot mr-1.5" aria-hidden="true"></i>Dehradun, Uttarakhand'
+)
+
+# Add a tiny noscript fallback for JS-dependent repo area.
+src = src.replace(
+    """                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TERMINAL CLI SECTION -->""",
+    """                        </div>
+                        <noscript>
+                            <p class="text-xs opacity-70 mt-4">JavaScript is disabled. Please visit the GitHub profile to browse repositories.</p>
+                        </noscript>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TERMINAL CLI SECTION -->"""
+)
+
+# Add a simple IntersectionObserver so reveal cards actually become visible.
+src = src.replace(
+    """        document.addEventListener("DOMContentLoaded", fetchAllGitHubRepos);
+
+        const termInput""",
+    """        document.addEventListener("DOMContentLoaded", () => {
+            fetchAllGitHubRepos();
+
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
                 });
+            }, { threshold: 0.08 });
 
-                card.innerHTML = `
-                    <div class="space-y-2.5">
-                        <div class="flex items-center justify-between">
-                            <i class="fa-regular fa-folder text-sm opacity-80"></i>
-                            <div class="flex items-center space-x-2.5 text-xs font-mono opacity-70">
-                                <span class="flex items-center gap-1"><i class="fa-regular fa-star text-amber-400"></i> ${repo.stargazers_count}</span>
-                                <span class="flex items-center gap-1"><i class="fa-solid fa-code-fork"></i> ${repo.forks_count}</span>
-                            </div>
-                        </div>
-
-                        <div>
-                            <h4 class="text-sm font-semibold hover:underline transition truncate" title="${repo.name}">
-                                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer">${repo.name}</a>
-                            </h4>
-                            <p class="text-xs opacity-80 mt-1 leading-relaxed line-clamp-2">
-                                ${repo.description ? repo.description : "No description provided."}
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="pt-3 flex items-center justify-between text-[11px] font-mono border-t border-current border-opacity-15">
-                        <span class="flex items-center gap-1.5 opacity-85">
-                            <span class="w-1.5 h-1.5 rounded-full bg-current"></span>
-                            ${repo.language ? repo.language : "Code"}
-                        </span>
-                        <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="opacity-85 hover:opacity-100 underline flex items-center gap-1 touch-btn min-h-0 py-1">
-                            Source <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
-                        </a>
-                    </div>
-                `;
-
-                gridContainer.appendChild(card);
-            });
-        }
-
-        document.getElementById('repo-search').addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            const lang = document.getElementById('repo-lang-filter').value;
-            applyFilters(query, lang);
+            document.querySelectorAll('.reveal-on-scroll').forEach((el) => revealObserver.observe(el));
         });
 
-        document.getElementById('repo-lang-filter').addEventListener('change', (e) => {
-            const lang = e.target.value;
-            const query = document.getElementById('repo-search').value.toLowerCase();
-            applyFilters(query, lang);
-        });
+        const termInput"""
+)
 
-        function applyFilters(searchQuery, languageFilter) {
-            const filtered = allUserRepos.filter(repo => {
-                const matchesSearch = repo.name.toLowerCase().includes(searchQuery) || 
-                                     (repo.description && repo.description.toLowerCase().includes(searchQuery));
-                const matchesLang = languageFilter === 'ALL' || repo.language === languageFilter;
-                return matchesSearch && matchesLang;
-            });
-            renderRepos(filtered);
-        }
+# Prevent duplicate DOMContentLoaded initialization at the bottom.
+src = src.replace('        document.addEventListener("DOMContentLoaded", fetchAllGitHubRepos);\n', '')
 
-        document.addEventListener("DOMContentLoaded", fetchAllGitHubRepos);
+# Basic HTML validity cleanup for the switch closing tag if replacement left mismatch.
+src = src.replace(
+    """                <a href="#contact" class="btn-spark px-4 py-1.5 rounded-full text-xs font-bold transition shadow-sm hidden sm:inline-block">""",
+    """                <a href="#contact" class="btn-spark px-4 py-1.5 rounded-full text-xs font-bold transition shadow-sm hidden sm:inline-block">"""
+)
 
-        const termInput = document.getElementById('terminal-input');
-        const termOutput = document.getElementById('terminal-output');
-        const commands = {
-            'help': 'Commands:\n • whoami    - Satyam Raj identity & background\n • skills    - Core technical capabilities\n • projects  - Featured repositories\n • theme     - Toggle dark blue / light aqua mode\n • contact   - Phone & email channels\n • clear     - Clear terminal buffer',
-            'whoami': 'Satyam Raj | Cybersecurity & Software Developer\nStudent at Shivalik College of Engineering, Dehradun (B.Tech ECE, Class of 2029).',
-            'skills': 'Languages: Python, Bash Scripting, C/C++\nFrameworks: Streamlit, REST APIs\nSecurity: Nmap, Dirsearch, Reconnaissance, Pentesting\nOS: Linux Architecture & GNOME Customization',
-            'projects': '1. Sentinel-X: Automated Multi-Tool Pen-Testing Framework (Python + Streamlit + Supabase)\n2. rento-marketplace: Hyperlocal Real-Estate Platform (TypeScript + Manus)',
-            'theme': 'Toggled palette successfully.',
-            'contact': 'Phone: +91 7260865157\nEmail: sk4702684@gmail.com\nLocation: Dehradun, Uttarakhand'
-        };
+# Add CSP-compatible resource hints without inline CSP (inline scripts/styles are present).
+# Keep CDNs because the original design explicitly depends on them.
 
-        termInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter') {
-                const input = termInput.value.trim().toLowerCase();
-                termInput.value = '';
-                const cmdLine = document.createElement('p');
-                cmdLine.className = 'font-semibold';
-                cmdLine.innerHTML = `<span class="opacity-60">satyam@shivalik:~$</span> ${input}`;
-                termOutput.appendChild(cmdLine);
+out = Path("/mnt/data/satyam_portfolio_production.html")
+out.write_text(src, encoding="utf-8")
 
-                if (input === 'clear') { 
-                    termOutput.innerHTML = ''; 
-                } else if (input === 'theme') {
-                    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-                    updateTheme(currentTheme);
-                    const resLine = document.createElement('p');
-                    resLine.className = 'opacity-85';
-                    resLine.textContent = `Theme active: ${currentTheme.toUpperCase()}`;
-                    termOutput.appendChild(resLine);
-                } else if (commands[input]) {
-                    const resLine = document.createElement('p');
-                    resLine.className = 'opacity-85 whitespace-pre-line';
-                    resLine.textContent = commands[input];
-                    termOutput.appendChild(resLine);
-                } else if (input !== '') {
-                    const errLine = document.createElement('p');
-                    errLine.className = 'text-red-400';
-                    errLine.textContent = `command not found: ${input}. Enter 'help' for commands.`;
-                    termOutput.appendChild(errLine);
-                }
-                termOutput.scrollTop = termOutput.scrollHeight;
-            }
-        });
-    </script>
-</body>
-</html>
+# Quick sanity checks.
+assert src.count("<html") == 1 and src.count("</html>") == 1
+assert src.count("<script") == src.count("</script>")
+assert src.count("<button id=\"theme-switch-btn\"") == 1
+assert "card.innerHTML = `" not in src
+assert "repo.description" in src
+assert "prefers-reduced-motion" in src
+
+print(f"Done: {out}")
+print(f"Lines: {len(src.splitlines())}")
